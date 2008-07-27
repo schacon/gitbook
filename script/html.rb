@@ -1,13 +1,14 @@
 require 'rubygems'
-require 'discount'
+require 'rdiscount'
 require "uv"
 
 desc 'Create the HTML version'
 task :html => :merge do
-  if File.exists?('output/full_book.texttile')
-    output = File.new('output/full_book.texttile').read
-    output = Discount.new(output).to_html
+  if File.exists?('output/full_book.markdown')
+    output = File.new('output/full_book.markdown').read
+    output = RDiscount.new(output).to_html
 
+    # code highlighting
     File.open('output/index.html', 'w') do |f|
       html_template = File.new("layout/pdf_template.html").read
       html_template.gsub!("#body", output)
