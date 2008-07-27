@@ -1,5 +1,8 @@
 =Maint Tasks
 
+* pre-processors:
+  - linkgit:(command)
+  
 * Generate HTML only output - one page per chapter
 
 
