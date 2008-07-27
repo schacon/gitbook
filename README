@@ -1,0 +1,20 @@
+== The Community Git Book ==
+
+This is an attempt to make a comprehensive, easy to follow Git learning
+resource to be hosted on the main Git website.
+
+== Contributing ==
+
+* Clone this source, add to it and send me (schacon@gmail.com) a patch or pull request
+* Install gems 'ultraviolet' and 'discount'
+* Install prince (http://www.princexml.com/download/)
+
+== References ==
+
+* A bunch of the scripts for building and such from the Rails 2.1 book by Carlos Brando
+
+== Authors ==
+
+* Scott Chacon
+
+
