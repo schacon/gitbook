@@ -1,23 +1,23 @@
-= Maint Tasks
+=Maint Tasks
 
 * Generate HTML only output - one page per chapter
 
 
-= Content
+=Content
 
-=== Introduction
+===Introduction
 
 * Introduction (Why Git)
 * Git Object DB Basics (Git vs SVN, what is a DAG)
 * The Git Index
 * Git directory and working directory
 
-=== First Time
+===First Time
 
 * Installing Git
 * Setup and Initialization
 
-=== Basic Usage
+===Basic Usage
 
 * Normal Workflow
 * Basic Branching and Merging
@@ -26,7 +26,7 @@
 * Distributed Workflows – clone, fetch, push
 * Git Tag
 
-=== Intermediate Usage
+===Intermediate Usage
 
 * Rebasing
 * Interactive Rebasing
@@ -41,23 +41,23 @@
 * Setting up a Public Repo – git, http/s, ssh, gitosis
 * Git Workflows
 
-=== Advanced Git
+===Advanced Git
 
 * Creating New Empty Branches
 * Advanced Branching and Merging
 * Finding Issues – Git Bisect
 * Finding Issues – Git Blame
 * Git and Email – git-am, git-format-patch
-* Stacked Git – stgit, guilt
 * Customizing Git – git config
 * Git Hooks
 * Git Recovery – corrupted blob objects
 * Advanced Merging – multiway, merge subtree
 * Git Submodules
 
-=== Working With Git
+===Working With Git
 
 * Git on Windows
+* Stacked Git – stgit, guilt
 * Capistrano and Git
 * Subversion Integration
 * Subversion Migration
@@ -68,7 +68,7 @@
 * Ruby and Git – grit, gruby, Ruby/Git
 * Git and Editors (Textmate, Eclipse, etc)
 
-=== Internals and Plumbing
+===Internals and Plumbing
 
 * How Git Stores Objects (loose and packed)
 * Browsing Git Objects - cat-file, ls-tree, gitk
