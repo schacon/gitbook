@@ -1,14 +1,98 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-	"http://www.w3.org/TR/html4/strict.dtd">
+  "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" type="text/css" href="assets/style.css"/>
-	<title>The Git Community Book</title>
+	<title>Git Community Book</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen, projection">
+	<script type="text/javascript" src="javascripts/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="javascripts/jquery.corner.js"></script>
 </head>
+
 <body>
-	<div class="chapter">
-		#body
-	</div>
+<div class="container showgrids">
+
+  <div class="span-21 header">
+    <a href="/"><img alt="Git Community Book" src="images/header-book.gif"></a>
+  </div>
+
+  <div class="span-21 navbar">
+    <div id="toc">
+      <ul class="a-documentation">
+      	<li id="m-index"><a href="http://git-scm.com/">Home</a></li>
+      	<li id="m-about"><a href="http://git-scm.com/about">About Git</a></li>
+      	<li id="m-documentation"><a href="http://git-scm.com/documentation">Documentation</a></li>
+      	<li id="m-download"><a href="http://git-scm.com/download">Download</a></li>
+      	<li id="m-tools"><a href="http://git-scm.com/tools">Related Tools</a></li>
+      	<li id="m-wiki"><a href="http://git.or.cz/gitwiki">Wiki</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-14">
+    <div id="book-intro">
+      <h3>The Git Community Book</h3>
+      <p>
+        Welcome to the Git Community Book.
+        This book has been built by dozens of people in the Git community, and
+        is meant to help you learn how to use Git as quickly and easily as possible.
+      </p>
+      <p>
+        If you see anything out of date, have a suggestion on how to improve it,
+        or would like to help add to the book,
+        please see the <a href="http://github.com/schacon/learn-github/wikis/how-to-contribute">How to Contribute</a> page, or just send
+        <a href="mailto:schacon@gmail.com">our maintainer</a> a note.
+    </div>
+  </div>
+
+  <div class="span-7 last">
+    <div id="new-to-git">
+      <h3>New to Git?</h3>
+      <div class="inner">
+        <p>Best to begin by learning what makes it different 
+        from what you may have used before.</p>
+        <p>You may want to start at <a href='1_welcome_to_git.html'>the beginning</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="span-21">
+    #body
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This page is maintained by Scott Chacon. 
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+  	  <p>Source for this website at <a href="http://github.com/schacon/learn-github">GitHub</a>, which was forked from Petr Baudis's <a href="http://git.or.cz">git.or.cz</a></p>
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    hosting donated by:
+    <a href="http://github.com"><img src="images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $('#book-intro').corner();
+    $('#new-to-git').corner();
+    $('.footer').corner();
+  });
+</script>
+
 </body>
 </html>

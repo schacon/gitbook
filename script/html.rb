@@ -32,6 +32,8 @@ task :html => :merge do
     
     # html chapters
     links = []
+    chapter_files = []
+    
     count = 0
     sections = output.split('<h1>')
     sections.each do |section|
@@ -51,27 +53,41 @@ task :html => :merge do
         # extract chapter title
         puts "\t" + chtitle.strip
         filename = count.to_s + '_' + chtitle.strip.downcase.gsub(' ', '_') + '.html'
-        File.open(File.join(html_dir, filename), 'w') do |f|
-          body = "<h2>#{chtitle}</h2>" + chapter
-          html_template = File.new("layout/chapter_template.html").read
-          html_template.gsub!("#title", chtitle)
-          html_template.gsub!("#body", body)
-          f.puts html_template
-        end
+        body = "<h2>#{chtitle}</h2>" + chapter
         chlinks << [chtitle.strip, filename]
+        chapter_files << [chtitle.strip, filename, body]
       end
       links << [title.strip, chlinks]
+    end
+
+    # writing out the chapter files
+    chapter_files.each_with_index do |arr, index|
+      chapter_title, chapter_file, body = arr
+      File.open(File.join(html_dir, chapter_file), 'w') do |f|
+        nav = ''
+        if (cf = chapter_files[index - 1]) && index != 0
+          nav += "<a href=\"#{cf[1]}\">Prev</a> "
+        end
+        if cf = chapter_files[index + 1]
+          nav += " <a href=\"#{cf[1]}\">Next</a>"
+        end
+        html_template = File.new("layout/chapter_template.html").read
+        html_template.gsub!("#title", chapter_title)
+        html_template.gsub!("#body", body)
+        html_template.gsub!("#nav", nav)
+        f.puts html_template
+      end
     end
     
     toc = Builder::XmlMarkup.new(:indent => 1)
     toc.table { toc.tr { 
       toc.td(:valign => "top") {
         links[0,4].each do |section_title, section_array|
-          toc.h1 { toc << section_title }
+          toc.h3(:class => 'title') { toc << section_title }
           toc.table do
             section_array.each do |chapter_title, chapter_file|
               toc.tr { toc.td {
-                toc.a(:href => chapter_file) << chapter_title
+                toc.a(:href => chapter_file, :class => 'chapter-link') << chapter_title
               }}
             end
           end
@@ -79,11 +95,11 @@ task :html => :merge do
       }
       toc.td(:valign => "top") {
         links[4,3].each do |section_title, section_array|
-          toc.h1 { toc << section_title }
+          toc.h3(:class => 'title') { toc << section_title }
           toc.table do
             section_array.each do |chapter_title, chapter_file|
               toc.tr { toc.td {
-                toc.a(:href => chapter_file) << chapter_title
+                toc.a(:href => chapter_file, :class => 'chapter-link') << chapter_title
               }}
             end
           end
@@ -95,6 +111,8 @@ task :html => :merge do
       html_template.gsub!("#body", toc.to_s)
       f.puts html_template
     end
+    
+    `cp -Rf assets/* output/book/`
     
   end
 end
