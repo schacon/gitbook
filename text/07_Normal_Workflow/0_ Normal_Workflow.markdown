@@ -1,1 +1,3 @@
-##Normal Workflow
+## Normal Workflow ##
+
+(modifying, adding, commiting)

@@ -43,9 +43,11 @@ and send me a patch or a pull-request.
 
 ### References ###
 
-Much of this book is pulled together from different sources.
+Much of this book is pulled together from different sources and then added to.  
+If you would like to read some of the original articles or resources, please
+visit them and thank the authors:
 
 * [Git User Manual](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html)
 
 * ["My Git Workflow" blog post](http://osteele.com/archives/2008/05/my-git-workflow)
-(Oliver Steele <steele@osteele.com>)
+

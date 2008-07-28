@@ -10,7 +10,6 @@
 
 ===Introduction
 
-* Introduction (Why Git)
 * Git Object DB Basics (Git vs SVN, what is a DAG)
 * The Git Index
 * Git directory and working directory
@@ -55,7 +54,6 @@
 * Git Hooks
 * Git Recovery – corrupted blob objects
 * Advanced Merging – multiway, merge subtree
-* Git Submodules
 
 ===Working With Git
 
