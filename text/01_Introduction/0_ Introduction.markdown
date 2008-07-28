@@ -48,6 +48,7 @@ If you would like to read some of the original articles or resources, please
 visit them and thank the authors:
 
 * [Git User Manual](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html)
-
+* [The Git Tutorial](http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html)
+* [The Git Tutorial pt 2](http://www.kernel.org/pub/software/scm/git/docs/gittutorial-2.html)
 * ["My Git Workflow" blog post](http://osteele.com/archives/2008/05/my-git-workflow)
 
