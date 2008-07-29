@@ -31,3 +31,5 @@ Note that git log starts with the most recent commit and works
 backwards through the parents; however, since git history can contain
 multiple independent lines of development, the particular order that
 commits are listed in may be somewhat arbitrary.
+
+[gitcast:c4-git-log]("GitCast #4: Git Log")

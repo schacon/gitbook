@@ -7,3 +7,5 @@
     <do work> 
     git add your files 
     git commit -m 'Initial commit'
+    
+[gitcast:c9-empty-branch]("GitCast #7: Creating Empty Branches")

@@ -202,3 +202,5 @@ silently overwritten:
 NOTE: The changes are still visible in the submodule's reflog.
 
 This is not the case if you did not commit your changes.
+
+[gitcast:c11-git-submodules]("GitCast #11: Git Submodules")

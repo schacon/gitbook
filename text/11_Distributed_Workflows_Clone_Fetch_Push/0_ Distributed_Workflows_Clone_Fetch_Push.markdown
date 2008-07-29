@@ -236,3 +236,5 @@ solution is to retry the push after first updating your work: either by a
 pull, or by a fetch followed by a rebase; see the
 <<setting-up-a-shared-repository,next section>> and
 linkgit:gitcvs-migration[7] for more.
+
+[gitcast:c8-dist-workflow]("GitCast #8: Distributed Workflow")

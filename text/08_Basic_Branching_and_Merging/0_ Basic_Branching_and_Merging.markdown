@@ -162,3 +162,5 @@ commit present in the one is already contained in the other--then git
 just performs a "fast forward"; the head of the current branch is moved
 forward to point at the head of the merged-in branch, without any new
 commits being created.
+
+[gitcast:c6-branch-merge]("GitCast #6: Branching and Merging")

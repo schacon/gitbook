@@ -54,3 +54,5 @@ does something simpler and more powerful: `git add` is used both for new
 and newly modified files, and in both cases it takes a snapshot of the
 given files and stages that content in the index, ready for inclusion in
 the next commit.
+
+[gitcast:c2_normal_workflow]("GitCast #2: Normal Workflow")
