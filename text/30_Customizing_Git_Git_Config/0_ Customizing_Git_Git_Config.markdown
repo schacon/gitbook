@@ -1,3 +1,3 @@
 ## Customizing Git ##
 
-(Git Config)
+(interesting or most useful git-config options)

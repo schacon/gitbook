@@ -1,4 +1,4 @@
-##Submodules
+## Submodules ##
 
 Large projects are often composed of smaller, self-contained modules.  For
 example, an embedded Linux distribution's source tree would include every

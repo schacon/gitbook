@@ -59,3 +59,5 @@ table tr td { vertical-align: top;}
 
 table.data-table tr td { vertical-align: top;}
 table.data-table tr td h3 { background: #B5463F; color: #fff; padding: 5px; }
+
+pre { background: #eee; padding: 5px;}
