@@ -133,7 +133,7 @@ task :html => :merge do
           toc.table do
             section_array.each do |chapter_title, chapter_file, chsize|
               toc.tr { toc.td {
-                (chsize > 300) ? extra = 'done' : extra = 'todo'
+                (chsize > 800) ? extra = 'done' : extra = 'todo'
                 toc.a(:href => chapter_file, :class => "chapter-link #{extra}") << chapter_title
               }}
             end

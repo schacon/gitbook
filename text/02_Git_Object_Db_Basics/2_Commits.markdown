@@ -46,3 +46,30 @@ file data at changing paths suggests a rename.  (See, for example, the
 A commit is usually created by linkgit:git-commit[1], which creates a
 commit whose parent is normally the current HEAD, and whose tree is
 taken from the content currently stored in the index.
+
+### The Object Model ###
+
+So, now that we've looked at the 3 main object types (the blob, tree and commit), 
+let's take a quick look at how they all fit together.
+
+If we had a simple project with the following directory structure:
+
+    $>tree
+    .
+    |-- README
+    `-- lib
+        |-- inc
+        |   `-- tricks.rb
+        `-- mylib.rb
+
+    2 directories, 3 files
+
+And we committed this to a Git repository, it would be represented like this:
+
+<div class="span-21 center">
+    <img src="images/figure/model-real.png">
+</div>
+
+You can see that we have created a **tree** object for each directory (including the root)
+and a **blob** object for each file.  Then we have a **commit** object to point
+to the root, so we can track what our project looked like when it was committed.

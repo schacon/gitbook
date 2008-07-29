@@ -1,8 +1,14 @@
 ## The Git Object Database ##
 
-We already saw in <<understanding-commits>> that all commits are stored
-under a 40-digit "object name".  In fact, all the information needed to
-represent the history of a project is stored in objects with such names.
+### The SHA ###
+
+All the information needed to represent the history of a
+project is stored in files referenced by a 40-digit "object name" that 
+looks something like this:
+    
+    6ff87c4664981e4397625791c8ea3bbb5f2279a3
+    
+You will see these 40-character strings all over the place in Git.
 In each case the name is calculated by taking the SHA1 hash of the
 contents of the object.  The SHA1 hash is a cryptographic hash function.
 What that means to us is that it is impossible to find two different
@@ -17,6 +23,8 @@ others:
 - Git can detect errors when it reads an object, by checking that the
   object's name is still the SHA1 hash of its contents.
 
+### The Objects ###
+
 <div class="center span-21">
     <img width="350" src="images/figure/object_types.png">
 </div>
@@ -24,20 +32,26 @@ others:
 There are four different types of objects: "blob", "tree", "commit", and
 "tag".
 
-- A <<def_blob_object,"blob" object>> is used to store file data.
-- A <<def_tree_object,"tree" object>> ties one or more
-  "blob" objects into a directory structure. In addition, a tree object
-  can refer to other tree objects, thus creating a directory hierarchy.
-- A <<def_commit_object,"commit" object>> ties such directory hierarchies
-  together into a <<def_DAG,directed acyclic graph>> of revisions--each
-  commit contains the object name of exactly one tree designating the
-  directory hierarchy at the time of the commit. In addition, a commit
-  refers to "parent" commit objects that describe the history of how we
-  arrived at that directory hierarchy.
-- A <<def_tag_object,"tag" object>> symbolically identifies and can be
-  used to sign other objects. It contains the object name and type of
-  another object, a symbolic name (of course!) and, optionally, a
-  signature.
+- A **"blob"** is used to store file data - it is generally a file.
+- A **"tree"** is basically like a directory - it references a bunch of
+    other trees and/or blobs (ie. files and sub-directories)
+- A **"commit"** points to a single tree, marking it as what the project
+    looked like at a certain point in time.  It contains meta-information
+    about that point in time, such as a timestamp, the author of the changes
+    since the last commit, a pointer to the previous commit(s), etc.
+- A **"tag"** is a way to mark a specific commit as special in some way.  It
+    is normally used to tag certain commits as specific releases or something
+    along those lines.
 
+Almost all of Git is built around manipulating this simple structure of four
+different object types.  It is sort of it's own little filesystem that sits
+on top of your filesystem.
 
-The object types in some more detail:
+### Different from SVN ###
+
+It is important to note that this is very different from most SCM systems
+that you are probably used to.  Subversion, CVS, Perforce, Mercurial and the like all 
+use _Delta Storage_ systems - they store the differences between one commit
+and the next.  Git does not do this - it stores a snapshot of what all the
+files in your project look like each time you commit in this tree structure. This 
+is a very important concept to understand when using Git.

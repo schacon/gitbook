@@ -1,8 +1,34 @@
+### Blob Object ###
+
+A blob generally stores the contents of a file.
+
+You can use linkgit:git-show[1] to examine the contents of any blob. 
+Assuming we have a SHA for a blob, we can examine its contents like this:
+
+    $ git show 6ff87c4664
+
+     Note that the only valid version of the GPL as far as this project
+     is concerned is _this_ particular version of the license (ie v2, not
+     v2.2 or v3.x or whatever), unless explicitly otherwise stated.
+    ...
+
+A "blob" object is nothing but a binary blob of data.  It doesn't refer
+to anything else or have attributes of any kind, not even a file name.
+
+Since the blob is entirely defined by its data, if two files in a
+directory tree (or in multiple different versions of the repository)
+have the same contents, they will share the same blob object. The object
+is totally independent of its location in the directory tree, and
+renaming a file does not change the object that file is associated with.
+
 ### Tree Object ###
+
+A tree is a simple object that has a bunch of pointers to blobs and other
+trees.
 
 The ever-versatile linkgit:git-show[1] command can also be used to
 examine tree objects, but linkgit:git-ls-tree[1] will give you more
-details:
+details.  Assuming we have a SHA for a tree, we can examine it like this:
 
     $ git ls-tree fb3a8bdd0ce
     100644 blob 63c918c667fa005ff12ad89437f2fdc80926e21c    .gitignore
@@ -29,33 +55,8 @@ between two related tree objects, since it can ignore any entries with
 identical object names.
 
 (Note: in the presence of submodules, trees may also have commits as
-entries.  See <<submodules>> for documentation.)
+entries.  See the **Submodules** section.)
 
 Note that the files all have mode 644 or 755: git actually only pays
 attention to the executable bit.
 
-### Blob Object ###
-
-You can use linkgit:git-show[1] to examine the contents of a blob; take,
-for example, the blob in the entry for "COPYING" from the tree above:
-
-    $ git show 6ff87c4664
-
-     Note that the only valid version of the GPL as far as this project
-     is concerned is _this_ particular version of the license (ie v2, not
-     v2.2 or v3.x or whatever), unless explicitly otherwise stated.
-    ...
-
-A "blob" object is nothing but a binary blob of data.  It doesn't refer
-to anything else or have attributes of any kind.
-
-Since the blob is entirely defined by its data, if two files in a
-directory tree (or in multiple different versions of the repository)
-have the same contents, they will share the same blob object. The object
-is totally independent of its location in the directory tree, and
-renaming a file does not change the object that file is associated with.
-
-Note that any tree or blob object can be examined using
-linkgit:git-show[1] with the <revision>:<path> syntax.  This can
-sometimes be useful for browsing the contents of a tree that is not
-currently checked out.

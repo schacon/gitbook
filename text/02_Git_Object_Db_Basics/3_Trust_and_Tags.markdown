@@ -1,30 +1,4 @@
-### Trust ###
 
-If you receive the SHA1 name of a blob from one source, and its contents
-from another (possibly untrusted) source, you can still trust that those
-contents are correct as long as the SHA1 name agrees.  This is because
-the SHA1 is designed so that it is infeasible to find different contents
-that produce the same hash.
-
-Similarly, you need only trust the SHA1 name of a top-level tree object
-to trust the contents of the entire directory that it refers to, and if
-you receive the SHA1 name of a commit from a trusted source, then you
-can easily verify the entire history of commits reachable through
-parents of that commit, and all of those contents of the trees referred
-to by those commits.
-
-So to introduce some real trust in the system, the only thing you need
-to do is to digitally sign just 'one' special note, which includes the
-name of a top-level commit.  Your digital signature shows others
-that you trust that commit, and the immutability of the history of
-commits tells others that they can trust the whole history.
-
-In other words, you can easily validate a whole archive by just
-sending out a single email that tells the people the name (SHA1 hash)
-of the top commit, and digitally sign that email using something
-like GPG/PGP.
-
-To assist in this, git also provides the tag object...
 
 ### Tag Object ###
 
