@@ -1,1 +1,2 @@
-##Redoing Git Reset and Revert
+## Undoing in Git - Reset and Revert ##
+

@@ -1,1 +1,2 @@
-##Finding Issues Git Blame
+## Finding Issues - Git Blame ##
+

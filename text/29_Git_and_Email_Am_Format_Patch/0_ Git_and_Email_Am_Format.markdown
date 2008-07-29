@@ -1,1 +1,5 @@
-##Git and Email Am Format
+## Git and Email ##
+
+(git-am)
+
+(git-format-patch)

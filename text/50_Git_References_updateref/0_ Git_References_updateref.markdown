@@ -1,1 +1,3 @@
-##Git References updateref
+## Git References ##
+
+update-ref

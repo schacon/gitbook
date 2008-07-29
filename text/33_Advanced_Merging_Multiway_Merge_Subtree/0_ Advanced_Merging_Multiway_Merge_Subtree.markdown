@@ -1,1 +1,5 @@
-##Advanced Merging Multiway Merge Subtree
+## Advanced Merging ##
+
+Multiway Merge 
+
+Subtree

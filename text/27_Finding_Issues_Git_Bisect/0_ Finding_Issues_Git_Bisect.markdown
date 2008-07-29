@@ -1,1 +1,2 @@
-##Finding Issues Git Bisect
+## Finding Issues - Git Bisect ##
+

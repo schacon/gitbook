@@ -1,1 +1,5 @@
-##Maintaining Git Gc Prune Fsck
+## Maintaining Git ##
+
+(Gc Prune)
+
+(Fsck)

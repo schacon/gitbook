@@ -1,1 +1,2 @@
-##Comparing Commits Git Diff
+## Comparing Commits - Git Diff ##
+

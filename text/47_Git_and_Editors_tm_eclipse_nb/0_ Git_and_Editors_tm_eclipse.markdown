@@ -1,1 +1,7 @@
-##Git and Editors tm eclipse
+## Git and Editors ##
+
+textmate 
+
+eclipse
+ 
+netbeans

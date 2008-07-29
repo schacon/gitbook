@@ -1,1 +1,9 @@
-##Setting Up A Public Repo
+## Setting Up A Public Repo ##
+
+(git://)
+
+(http/s://)
+
+(ssh://)
+
+(gitosis)

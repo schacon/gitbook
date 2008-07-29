@@ -1,1 +1,3 @@
-##The Git Index lsfiles
+## The Git Index ##
+
+ls-files

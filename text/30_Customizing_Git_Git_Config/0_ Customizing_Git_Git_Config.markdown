@@ -1,1 +1,3 @@
-##Customizing Git Git Config
+## Customizing Git ##
+
+(Git Config)

@@ -1,1 +1,2 @@
-##How Git Stores Objects
+## How Git Stores Objects ##
+

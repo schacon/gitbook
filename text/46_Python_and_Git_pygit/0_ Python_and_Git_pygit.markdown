@@ -1,1 +1,3 @@
-##Python and Git pygit
+## Python and Git ##
+
+pygit

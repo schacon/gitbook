@@ -1,1 +1,3 @@
-##Distributed Workflows Clone Fetch Push
+## Distributed Workflows ##
+
+( Clone Fetch Push )

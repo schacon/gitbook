@@ -1,1 +1,0 @@
-##Alternative Uses TicGit

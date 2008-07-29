@@ -1,1 +1,3 @@
-##Ruby and Git grit
+## Ruby and Git ##
+
+grit
