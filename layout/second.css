@@ -307,7 +307,7 @@ div.appendix, div.bibliography, div.glossary, div.index, div.colophon {
 div.backcover { 
 	page-break-before: left;
 	page: cover; 
-	background-image: url(../images/b_cover.jpg);
+	background-image: url(../assets/images/b_cover.jpg);
 	position: absolute;
 	width: 9.25in; height: 7in;
   left: 0; top: 0;
@@ -318,7 +318,7 @@ div.backcover {
 
 div.frontcover { 
 	page: cover; 
-	background-image: url(../images/cover.jpg);
+	background-image: url(../assets/images/cover.jpg);
 	position: absolute;
 	width: 9.25in; height: 7in;
   left: 0; top: 0;

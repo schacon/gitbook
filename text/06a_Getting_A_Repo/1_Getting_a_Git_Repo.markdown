@@ -42,4 +42,4 @@ Git will reply
 You've now initialized the working directory--you may notice a new
 directory created, named ".git".
 
-[gitcast:1](GitCast #1 - setup, init and cloning)
+[gitcast:c1_init](GitCast #1 - setup, init and cloning)

@@ -5,8 +5,53 @@ require 'builder'
 require 'rdiscount'
 require "uv"
 
+def do_replacements(html, type = :html)
+
+  # highlight code
+  #html = html.gsub /<pre><code>.*?<\/code><\/pre>/m do |code|
+  #  code = code.gsub('<pre><code>', '').gsub('</code></pre>', '').gsub('&lt;', '<').gsub('&gt;', '>').gsub('&amp;', '&')
+  #  Uv.parse(code, "xhtml", "ruby", false, "mac_classic")
+  #end
+  
+  # fix images in pdf
+  if type == :pdf
+    html = html.gsub /src="images/ do |img| 
+      'src="assets/images'
+    end
+  end
+  
+  # replace gitlinks
+  html = html.gsub /linkgit:.*?\[\d\]/ do |code|
+    if match = /linkgit:(.*?)\[/.match(code)
+      code = "<a href=\"http://www.kernel.org/pub/software/scm/git/docs/#{match[1]}.html\">#{match[1]}</a>"
+    end
+    code
+  end
+  
+  # replace/remove gitcasts
+  
+  html = html.gsub /\[gitcast:.*?\]\(.*?\)/ do |code|
+    if type == :html
+      puts code
+      if match = /gitcast:(.*?)\]\((.*?)\)/.match(code)
+        cast = match[1].gsub('_', '%2D')
+        code = '<div class="gitcast">
+        <embed src="http://gitcasts.com/flowplayer/FlowPlayerLight.swf?config=%7Bembedded%3Atrue%2CbaseURL%3A%27http%3A%2F%2Fgitcasts%2Ecom%2Fflowplayer%27%2CvideoFile%3A%27http%3A%2F%2Fmedia%2Egitcasts%2Ecom%2F' + cast + '%2Eflv%27%2CautoBuffering%3Afalse%2CautoPlay%3Afalse%7D" width="620" height="445" scale="noscale" bgcolor="111111" type="application/x-shockwave-flash" allowFullScreen="true" allowScriptAccess="always" allowNetworking="all" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed>
+        <br>' +  match[2] + '
+        </div>'
+      end
+    else
+      code = ''
+    end
+    code
+  end
+  
+  html
+end
+
 desc 'Create the HTML version'
 task :html => :merge do
+  
   if File.exists?('output/full_book.markdown')
     output = File.new('output/full_book.markdown').read
     output = RDiscount.new(output).to_html
@@ -15,12 +60,12 @@ task :html => :merge do
     
     # code highlighting
     File.open('output/index.html', 'w') do |f|
+      body = do_replacements(output, :pdf)
+
       html_template = File.new("layout/pdf_template.html").read
-      html_template.gsub!("#body", output)
-      html_template.gsub! /<pre><code>.*?<\/code><\/pre>/m do |code|
-        code = code.gsub('<pre><code>', '').gsub('</code></pre>', '').gsub('&lt;', '<').gsub('&gt;', '>').gsub('&amp;', '&')
-        Uv.parse(code, "xhtml", "ruby", false, "mac_classic")
-      end
+      html_template.gsub!("#body", body)
+
+      
       f.puts html_template
     end
     
@@ -54,6 +99,7 @@ task :html => :merge do
         puts "\t" + chtitle.strip
         filename = count.to_s + '_' + chtitle.strip.downcase.gsub(' ', '_') + '.html'
         body = "<h2>#{chtitle}</h2>" + chapter
+        body = do_replacements(body, :html)
         chlinks << [chtitle.strip, filename, body.size]
         chapter_files << [chtitle.strip, filename, body]
       end
@@ -118,3 +164,4 @@ task :html => :merge do
     
   end
 end
+

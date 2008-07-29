@@ -36,10 +36,11 @@ class Prince
   # it down the pipe using Rails.
   #
   def pdf_from_string(string)
+    puts `pwd`
     path = self.exe_path()
     # Don't spew errors to the standard out...and set up to take IO 
     # as input and output
-    path << ' --silent - -o -'
+    path << ' - -o -'
 
     # Show the command used...
     #logger.info "\n\nPRINCE XML PDF COMMAND"

@@ -17,8 +17,9 @@ others:
 - Git can detect errors when it reads an object, by checking that the
   object's name is still the SHA1 hash of its contents.
 
-(See <<object-details>> for the details of the object formatting and
-SHA1 calculation.)
+<div class="center span-21">
+    <img width="350" src="images/figure/object_types.png">
+</div>
 
 There are four different types of objects: "blob", "tree", "commit", and
 "tag".
@@ -37,5 +38,6 @@ There are four different types of objects: "blob", "tree", "commit", and
   used to sign other objects. It contains the object name and type of
   another object, a symbolic name (of course!) and, optionally, a
   signature.
+
 
 The object types in some more detail:

@@ -13,6 +13,7 @@ body {
 a { color: #6E212E; }
 .center { text-align: center; }
 .pad { padding: 5px; }
+.chapter img { display: block; }
 
 #toc { padding: 10px; font-size: 120%; }
 #toc ul { display: inline; }
@@ -61,4 +62,5 @@ table tr td { vertical-align: top;}
 table.data-table tr td { vertical-align: top;}
 table.data-table tr td h3 { background: #B5463F; color: #fff; padding: 5px; }
 
-pre { background: #eee; padding: 5px;}
+pre { background: #eee !important; padding: 5px;}
+.gitcast { padding: 20px; background: #FFE9B7; border: 1px solid #E3D185; text-align: center;}
