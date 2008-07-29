@@ -54,7 +54,7 @@ task :html => :merge do
         puts "\t" + chtitle.strip
         filename = count.to_s + '_' + chtitle.strip.downcase.gsub(' ', '_') + '.html'
         body = "<h2>#{chtitle}</h2>" + chapter
-        chlinks << [chtitle.strip, filename]
+        chlinks << [chtitle.strip, filename, body.size]
         chapter_files << [chtitle.strip, filename, body]
       end
       links << [title.strip, chlinks]
@@ -85,9 +85,10 @@ task :html => :merge do
         links[0,4].each do |section_title, section_array|
           toc.h3(:class => 'title') { toc << section_title }
           toc.table do
-            section_array.each do |chapter_title, chapter_file|
+            section_array.each do |chapter_title, chapter_file, chsize|
               toc.tr { toc.td {
-                toc.a(:href => chapter_file, :class => 'chapter-link') << chapter_title
+                (chsize > 300) ? extra = 'done' : extra = 'todo'
+                toc.a(:href => chapter_file, :class => "chapter-link #{extra}") << chapter_title
               }}
             end
           end
@@ -97,9 +98,10 @@ task :html => :merge do
         links[4,3].each do |section_title, section_array|
           toc.h3(:class => 'title') { toc << section_title }
           toc.table do
-            section_array.each do |chapter_title, chapter_file|
+            section_array.each do |chapter_title, chapter_file, chsize|
               toc.tr { toc.td {
-                toc.a(:href => chapter_file, :class => 'chapter-link') << chapter_title
+                (chsize > 300) ? extra = 'done' : extra = 'todo'
+                toc.a(:href => chapter_file, :class => "chapter-link #{extra}") << chapter_title
               }}
             end
           end

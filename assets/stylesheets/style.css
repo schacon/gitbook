@@ -54,6 +54,7 @@ img.book { border: 1px solid #666; }
 #new-to-git h3 small { color: #eee; font-weight: normal; font-size: 70%;}
 
 a.chapter-link { font-size: 120%; }
+a.todo { color: #888 !important; }
 
 table tr td { vertical-align: top;}
 
