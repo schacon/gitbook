@@ -51,8 +51,8 @@ patches to the new mywork.  The result will look like:
 
     ................................................
      o--o--O--o--o--o <-- origin
-    		 \
-    		  a'--b'--c' <-- mywork
+    		         \
+    		          a'--b'--c' <-- mywork
     ................................................
 
 In the process, it may discover conflicts.  In that case it will stop
