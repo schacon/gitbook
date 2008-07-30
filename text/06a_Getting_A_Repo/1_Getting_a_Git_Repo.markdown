@@ -20,11 +20,16 @@ or over http:
 
     git clone http://www.kernel.org/pub/scm/git/git.git
 
-The git:// protocol is faster and more efficient, but sometimes it is necceary 
+The git:// protocol is faster and more efficient, but sometimes it is necessary 
 to use the simpler http based one behind corporate firewalls or what have you. 
 In either case you should then have a new directory named 'git' that contains
 all the Git source code and history - it is basically a complete copy of what 
 was on the server.
+
+By default, Git will name the new directory it has checked
+out your cloned code into after whatever comes directly before the '.git' in 
+the name of the cloned project. (ie. *git clone http://git.kernel.org/linux/kernel/git/torvalds/linux-2.6.git* will
+result in a new directory named 'linux-2.6')
 
 ### Initializing a New Repository ###
 

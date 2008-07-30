@@ -1,3 +1,11 @@
 ### Mac 10.5 ###
 
+With Leopard, you can also install via MacPorts, but you also have the option of 
+using a nice installer, which you can download from here : 
+[Git OSX Installer](http://code.google.com/p/git-osx-installer/downloads/list?can=3)
 
+If you prefer to install it from source, these guides may be particularly helpful to you :
+
+[Article: Installing Git on OSX Leopard](http://solutions.treypiepmeier.com/2008/02/25/installing-git-on-os-x-leopard/)
+
+[Article: Installing Git on OS 10.5](http://dysinger.net/2007/12/30/installing-git-on-mac-os-x-105-leopard/)
