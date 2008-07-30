@@ -13,13 +13,7 @@ def do_replacements(html, type = :html)
   #  Uv.parse(code, "xhtml", "ruby", false, "mac_classic")
   #end
   
-  # fix images in pdf
-  if type == :pdf
-    html = html.gsub /src="images/ do |img| 
-      'src="assets/images'
-    end
-  end
-  
+
   # replace gitlinks
   html = html.gsub /linkgit:.*?\[\d\]/ do |code|
     if match = /linkgit:(.*?)\[/.match(code)
@@ -34,6 +28,13 @@ def do_replacements(html, type = :html)
       code = "<div class=\"center\"><img src=\"images/figure/#{match[1]}.png\"></div>"
     end
     code
+  end
+  
+  # fix images in pdf
+  if type == :pdf
+    html = html.gsub /src="images/ do |img| 
+      'src="assets/images'
+    end
   end
   
   # replace/remove gitcasts
