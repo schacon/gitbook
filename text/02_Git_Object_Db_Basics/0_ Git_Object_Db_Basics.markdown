@@ -1,4 +1,4 @@
-## The Git Object Database ##
+## The Git Object Model ##
 
 ### The SHA ###
 

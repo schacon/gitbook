@@ -18,22 +18,22 @@ commit:
 
 As you can see, a commit is defined by:
 
-- a tree: The SHA1 name of a tree object (as defined below), representing
+- a **tree**: The SHA1 name of a tree object (as defined below), representing
   the contents of a directory at a certain point in time.
-- parent(s): The SHA1 name of some number of commits which represent the
+- **parent(s)**: The SHA1 name of some number of commits which represent the
   immediately previous step(s) in the history of the project.  The
   example above has one parent; merge commits may have more than
   one.  A commit with no parents is called a "root" commit, and
   represents the initial revision of a project.  Each project must have
   at least one root.  A project can also have multiple roots, though
   that isn't common (or necessarily a good idea).
-- an author: The name of the person responsible for this change, together
+- an **author**: The name of the person responsible for this change, together
   with its date.
-- a committer: The name of the person who actually created the commit,
+- a **committer**: The name of the person who actually created the commit,
   with the date it was done.  This may be different from the author, for
   example, if the author was someone who wrote a patch and emailed it
   to the person who used it to create the commit.
-- a comment describing this commit.
+- a **comment** describing this commit.
 
 Note that a commit does not itself contain any information about what
 actually changed; all changes are calculated by comparing the contents

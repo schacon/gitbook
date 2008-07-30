@@ -23,7 +23,7 @@ def do_replacements(html, type = :html)
   # replace gitlinks
   html = html.gsub /linkgit:.*?\[\d\]/ do |code|
     if match = /linkgit:(.*?)\[/.match(code)
-      code = "<a href=\"http://www.kernel.org/pub/software/scm/git/docs/#{match[1]}.html\">#{match[1]}</a>"
+      code = "<a href=\"http://www.kernel.org/pub/software/scm/git/docs/#{match[1]}.html\">#{match[1].gsub('git-', 'git ')}</a>"
     end
     code
   end

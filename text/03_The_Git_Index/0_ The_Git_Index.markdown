@@ -1,54 +1,44 @@
 ## The Git Index ##
 
-The index is a binary file (generally kept in .git/index) containing a
-sorted list of path names, each with permissions and the SHA1 of a blob
-object; linkgit:git-ls-files[1] can show you the contents of the index:
+The Git index is used as a staging area between your working directory 
+and your repository.  You can use the index to build up a set of changes
+that you want to commit together relatively easily.  When you create a commit,
+what is committed is what is currently in the index, not what is in your working
+directory.
 
-    $ git ls-files --stage
-    100644 63c918c667fa005ff12ad89437f2fdc80926e21c 0	.gitignore
-    100644 5529b198e8d14decbe4ad99db3f7fb632de0439d 0	.mailmap
-    100644 6ff87c4664981e4397625791c8ea3bbb5f2279a3 0	COPYING
-    100644 a37b2152bd26be2c2289e1f57a292534a51a93c7 0	Documentation/.gitignore
-    100644 fbefe9a45b00a54b58d94d06eca48b03d40a50e0 0	Documentation/Makefile
-    ...
-    100644 2511aef8d89ab52be5ec6a5e46236b4b6bcd07ea 0	xdiff/xtypes.h
-    100644 2ade97b2574a9f77e7ae4002a4e07a6a38e46d07 0	xdiff/xutils.c
-    100644 d5de8292e05e7c36c4b68857c1cf9855e3d2f70a 0	xdiff/xutils.h
+### Looking at the Index ###
 
-Note that in older documentation you may see the index called the
-"current directory cache" or just the "cache".  It has three important
-properties:
+The easiest way to see what is in the index is with the linkgit:git-status[1]
+command.  When you run the status, you can see what files are staged (currently in your index),
+which are modified but not yet staged, and which are completely untracked.
 
-1. The index contains all the information necessary to generate a single
-    (uniquely determined) tree object.
-
-    For example, running linkgit:git-commit[1] generates this tree object
-    from the index, stores it in the object database, and uses it as the
-    tree object associated with the new commit.
-
-2. The index enables fast comparisons between the tree object it defines
-    and the working tree.
-
-    It does this by storing some additional data for each entry (such as
-    the last modified time).  This data is not displayed above, and is not
-    stored in the created tree object, but it can be used to determine
-    quickly which files in the working directory differ from what was
-    stored in the index, and thus save git from having to read all of the
-    data from such files to look for changes.
-
-3. It can efficiently represent information about merge conflicts
-    between different tree objects, allowing each pathname to be
-    associated with sufficient information about the trees involved that
-    you can create a three-way merge between them.
-
-    We saw in <<conflict-resolution>> that during a merge the index can
-    store multiple versions of a single file (called "stages").  The third
-    column in the linkgit:git-ls-files[1] output above is the stage
-    number, and will take on values other than 0 for files with merge
-    conflicts.
-
-The index is thus a sort of temporary staging area, which is filled with
-a tree which you are in the process of working on.
+    $>git status
+    # On branch master
+    # Your branch is behind 'origin/master' by 11 commits, and can be fast-forwarded.
+    #
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #	modified:   daemon.c
+    #
+    # Changed but not updated:
+    #   (use "git add <file>..." to update what will be committed)
+    #
+    #	modified:   grep.c
+    #	modified:   grep.h
+    #
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #	blametree
+    #	blametree-init
+    #	git-gui/git-citool
 
 If you blow the index away entirely, you generally haven't lost any
 information as long as you have the name of the tree that it described.
+
+And with that, you should have a pretty good understanding of the basics of 
+what Git is doing behind the scenes, and why it is a bit different than most
+other SCM systems.  Don't worry if you don't totally understand it all right 
+now, we'll revisit all of these topics in the next sections. Now we're ready 
+to move on to installing, configuring and using Git.  
