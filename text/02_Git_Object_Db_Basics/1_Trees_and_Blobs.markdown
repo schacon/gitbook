@@ -2,6 +2,8 @@
 
 A blob generally stores the contents of a file.
 
+[fig:object-blob]
+
 You can use linkgit:git-show[1] to examine the contents of any blob. 
 Assuming we have a SHA for a blob, we can examine its contents like this:
 
@@ -24,7 +26,9 @@ renaming a file does not change the object that file is associated with.
 ### Tree Object ###
 
 A tree is a simple object that has a bunch of pointers to blobs and other
-trees.
+trees - it generally represents the contents of a directory or subdirectory.
+
+[fig:object-tree]
 
 The ever-versatile linkgit:git-show[1] command can also be used to
 examine tree objects, but linkgit:git-ls-tree[1] will give you more

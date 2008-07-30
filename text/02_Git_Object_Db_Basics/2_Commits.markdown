@@ -1,7 +1,11 @@
 ### Commit Object ###
 
 The "commit" object links a physical state of a tree with a description
-of how we got there and why.  Use the --pretty=raw option to
+of how we got there and why. 
+
+[fig:object-commit]
+
+You can use the --pretty=raw option to
 linkgit:git-show[1] or linkgit:git-log[1] to examine your favorite
 commit:
 
@@ -66,9 +70,7 @@ If we had a simple project with the following directory structure:
 
 And we committed this to a Git repository, it would be represented like this:
 
-<div class="span-21 center">
-    <img src="images/figure/model-real.png">
-</div>
+[fig:objects-example]
 
 You can see that we have created a **tree** object for each directory (including the root)
 and a **blob** object for each file.  Then we have a **commit** object to point

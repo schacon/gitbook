@@ -25,12 +25,10 @@ others:
 
 ### The Objects ###
 
-<div class="center span-21">
-    <img width="350" src="images/figure/object_types.png">
-</div>
-
-There are four different types of objects: "blob", "tree", "commit", and
-"tag".
+Every object consists of three things - a **type**, a **size** and **content**.
+The _size_ is simply the size of the contents, the contents depend on what
+type of object it is, and there are four different types of objects: 
+"blob", "tree", "commit", and "tag".
 
 - A **"blob"** is used to store file data - it is generally a file.
 - A **"tree"** is basically like a directory - it references a bunch of

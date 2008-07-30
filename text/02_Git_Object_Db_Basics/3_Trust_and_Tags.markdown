@@ -1,6 +1,7 @@
 
-
 ### Tag Object ###
+
+[fig:object-tag]
 
 A tag object contains an object, object type, tag name, the name of the
 person ("tagger") who created the tag, and a message, which may contain
