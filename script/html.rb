@@ -28,6 +28,14 @@ def do_replacements(html, type = :html)
     code
   end
   
+  # replace figures
+  html = html.gsub /\[fig:.*?\]/ do |code|
+    if match = /\[fig:(.*?)\]/.match(code)
+      code = "<div class=\"center\"><img src=\"images/figure/#{match[1]}.png\"></div>"
+    end
+    code
+  end
+  
   # replace/remove gitcasts
   
   html = html.gsub /\[gitcast:.*?\]\(.*?\)/ do |code|
