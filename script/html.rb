@@ -15,20 +15,12 @@ def do_replacements(html, type = :html)
   
 
   # replace gitlinks
-  html = html.gsub /linkgit:.*?\[\d\]/ do |code|
-    if match = /linkgit:(.*?)\[/.match(code)
-      code = "<a href=\"http://www.kernel.org/pub/software/scm/git/docs/#{match[1]}.html\">#{match[1].gsub('git-', 'git ')}</a>"
-    end
-    code
+  html.gsub! /linkgit:(.*?)\[\d\]/ do |code, waa|
+    "<a href=\"http://www.kernel.org/pub/software/scm/git/docs/#{$1}.html\">#{$1.gsub('git-', 'git ')}</a>"
   end
   
   # replace figures
-  html = html.gsub /\[fig:.*?\]/ do |code|
-    if match = /\[fig:(.*?)\]/.match(code)
-      code = "<div class=\"center\"><img src=\"images/figure/#{match[1]}.png\"></div>"
-    end
-    code
-  end
+  html.gsub! /\[fig:(.*?)\]/, '<div class="center"><img src="images/figure/\1.png"></div>'
   
   # fix images in pdf
   html.gsub!('src="images', 'src="assets/images') if type == :pdf  
