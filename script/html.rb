@@ -31,12 +31,8 @@ def do_replacements(html, type = :html)
   end
   
   # fix images in pdf
-  if type == :pdf
-    html = html.gsub /src="images/ do |img| 
-      'src="assets/images'
-    end
-  end
-  
+  html.gsub!('src="images', 'src="assets/images') if type == :pdf  
+
   # replace/remove gitcasts
   
   html = html.gsub /\[gitcast:.*?\]\(.*?\)/ do |code|
