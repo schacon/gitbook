@@ -49,12 +49,13 @@ As you can see, a tree object contains a list of entries, each with a
 mode, object type, SHA1 name, and name, sorted by name.  It represents
 the contents of a single directory tree.
 
-An object referenced by a tree may be blob, representing the contents of a file, or another tree, representing the contents of a subdirectory.  Since trees and blobs, like all other objects, are named by the SHA1 hash of their
-contents, two trees have the same SHA1 name if and only if their
-contents (including, recursively, the contents of all subdirectories)
-are identical.  This allows git to quickly determine the differences
-between two related tree objects, since it can ignore any entries with
-identical object names.
+An object referenced by a tree may be blob, representing the contents of a
+file, or another tree, representing the contents of a subdirectory.  Since
+trees and blobs, like all other objects, are named by the SHA1 hash of their
+contents, two trees have the same SHA1 name if and only if their contents
+(including, recursively, the contents of all subdirectories) are identical.
+This allows git to quickly determine the differences between two related tree
+objects, since it can ignore any entries with identical object names.
 
 (Note: in the presence of submodules, trees may also have commits as
 entries.  See the **Submodules** section.)

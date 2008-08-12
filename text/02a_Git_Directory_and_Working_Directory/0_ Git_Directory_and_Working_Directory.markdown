@@ -2,9 +2,14 @@
 
 ### The Git Directory ###
 
-The 'git directory' is the directory that stores all Git's history and meta information for your project - including all of the objects (commits, trees, blobs, tags), all of the pointers to where different branches are and more. 
+The 'git directory' is the directory that stores all Git's history and meta
+information for your project - including all of the objects (commits, trees,
+blobs, tags), all of the pointers to where different branches are and more.
 
-There is only one Git Directory per project (as opposed to one per subdirectory like with SVN or CVS), and that directory is (by default, though not necessarily) '.git' in the root of your project.  If you look at the contents of that directory, you can see all of your important files:
+There is only one Git Directory per project (as opposed to one per
+subdirectory like with SVN or CVS), and that directory is (by default, though
+not necessarily) '.git' in the root of your project.  If you look at the
+contents of that directory, you can see all of your important files:
 
     $>tree -L 1
     .
