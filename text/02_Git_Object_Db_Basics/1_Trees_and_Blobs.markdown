@@ -5,7 +5,7 @@ A blob generally stores the contents of a file.
 [fig:object-blob]
 
 You can use linkgit:git-show[1] to examine the contents of any blob. 
-Assuming we have a SHA for a blob, we can examine its contents like this:
+Assuming we have the SHA for a blob, we can examine its contents like this:
 
     $ git show 6ff87c4664
 
@@ -14,7 +14,7 @@ Assuming we have a SHA for a blob, we can examine its contents like this:
      v2.2 or v3.x or whatever), unless explicitly otherwise stated.
     ...
 
-A "blob" object is nothing but a binary blob of data.  It doesn't refer
+A "blob" object is nothing but a chunk of binary data.  It doesn't refer
 to anything else or have attributes of any kind, not even a file name.
 
 Since the blob is entirely defined by its data, if two files in a
@@ -32,7 +32,7 @@ trees - it generally represents the contents of a directory or subdirectory.
 
 The ever-versatile linkgit:git-show[1] command can also be used to
 examine tree objects, but linkgit:git-ls-tree[1] will give you more
-details.  Assuming we have a SHA for a tree, we can examine it like this:
+details.  Assuming we have the SHA for a tree, we can examine it like this:
 
     $ git ls-tree fb3a8bdd0ce
     100644 blob 63c918c667fa005ff12ad89437f2fdc80926e21c    .gitignore
@@ -49,9 +49,7 @@ As you can see, a tree object contains a list of entries, each with a
 mode, object type, SHA1 name, and name, sorted by name.  It represents
 the contents of a single directory tree.
 
-The object type may be a blob, representing the contents of a file, or
-another tree, representing the contents of a subdirectory.  Since trees
-and blobs, like all other objects, are named by the SHA1 hash of their
+An object referenced by a tree may be blob, representing the contents of a file, or another tree, representing the contents of a subdirectory.  Since trees and blobs, like all other objects, are named by the SHA1 hash of their
 contents, two trees have the same SHA1 name if and only if their
 contents (including, recursively, the contents of all subdirectories)
 are identical.  This allows git to quickly determine the differences

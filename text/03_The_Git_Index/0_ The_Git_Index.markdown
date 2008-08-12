@@ -2,14 +2,13 @@
 
 The Git index is used as a staging area between your working directory 
 and your repository.  You can use the index to build up a set of changes
-that you want to commit together relatively easily.  When you create a commit,
-what is committed is what is currently in the index, not what is in your working
+that you want to commit together.  When you create a commit, what is committed is what is currently in the index, not what is in your working
 directory.
 
 ### Looking at the Index ###
 
 The easiest way to see what is in the index is with the linkgit:git-status[1]
-command.  When you run the status, you can see what files are staged (currently in your index),
+command.  When you run git status, you can see which files are staged (currently in your index),
 which are modified but not yet staged, and which are completely untracked.
 
     $>git status
@@ -40,5 +39,5 @@ information as long as you have the name of the tree that it described.
 And with that, you should have a pretty good understanding of the basics of 
 what Git is doing behind the scenes, and why it is a bit different than most
 other SCM systems.  Don't worry if you don't totally understand it all right 
-now, we'll revisit all of these topics in the next sections. Now we're ready 
+now; we'll revisit all of these topics in the next sections. Now we're ready 
 to move on to installing, configuring and using Git.  
