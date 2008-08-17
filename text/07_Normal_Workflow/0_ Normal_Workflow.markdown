@@ -28,7 +28,7 @@ newly modified content to the index.  Finally, commit your changes with:
 
     $ git commit
 
-This will again prompt your for a message describing the change, and then
+This will again prompt you for a message describing the change, and then
 record a new version of the project.
 
 Alternatively, instead of running `git add` beforehand, you can use
@@ -43,7 +43,7 @@ begin the commit message with a single short (less than 50 character)
 line summarizing the change, followed by a blank line and then a more
 thorough description.  Tools that turn commits into email, for
 example, use the first line on the Subject: line and the rest of the
-commit in the body.
+commit message in the body.
 
 
 #### Git tracks content not files ####
