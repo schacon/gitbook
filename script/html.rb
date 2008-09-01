@@ -23,7 +23,7 @@ def do_replacements(html, type = :html)
   html.gsub! /\[fig:(.*?)\]/, '<div class="center"><img src="images/figure/\1.png"></div>'
   
   # fix images in pdf
-  html.gsub!('src="images', 'src="assets/images') if type == :pdf  
+  html.gsub!('src="images', 'src="assets/images')
 
   # replace/remove gitcasts
   
@@ -157,7 +157,7 @@ task :html => :merge do
       f.puts html_template
     end
     
-    `cp -Rf assets/* output/book/`
+    `cp -Rf assets output/book/`
     
   end
 end
