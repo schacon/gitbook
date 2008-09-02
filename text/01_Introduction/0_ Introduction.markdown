@@ -18,16 +18,16 @@ minutes to read through.
 Next we will go over **Intermediate Git Usage** - things that are slightly more
 complex, but may replace some of the basic commands you learned in the first 
 section.  This will mostly be tricks and commands that will feel more 
-comforatble after you know the basic commands.
+comfortable after you know the basic commands.
 
 After you have all of that mastered, we will cover **Advanced Git** - commands
 that most people probably don't use very often, but can be very helpful in
 certain situations.  Learning these commands should round out your day-to-day
-git knowledge, you will be a master of the Git.
+git knowledge; you will be a master of the Git!
 
 Now that you know Git, we will then cover **Working with Git**.  Here we will go
 over how to use Git in scripts, with deployment tools, with editors and more.
-These sections are meant to help you integrate Git into your environement.
+These sections are meant to help you integrate Git into your environment.
 
 Lastly, we will have a series of articles on **low-level documentation** that may
 help the Git hackers who want to learn how the actual internals and protocols

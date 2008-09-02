@@ -34,9 +34,9 @@ As you can see, a commit is defined by:
 - an **author**: The name of the person responsible for this change, together
   with its date.
 - a **committer**: The name of the person who actually created the commit,
-  with the date it was done.  This may be different from the author, for
-  example, if the author was someone who wrote a patch and emailed it
-  to the person who used it to create the commit.
+  with the date it was done.  This may be different from the author; for
+  example, if the author wrote a patch and emailed it to another person who
+  used the patch to create the commit.
 - a **comment** describing this commit.
 
 Note that a commit does not itself contain any information about what
@@ -53,7 +53,7 @@ taken from the content currently stored in the index.
 
 ### The Object Model ###
 
-So, now that we've looked at the 3 main object types (the blob, tree and commit), 
+So, now that we've looked at the 3 main object types (blob, tree and commit), 
 let's take a quick look at how they all fit together.
 
 If we had a simple project with the following directory structure:

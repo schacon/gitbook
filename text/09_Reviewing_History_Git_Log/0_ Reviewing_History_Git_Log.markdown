@@ -6,13 +6,13 @@ can also make more specific requests:
 
     $ git log v2.5..	    # commits since (not reachable from) v2.5
     $ git log test..master	# commits reachable from master but not test
-    $ git log master..test	# ...reachable from test but not master
-    $ git log master...test	# ...reachable from either test or master,
-    			            #    but not both
+    $ git log master..test	# commits reachable from test but not master
+    $ git log master...test	# commits reachable from either test or
+    			            #    master, but not both
     $ git log --since="2 weeks ago" # commits from the last 2 weeks
-    $ git log Makefile      # commits which modify Makefile
-    $ git log fs/		    # ... which modify any file under fs/
-    $ git log -S'foo()'	    # commits which add or remove any file data
+    $ git log Makefile      # commits that modify Makefile
+    $ git log fs/		    # commits that modify any file under fs/
+    $ git log -S'foo()'	    # commits that add or remove any file data
     			            # matching the string 'foo()'
 
 And of course you can combine all of these; the following finds

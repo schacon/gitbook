@@ -11,9 +11,9 @@ can use three dots instead of two:
 
     $ git diff master...test
 
-linkgit:git-diff[1] is an incredibly useful tool for figuring out what has 
-changed between any two points in your projects history, or to see what people
-are trying to introduce in new branches, etc.
+linkgit:git-diff[1] is an incredibly useful tool for figuring out what has
+changed between any two points in your project's history, or to see what
+people are trying to introduce in new branches, etc.
 
 ### What you will commit ###
 
@@ -30,12 +30,12 @@ If you want to see what _is_ staged for the next commit, you can run
     $ git diff --cached
 
 which will show you the difference between the index and your last commit; 
-what you would be committing if you run "git commit" without "-a" option.
+what you would be committing if you run "git commit" without the "-a" option.
 Lastly, you can run 
 
     $ git diff HEAD
 
-which shows changes in the working tree since your last commit; 
+which shows changes in the working directory since your last commit; 
 what you would be committing if you run "git commit -a".
 
 ### More Diff Options ###
@@ -45,19 +45,19 @@ the project in another branch, you can run something like
 
     $ git diff test
     
-This will show you what is different between your current content and the snapshot
-on the 'test' branch.  You can also limit the comparison to a specific file or 
-subdirectory by adding a *path limiter*
+This will show you what is different between your current working directory
+and the snapshot on the 'test' branch.  You can also limit the comparison to a
+specific file or subdirectory by adding a *path limiter*:
 
     $ git diff HEAD -- ./lib 
 
-That command will show the changes between the last commit 
-(or, more accurately, the tip of the current branch) and limit the comparison
-to files in the 'lib' subdirectory.
+That command will show the changes between your current working directory and
+the last commit (or, more accurately, the tip of the current branch), limiting
+the comparison to files in the 'lib' subdirectory.
 
-If you don't want to see the whole patch, you can add the '--stat' option, which
-will limit the output to which files have changed and a little text graph of
-how each file changed.
+If you don't want to see the whole patch, you can add the '--stat' option,
+which will limit the output to the files that have changed along with a little
+text graph depicting how many lines changed in each file.
 
     $>git diff --stat
      layout/book_index_template.html                    |    8 ++-

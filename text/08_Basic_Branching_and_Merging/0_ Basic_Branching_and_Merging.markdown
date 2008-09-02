@@ -79,7 +79,7 @@ linkgit:git-merge[1]:
 
     $ git merge branchname
 
-merges the development in the branch "branchname" into the current
+merges the changes made in the branch "branchname" into the current
 branch.  If there are conflicts--for example, if the same file is
 modified in two different ways in the remote branch and the local
 branch--then you are warned; the output may look something like this:
@@ -93,10 +93,10 @@ branch--then you are warned; the output may look something like this:
 Conflict markers are left in the problematic files, and after
 you resolve the conflicts manually, you can update the index
 with the contents and run git commit, as you normally would when
-creating a new file.
+modifying a file.
 
 If you examine the resulting commit using gitk, you will see that it
-has two parents, one pointing to the top of the current branch, and
+has two parents: one pointing to the top of the current branch, and
 one to the top of the other branch.
 
 ### Resolving a merge ###
@@ -145,22 +145,20 @@ Or, if you've already committed the merge that you want to throw away,
 
     $ git reset --hard ORIG_HEAD
 
-However, this last command can be dangerous in some cases--never
-throw away a commit you have already committed if that commit may
-itself have been merged into another branch, as doing so may confuse
-further merges.
+However, this last command can be dangerous in some cases--never throw away a
+commit if that commit may itself have been merged into another branch, as
+doing so may confuse further merges.
 
 ### Fast-forward merges ###
 
-There is one special case not mentioned above, which is treated
-differently.  Normally, a merge results in a merge commit, with two
-parents, one pointing at each of the two lines of development that
-were merged.
+There is one special case not mentioned above, which is treated differently.
+Normally, a merge results in a merge commit with two parents, one for each of
+the two lines of development that were merged.
 
-However, if the current branch is a descendant of the other--so every
-commit present in the one is already contained in the other--then git
-just performs a "fast forward"; the head of the current branch is moved
-forward to point at the head of the merged-in branch, without any new
-commits being created.
+However, if the current branch has not diverged from the other--so every
+commit present in the current branch is already contained in the other--then
+git just performs a "fast forward"; the head of the current branch is moved
+forward to point at the head of the merged-in branch, without any new commits
+being created.
 
 [gitcast:c6-branch-merge]("GitCast #6: Branching and Merging")

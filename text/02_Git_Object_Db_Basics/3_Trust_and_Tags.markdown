@@ -3,9 +3,10 @@
 
 [fig:object-tag]
 
-A tag object contains an object, object type, tag name, the name of the
-person ("tagger") who created the tag, and a message, which may contain
-a signature, as can be seen using linkgit:git-cat-file[1]:
+A tag object contains an object name (called simply 'object'), object type,
+tag name, the name of the person ("tagger") who created the tag, and a
+message, which may contain a signature, as can be seen using
+linkgit:git-cat-file[1]:
 
     $ git cat-file tag v1.5.0
     object 437b1b20df4b356c9342dac8d38849f24ef44f27
