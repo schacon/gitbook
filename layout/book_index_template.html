@@ -6,19 +6,19 @@
 	<meta http-equiv="content-language" content="en">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="icon" href="favicon.png" type="image/png">
-	<link rel="stylesheet" href="blueprint/screen.css" type="text/css" media="screen, projection">
-  <link rel="stylesheet" href="blueprint/print.css" type="text/css" media="print">
-  <!--[if IE]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-	<link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen, projection">
-	<script type="text/javascript" src="javascripts/jquery-1.2.6.min.js"></script>
-	<script type="text/javascript" src="javascripts/jquery.corner.js"></script>
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+	<script type="text/javascript" src="assets/javascripts/jquery-1.2.6.min.js"></script>
+	<script type="text/javascript" src="assets/javascripts/jquery.corner.js"></script>
 </head>
 
 <body>
 <div class="container showgrids">
 
   <div class="span-21 header">
-    <a href="/"><img alt="Git Community Book" src="images/header-book.gif"></a>
+    <a href="/"><img alt="Git Community Book" src="assets/images/header-book.gif"></a>
   </div>
 
   <div class="span-21 navbar">
@@ -38,7 +38,7 @@
     <br/>
   </div>
   
-  <div class="span-14">
+  <div class="span-10">
     <div id="book-intro">
       <h3>The Git Community Book</h3>
       <p>
@@ -54,7 +54,19 @@
     </div>
   </div>
 
-  <div class="span-7 last">
+  
+  <div class="span-5">
+	  <div id="download">
+			<h3>Download</h3>			
+			<div class="inner">
+				Click <a href="book.pdf">here</a> to download the current PDF version of this book.
+    		<hr/>
+			  <a href="book.pdf"><img height="50" border="0" src="assets/images/pdf.png"/></a>
+			</div>
+    </div>
+  </div>
+
+  <div class="span-6 last">
     <div id="new-to-git">
       <h3>New to Git?</h3>
       <div class="inner">
@@ -67,7 +79,6 @@
     </div>
   </div>
 
-  
   <div class="span-21">
     #body
   </div>
@@ -81,7 +92,7 @@
 	  </div>
   </div>
   <div class="span-4 last center">
-    <a href="http://github.com"><img src="images/github.png" alt="github logo"></a>
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
   </div>
   
 </div>
@@ -90,6 +101,7 @@
   $(function() {
     $('#book-intro').corner();
     $('#new-to-git').corner();
+    $('#download').corner();
     $('.footer').corner();
   });
 </script>

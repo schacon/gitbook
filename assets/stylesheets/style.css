@@ -50,6 +50,10 @@ img.book { border: 1px solid #666; }
 #book-intro { padding: 10px; margin-bottom: 15px; background: #FFE9B7;}
 #book-intro h3 { color: #630; font-size: 200%; font-weight: bold;}
 
+#download { padding: 10px; background: #9AB54F; text-align:center; }
+#download h3 { color: #efe; font-size: 150%; font-weight: bold; text-align: center;}
+#download .inner { background: #efe; padding: 5px 10px;}
+
 #new-to-git { padding: 10px; padding-bottom:15px; background: #B5463F; }
 #new-to-git h3 { color: #fee; font-size: 150%; font-weight: bold; text-align: center;}
 #new-to-git h3 small { color: #eee; font-weight: normal; font-size: 70%;}
