@@ -158,6 +158,7 @@ task :html => :merge do
     end
     
     `cp -Rf assets output/book/`
+    `cp output/book.pdf output/book/`
     
   end
 end
