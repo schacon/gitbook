@@ -21,9 +21,7 @@ This is the preferred method.
 
 If someone else administers the server, they should tell you what
 directory to put the repository in, and what git:// URL it will appear
-at.  You can then skip to the section
-"<<pushing-changes-to-a-public-repository,Pushing changes to a public
-repository>>", below.
+at.
 
 Otherwise, all you need to do is start linkgit:git-daemon[1]; it will
 listen on port 9418.  By default, it will allow access to any directory
@@ -56,10 +54,3 @@ Advertise the URL of proj.git.  Anybody else should then be able to
 clone or pull from that URL, for example with a command line like:
 
     $ git clone http://yourserver.com/~you/proj.git
-
-(See also
-link:howto/setup-git-server-over-http.txt[setup-git-server-over-http]
-for a slightly more sophisticated setup using WebDAV which also
-allows pushing over http.)
-
-(!!gitosis!!)

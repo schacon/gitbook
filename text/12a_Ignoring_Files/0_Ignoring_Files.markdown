@@ -24,8 +24,8 @@ in the top level of your working directory, with contents such as:
 See linkgit:gitignore[5] for a detailed explanation of the syntax.  You can
 also place .gitignore files in other directories in your working tree, and they
 will apply to those directories and their subdirectories.  The `.gitignore`
-files can be added to your repository like any other files (just run `git add
-.gitignore` and `git commit`, as usual), which is convenient when the exclude
+files can be added to your repository like any other files 
+(just run `git add .gitignore` and `git commit`, as usual), which is convenient when the exclude
 patterns (such as patterns matching build output files) would also make sense
 for other users who clone your repository.
 

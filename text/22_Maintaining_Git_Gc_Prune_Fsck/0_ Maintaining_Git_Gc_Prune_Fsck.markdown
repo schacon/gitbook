@@ -33,4 +33,4 @@ time.  The most common warning by far is about "dangling" objects:
 
 Dangling objects are not a problem.  At worst they may take up a little
 extra disk space.  They can sometimes provide a last-resort method for
-recovering lost work--see <<dangling-objects>> for details.
+recovering lost work.

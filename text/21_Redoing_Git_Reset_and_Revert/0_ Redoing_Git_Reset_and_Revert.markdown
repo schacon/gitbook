@@ -63,8 +63,7 @@ You can also revert an earlier change, for example, the next-to-last:
 In this case git will attempt to undo the old change while leaving
 intact any changes made since then.  If more recent changes overlap
 with the changes to be reverted, then you will be asked to fix
-conflicts manually, just as in the case of <<resolving-a-merge,
-resolving a merge>>.
+conflicts manually, just as in the case of resolving a merge.
 
 #### Fixing a mistake by modifying a commit ####
 
