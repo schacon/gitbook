@@ -21,3 +21,15 @@ After that, you can go back to what you were working on with
 
     $ git stash apply
 
+
+### Stash Queue ###
+
+You can also use stashing to queue up stashed changes.  
+If you run 'git stash list' you can see which stashes you have saved:
+
+	$>git stash list
+	stash@{0}: WIP on book: 51bea1d... fixed images
+	stash@{1}: WIP on master: 9705ae6... changed the browse code to the official repo
+
+Then you can apply them individually with 'git stash apply stash@{1}'.  You
+can clear out the list with 'git stash clear'.
