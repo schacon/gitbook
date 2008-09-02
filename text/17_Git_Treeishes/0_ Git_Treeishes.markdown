@@ -1,7 +1,8 @@
 ## Git Treeishes ##
 
 There are a number of ways to refer to a particular commit or tree other
-than spelling out the entire 40-character sha.
+than spelling out the entire 40-character sha.  In Git, these are referred
+to as a 'treeish'.
 
 ### Partial Sha ###
 
