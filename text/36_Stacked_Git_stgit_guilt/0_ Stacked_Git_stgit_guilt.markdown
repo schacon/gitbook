@@ -1,5 +1,0 @@
-## Stacked Git ##
-
-stgit 
-
-guilt
