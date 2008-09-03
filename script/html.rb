@@ -8,11 +8,10 @@ require "uv"
 def do_replacements(html, type = :html)
 
   # highlight code
-  #html = html.gsub /<pre><code>.*?<\/code><\/pre>/m do |code|
-  #  code = code.gsub('<pre><code>', '').gsub('</code></pre>', '').gsub('&lt;', '<').gsub('&gt;', '>').gsub('&amp;', '&')
-  #  Uv.parse(code, "xhtml", "ruby", false, "mac_classic")
-  #end
-  
+  html = html.gsub /<pre><code>ruby.*?<\/code><\/pre>/m do |code|
+    code = code.gsub('<pre><code>ruby', '').gsub('</code></pre>', '').gsub('&lt;', '<').gsub('&gt;', '>').gsub('&amp;', '&')
+    Uv.parse(code, "xhtml", "ruby", false, "mac_classic")
+  end
 
   # replace gitlinks
   html.gsub! /linkgit:(.*?)\[\d\]/ do |code, waa|
