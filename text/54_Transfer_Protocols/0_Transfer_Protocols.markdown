@@ -110,7 +110,7 @@ The client connects and sends the request header. The clone command
 
 produces the following request:
 
-	0032git-upload-pack /project.git\000host=myserver.com\000
+	0032git-upload-pack /project.git\\000host=myserver.com\\000
 
 The first four bytes contain the hex length of the line (including 4 byte line
 length and trailing newline if present). Following are the command and
@@ -123,7 +123,7 @@ The request is processed and turned into a call to git-upload-pack:
 
 This immediately returns information of the repo:
 
-	007c74730d410fcb6603ace96f1dc55ea6196122532d HEAD\000multi_ack thin-pack side-band side-band-64k ofs-delta shallow no-progress
+	007c74730d410fcb6603ace96f1dc55ea6196122532d HEAD\\000multi_ack thin-pack side-band side-band-64k ofs-delta shallow no-progress
 	003e7d1665144a3a975c05f1f43902ddaf084e784dbe refs/heads/debug
 	003d5a3f6be755bbb7deae50065988cbfa1ffa9ab68a refs/heads/dist
 	003e7e47fe2bd8d01d481f44d7af0531bd93d3b21c01 refs/heads/local
@@ -147,23 +147,23 @@ The is sent to the open git-upload-pack process which then streams out the
 final response:
 
 	"0008NAK\n"
-	"0023\002Counting objects: 2797, done.\n"
-	"002b\002Compressing objects:   0% (1/1177)   \r"
-	"002c\002Compressing objects:   1% (12/1177)   \r"
-	"002c\002Compressing objects:   2% (24/1177)   \r"
-	"002c\002Compressing objects:   3% (36/1177)   \r"
-	"002c\002Compressing objects:   4% (48/1177)   \r"
-	"002c\002Compressing objects:   5% (59/1177)   \r"
-	"002c\002Compressing objects:   6% (71/1177)   \r"
-	"0053\002Compressing objects:   7% (83/1177)   \rCompressing objects:   8% (95/1177)   \r"
+	"0023\\002Counting objects: 2797, done.\n"
+	"002b\\002Compressing objects:   0% (1/1177)   \r"
+	"002c\\002Compressing objects:   1% (12/1177)   \r"
+	"002c\\002Compressing objects:   2% (24/1177)   \r"
+	"002c\\002Compressing objects:   3% (36/1177)   \r"
+	"002c\\002Compressing objects:   4% (48/1177)   \r"
+	"002c\\002Compressing objects:   5% (59/1177)   \r"
+	"002c\\002Compressing objects:   6% (71/1177)   \r"
+	"0053\\002Compressing objects:   7% (83/1177)   \rCompressing objects:   8% (95/1177)   \r"
 	...
-	"005b\002Compressing objects: 100% (1177/1177)   \rCompressing objects: 100% (1177/1177), done.\n"
-	"2004\001PACK\000\000\000\002\000\000\n\355\225\017x\234\235\216K\n\302"..."\b<M^*\343\362\302s"
-	"2005\001\360\204{\225\376\330\345]z\226\273"..."\361\326\245\036\036\334*78w)\327\"/"
+	"005b\\002Compressing objects: 100% (1177/1177)   \rCompressing objects: 100% (1177/1177), done.\n"
+	"2004\\001PACK\\000\\000\\000\\002\\000\\000\n\355\225\\017x\234\235\216K\n\302"..."\b<M^*\343\362\302s"
+	"2005\\001\360\204{\225\376\330\345]z\226\273"..."\361\326\245\\036\\036\334*78w)\327\"/"
 	...
-	"0037\002Total 2797 (delta 1799), reused 2360 (delta 1529)\n"
+	"0037\\002Total 2797 (delta 1799), reused 2360 (delta 1529)\n"
 	...
-	"<\276\255L\273s\005\001w0006\001[0000"
+	"<\276\255L\273s\\005\\001w0006\\001[0000"
 	
 See the Packfile chapter previously for the actual format of the packfile data
 in the response.
