@@ -1,3 +1,0 @@
-## Ruby and Git ##
-
-grit

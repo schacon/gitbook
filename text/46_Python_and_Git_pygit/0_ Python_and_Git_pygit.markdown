@@ -1,3 +1,0 @@
-## Python and Git ##
-
-pygit

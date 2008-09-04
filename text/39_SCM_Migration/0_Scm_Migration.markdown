@@ -24,4 +24,15 @@ Python script that will import a Perforce repository for you.
 	$ ~/git.git/contrib/fast-import/git-p4 clone //depot/project/main@all myproject
 	
 
+### Importing Others ###
+
+These are other SCMs that listed high on the Git Survey, should find import
+docs for them.  !!TODO!!
+
+* CVS
+* Mercurial (hg)
+
+* Bazaar-NG
+* Darcs
+* ClearCase
 	

@@ -1,3 +1,0 @@
-## Perl and Git ##
-
-perlgit
