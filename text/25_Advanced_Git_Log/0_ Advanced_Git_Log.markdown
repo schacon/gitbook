@@ -1,1 +1,0 @@
-##Advanced Git Log
