@@ -5,7 +5,8 @@ require 'builder'
 require 'rdiscount'
 require "uv"
 
-MIN_SIZE = 1200
+#MIN_SIZE = 1200
+MIN_SIZE = 800
 
 def do_replacements(html, type = :html)
 

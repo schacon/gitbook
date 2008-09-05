@@ -26,9 +26,9 @@ tip of the other branch, which is stored temporarily in MERGE_HEAD.
 During the merge, the index holds three versions of each file.  Each of
 these three "file stages" represents a different version of the file:
 
-$ git show :1:file.txt	# the file in a common ancestor of both branches
-$ git show :2:file.txt	# the version from HEAD.
-$ git show :3:file.txt	# the version from MERGE_HEAD.
+	$ git show :1:file.txt	# the file in a common ancestor of both branches
+	$ git show :2:file.txt	# the version from HEAD.
+	$ git show :3:file.txt	# the version from MERGE_HEAD.
 
 When you ask linkgit:git-diff[1] to show the conflicts, it runs a
 three-way diff between the conflicted merge results in the work tree with

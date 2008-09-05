@@ -1,7 +1,5 @@
 ### Multiway Merge ###
 
-
-
 You can merge several heads at one time by simply listing them on the same 
 linkgit:git-merge[1] command.  For instance,
 
