@@ -118,12 +118,7 @@ will be returned via STDOUT.
 Now that we have a new commit object SHA, we can update a branch to point to
 it if we want to.  Lets say we want to update our 'master' branch to point to
 the new commit we just created - we would use the linkgit:git-update-ref[1]
-command.  Technically, you can just do something like this:
-
-	$ echo 'a5f85ba5875917319471dfd98dfc636c1dc65650' > .git/refs/heads/master
-	
-But a safer way of doing that is to use the update-ref command:
+command:
 
 	$ git update-ref refs/heads/master a5f85ba5875917319471dfd98dfc636c1dc65650
-
 
