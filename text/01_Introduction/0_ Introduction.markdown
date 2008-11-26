@@ -43,6 +43,7 @@ pode clonar o código-fonte deste livro em
 [http://github.com/schacon/gitscm](http://github.com/schacon/gitscm) e me 
 enviar um patch ou pull-request.
 
+
 ### Referências ###
 Muitos dos conteúdos desse livro é extraído de diferentes fontes e então 
 adicionados.
