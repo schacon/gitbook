@@ -1,19 +1,19 @@
-### Linux ###
+﻿### Linux ###
 
-If you are running Linux, you can likely install Git easily via your native
-package management system:
+Se você está rodando o Linux, você pode provavelmente instalar o Git
+facilmente através do sistema de gerenciamento de pacotes nativo.
 
-    $ yum install git-core
+    $ yum install git-core      
 
-    $ apt-get install git-core
+    $ apt-get install git-core  
 
-If that doesn't work, you can download the .deb or .rpm packages from here:
+Se não funcionar, você pode baixar os pacotes  .deb ou .rpm daqui:
 
 [RPM Packages](http://kernel.org/pub/software/scm/git/RPMS/)
 
 [Stable Debs](http://www.backports.org/debian/pool/main/g/git-core/)
 
-If you prefer to install from source on a Linux system, this article may be
-helpful:
+Se você preferir instalar a partir do código fonte em um sistema Linux,
+este artigo pode ser útil:
 
 [Article: Installing Git on Ubuntu](http://chrisolsen.org/2008/03/10/installing-git-on-ubuntu/)

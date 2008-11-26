@@ -1,4 +1,4 @@
-## Basic Branching and Merging ##
+﻿## Basic Branching and Merging ##
 
 A single git repository can maintain multiple branches of
 development.  To create a new branch named "experimental", use

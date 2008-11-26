@@ -1,14 +1,14 @@
-### Installing from Source ###
+﻿### Instalando a partir do Código Fonte ###
 
-In short, on a Unix-based system, you can download the Git source code from the
-[Git Download Page](http://git-scm.com/download), and then run something
-along the lines of :
+Em resumo, em um sistema baseado em Unix, você pode baixar o código fonte do 
+Git em [Git Download Page](http://git-scm.com/download), e então executar 
+essas linhas :
 
-    $ make prefix=/usr all ;# as yourself
-    $ make prefix=/usr install ;# as root
+    $ make prefix=/usr all ;# com seu próprio usuário
+    $ make prefix=/usr install ;# como root
 
-You will need the [expat](http://expat.sourceforge.net/), 
+Você precisará dessas bibliotecas instaladas [expat](http://expat.sourceforge.net/), 
 [curl](http://curl.linux-mirror.org),
-[zlib](http://www.zlib.net), and [openssl](http://www.openssl.org) libraries
-installed - though with the possible exception of *expat*, these will normally already
-be there.
+[zlib](http://www.zlib.net), e [openssl](http://www.openssl.org) 
+- embora com uma possível exceção do *expat*, esse normalmenete já existe 
+no sistema.

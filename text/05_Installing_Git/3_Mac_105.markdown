@@ -1,11 +1,12 @@
-### Mac 10.5 ###
+﻿### Mac 10.5 ###
 
-With Leopard, you can also install via MacPorts, but here you have the
-additional option of using a nice installer, which you can download from here:
+Com o Leopard, você pode também instalar através do MacPorts, mas aqui você 
+tem opções adicionais para uso do ótimo instalador, que você pode baixar daqui:
 [Git OSX
 Installer](http://code.google.com/p/git-osx-installer/downloads/list?can=3)
 
-If you prefer to install it from source, these guides may be particularly helpful to you :
+Se você preferir instalá-lo a partir do código fonte, esses guias podem ser 
+particularmente úteis para você:
 
 [Article: Installing Git on OSX Leopard](http://solutions.treypiepmeier.com/2008/02/25/installing-git-on-os-x-leopard/)
 

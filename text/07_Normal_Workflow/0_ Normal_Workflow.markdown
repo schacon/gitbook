@@ -1,17 +1,17 @@
-## Normal Workflow ##
+﻿## Fluxo Normal de Trabalho ##
 
-Modify some files, then add their updated contents to the index:
+Altere alguns arquivos, então adicione seus conteúdos alterados para o index:
 
     $ git add file1 file2 file3
 
-You are now ready to commit.  You can see what is about to be committed
-using linkgit:git-diff[1] with the --cached option:
+Você gora está pronto para realizar o commit. Você pode ver sobre o que 
+será commitado usando linkgit:git-diff[1] com a opção --cached:
 
     $ git diff --cached
 
-(Without --cached, linkgit:git-diff[1] will show you any changes that
-you've made but not yet added to the index.)  You can also get a brief
-summary of the situation with linkgit:git-status[1]:
+(Sem a opção --cached, linkgit:git-diff[1] mostrará a você qualquer modificação
+que você tem feito mas ainda não foi adicionado no index). Você pode também 
+conseguir uma breve sumário da situação com linkgit:git-status[1]:
 
     $ git status
     # On branch master
@@ -23,36 +23,37 @@ summary of the situation with linkgit:git-status[1]:
     #	modified:   file3
     #
 
-If you need to make any further adjustments, do so now, and then add any
-newly modified content to the index.  Finally, commit your changes with:
+Se você precisar fazer qualquer ajustes a mais, então faça-o agora, e 
+adicione qualquer nova alteração no conteúdo no index. Finalmente, commit
+suas mudanças com:
 
     $ git commit
 
-This will again prompt you for a message describing the change, and then
-record a new version of the project.
+Isso irá novamente mostrar a você uma mensagem descrevendo as mudanças, e
+então gravar uma nova versão do projeto.
 
-Alternatively, instead of running `git add` beforehand, you can use
+Alternativamente, ao invés de executar `git add`, você pode usar:
 
     $ git commit -a
     
-which will automatically notice any modified (but not new) files, add
-them to the index, and commit, all in one step.
+que irá automaticamente avisar sobre qualquer modificações nos (mas não novos)
+arquivos, adicioná-los no index, e realizar o commit, tudo de uma vez.
 
-A note on commit messages: Though not required, it's a good idea to
-begin the commit message with a single short (less than 50 character)
-line summarizing the change, followed by a blank line and then a more
-thorough description.  Tools that turn commits into email, for
-example, use the first line on the Subject: line and the rest of the
-commit message in the body.
+Uma nota sobre as mensagens de commit: Embora não necessário, é uma boa
+idéia iniciar a mensagem de commit em uma linha curta (menos do que
+50 caracteres) resumindo as mundanças, seguido por uma linha em branco e então,
+mais uma descrição profunda. Ferrramentas que transformam commits em emails, por
+exemplo, usam a primeira linha para o Assunto: e o resto da mensagem do commit 
+para o corpo do email.
 
 
-#### Git tracks content not files ####
+#### Git percebe conteúdo não arquivos ####
 
-Many revision control systems provide an "add" command that tells the
-system to start tracking changes to a new file.  Git's "add" command
-does something simpler and more powerful: `git add` is used both for new
-and newly modified files, and in both cases it takes a snapshot of the
-given files and stages that content in the index, ready for inclusion in
-the next commit.
+Muitos sistemas de controle de revisões dispõem de um comando "add" que
+chama o sistema para rastrear as mudanças para um novo arquivo. O comando
+"add" faz algumas coisas da mais simples as mais poderosas: `git add` é usado
+ambos para arquivos novos e arquivos alterados, e em ambos os casos fornece um 
+snapshot dos arquivos dados e os que estão no index, prontos para inclusão no 
+próximo commit. 
 
-[gitcast:c2_normal_workflow]("GitCast #2: Normal Workflow")
+[gitcast:c2_normal_workflow]("GitCast #2: Fluxo Normal de Trabalho")
