@@ -1,16 +1,18 @@
-## The Git Index ##
+## O Index do Git ##
 
-The Git index is used as a staging area between your working directory 
-and your repository.  You can use the index to build up a set of changes
-that you want to commit together.  When you create a commit, what is committed
-is what is currently in the index, not what is in your working directory.
+O index do Git é usado como uma área de preparação entre o seu diretório de 
+trabalho e o seu repositório. Você pode usar o index para contruir um conjunto 
+de modificações que você quer levar para o próximo commit juntos. Quando você 
+cria um commit, o que é commitado é o que está no index atualmente, não o que 
+está no seu diretório de trabalho. 
 
-### Looking at the Index ###
+### Visualizando o Index ###
 
-The easiest way to see what is in the index is with the linkgit:git-status[1]
-command.  When you run git status, you can see which files are staged
-(currently in your index), which are modified but not yet staged, and which
-are completely untracked.
+A forma mais fácil para ver o que está no index é com o comando 
+linkgit:git-status[1]. Quando você roda o git status, você pode ver quais
+arquivos estão preparados para o próximo commit (atualmente no seu index), 
+quais estão modificados mas não ainda não preparados, e quais estão 
+completamente sem nenhuma preparação.
 
     $>git status
     # On branch master
@@ -34,11 +36,11 @@ are completely untracked.
     #	blametree-init
     #	git-gui/git-citool
 
-If you blow the index away entirely, you generally haven't lost any
-information as long as you have the name of the tree that it described.
+Se você descartar o index completamente, você em geral não perde qualquer 
+informação contanto que você tenha o nome da tree que ele descreveu.
 
-And with that, you should have a pretty good understanding of the basics of 
-what Git is doing behind the scenes, and why it is a bit different than most
-other SCM systems.  Don't worry if you don't totally understand it all right 
-now; we'll revisit all of these topics in the next sections. Now we're ready 
-to move on to installing, configuring and using Git.  
+E com isso, você deveria ter um bom entendimento das coisas básicas que o Git 
+faz por traz da cena, e porque ele é um pouco direfente da maioria dos outros
+sistemas SCM. Não se preocupe se você não entendeu completamente tudo até 
+agora; iremos revisar todos esses tópicos nas próximas seções. Agora estamos
+prontos para ir a instalação, configuração e uso do Git.
