@@ -1,4 +1,4 @@
-## Bem vindo ao Git ##
+﻿## Bem vindo ao Git ##
 
 Bem vindo ao Git - o mais rápido , sistema de controle de versão distribuida.
 
