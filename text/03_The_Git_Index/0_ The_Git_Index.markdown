@@ -1,18 +1,18 @@
-## O Index do Git ##
+ï»¿## O Index do Git ##
 
-O index do Git é usado como uma área de preparação entre o seu diretório de 
-trabalho e o seu repositório. Você pode usar o index para contruir um conjunto 
-de modificações que você quer levar para o próximo commit juntos. Quando você 
-cria um commit, o que é commitado é o que está no index atualmente, não o que 
-está no seu diretório de trabalho. 
+O index do Git Ã© usado como uma Ã¡rea de preparaÃ§Ã£o entre o seu diretÃ³rio de 
+trabalho e o seu repositÃ³rio. VocÃª pode usar o index para contruir um conjunto 
+de modificaÃ§Ãµes que vocÃª quer levar para o prÃ³ximo commit juntos. Quando vocÃª 
+cria um commit, o que Ã© commitado Ã© o que estÃ¡ no index atualmente, nÃ£o o que 
+estÃ¡ no seu diretÃ³rio de trabalho. 
 
 ### Visualizando o Index ###
 
-A forma mais fácil para ver o que está no index é com o comando 
-linkgit:git-status[1]. Quando você roda o git status, você pode ver quais
-arquivos estão preparados para o próximo commit (atualmente no seu index), 
-quais estão modificados mas não ainda não preparados, e quais estão 
-completamente sem nenhuma preparação.
+A forma mais fÃ¡cil para ver o que estÃ¡ no index Ã© com o comando 
+linkgit:git-status[1]. Quando vocÃª roda o git status, vocÃª pode ver quais
+arquivos estÃ£o preparados para o prÃ³ximo commit (atualmente no seu index), 
+quais estÃ£o modificados mas nÃ£o ainda nÃ£o preparados, e quais estÃ£o 
+completamente sem nenhuma preparaÃ§Ã£o.
 
     $>git status
     # On branch master
@@ -36,11 +36,11 @@ completamente sem nenhuma preparação.
     #	blametree-init
     #	git-gui/git-citool
 
-Se você descartar o index completamente, você em geral não perde qualquer 
-informação contanto que você tenha o nome da tree que ele descreveu.
+Se vocÃª descartar o index completamente, vocÃª em geral nÃ£o perde qualquer 
+informaÃ§Ã£o contanto que vocÃª tenha o nome da tree que ele descreveu.
 
-E com isso, você deveria ter um bom entendimento das coisas básicas que o Git 
-faz por traz da cena, e porque ele é um pouco direfente da maioria dos outros
-sistemas SCM. Não se preocupe se você não entendeu completamente tudo até 
-agora; iremos revisar todos esses tópicos nas próximas seções. Agora estamos
-prontos para ir a instalação, configuração e uso do Git.
+E com isso, vocÃª deveria ter um bom entendimento das coisas bÃ¡sicas que o Git 
+faz por traz da cena, e porque ele Ã© um pouco direfente da maioria dos outros
+sistemas SCM. NÃ£o se preocupe se vocÃª nÃ£o entendeu completamente tudo atÃ© 
+agora; iremos revisar todos esses tÃ³picos nas prÃ³ximas seÃ§Ãµes. Agora estamos
+prontos para ir a instalaÃ§Ã£o, configuraÃ§Ã£o e uso do Git.
