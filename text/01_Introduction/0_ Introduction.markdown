@@ -2,51 +2,54 @@
 
 Bem vindo ao Git - o mais rápido , sistema de controle de versão distribuida.
 
-Esse livro é um ponto de início para as pessoas novas no Git que querem
+Esse livro é um ponto de partida para as pessoas novas no Git que querem
 aprendê-lo tão rapidamente e facilmente quanto possível.
 
-This book will start out by introducing you to the way Git stores data, to
-give you the context for why it is different than other VCS tools.
-This is meant to take you about 20 minutes.
+Esse livro iniciará introduzindo você sobre a forma como o Git armazena os
+dados, dando a você o contexto do porque ele é diferente do que as outras
+ferramentas de SCV.
+Essa parte será abordada em 20 minutos.
 
-Next we will cover **Basic Git Usage** - the commands you will be using 90% of
-the time.  These should give you a good basis to use Git comfortably for most
-of what you're going to use it for.  This section should take you about 30
-minutes to read through.
+Depois cobriremos **O Uso básico do Git** - os comandos que usará em 90% do
+do seu tempo. Isso lhe dará uma boa base para usar o Git confortávelmente
+para a maioria das coisas onde poderá usá-lo. Essa seção levará 30 minutos
+para leitura.
 
-Next we will go over **Intermediate Git Usage** - things that are slightly more
-complex, but may replace some of the basic commands you learned in the first
-section.  This will mostly be tricks and commands that will feel more
-comfortable after you know the basic commands.
+Depois iremos para **Uso Intermediário do Git** - coisas que são ligeiramente 
+mais complexas, mas podem substituir alguns dos comandos básicos que você 
+aprendeu na primeira seção. Este mostrará principalmente truques e comandos
+onde se sentirá mais confortável depois que conhece os comandos básicos. 
 
-After you have all of that mastered, we will cover **Advanced Git** - commands
-that most people probably don't use very often, but can be very helpful in
-certain situations.  Learning these commands should round out your day-to-day
-git knowledge; you will be a master of the Git!
+Depois que você estiver dominado, nós cobriremos **Git Avançado** - comandos 
+que a maioria das pesssoas não usan frequentemente, mas podem ser muito úteis
+em certas situações. Aprendendo esses comandos deverá cobrir o seu 
+conhecimento sobre o git no dia a dia; você se tornará um mestre do Git!                                                                                                             
 
-Now that you know Git, we will then cover **Working with Git**.  Here we will go
-over how to use Git in scripts, with deployment tools, with editors and more.
-These sections are meant to help you integrate Git into your environment.
+Agora que você conhece o Git, nós iremos cobrir **Trabalhando com Git**. Aqui
+nós iremos falar como usar o Git em scripts, com ferramentas de implantação,
+com editores e muito mais.
+Estas seções são principalmente para ajudar você a integrar o Git ao seu 
+ambiente.   
 
-Lastly, we will have a series of articles on **low-level documentation** that may
-help the Git hackers who want to learn how the actual internals and protocols
-work in Git.
+Finalmente, nós teremos uma série de artigos sobre 
+**documentação de baixo nível** que pode ajudar hackers de Git que querem 
+aprender como funcionam os protocolos e funções internas no Git.
 
-### Feedback and Contributing ###
+### Comentários e Contribuições ###
 
-At any point, if you see a mistake or want to contribute to the book, you can
-send me an email at [schacon@gmail.com](mailto://schacon@gmail.com), or you
-can clone the source of this book at
-[http://github.com/schacon/gitscm](http://github.com/schacon/gitscm)
-and send me a patch or a pull-request.
+Até aqui, se você achou algum erro ou quer contribuir com o livro, você
+pode enviar um email para [schacon@gmail.com](mailto://schacon@gmail.com), ou
+pode clonar o código-fonte deste livro em 
+[http://github.com/schacon/gitscm](http://github.com/schacon/gitscm) e me 
+enviar um patch ou pull-request.
 
-### References ###
+### Referências ###
+Muitos dos conteúdos desse livro é extraído de diferentes fontes e então 
+adicionados.
+Se você gostaria de ler sobre alguns dos artigos originais ou recursos, por 
+favor visite eles e agradeça os autores.
 
-Much of this book is pulled together from different sources and then added to.
-If you would like to read some of the original articles or resources, please
-visit them and thank the authors:
-
-* [Git User Manual](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html)
+* [Git Manual do Usuário](http://www.kernel.org/pub/software/scm/git/docs/user-manual.html)
 * [The Git Tutorial](http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html)
 * [The Git Tutorial pt 2](http://www.kernel.org/pub/software/scm/git/docs/gittutorial-2.html)
 * ["My Git Workflow" blog post](http://osteele.com/archives/2008/05/my-git-workflow)
