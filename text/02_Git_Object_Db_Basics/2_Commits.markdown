@@ -1,13 +1,12 @@
-### Commit Object ###
+### Objeto Commit ###
 
-The "commit" object links a physical state of a tree with a description
-of how we got there and why. 
+O objeto "commit" liga o estado físico de uma árvore com a descrição de como 
+a conseguimos e porque.
 
 [fig:object-commit]
 
-You can use the --pretty=raw option to
-linkgit:git-show[1] or linkgit:git-log[1] to examine your favorite
-commit:
+Você pode usar a opção --pretty=raw para linkgit:git-show[1] ou 
+linkgit:git-log[1] para examinar seu commit favorito: 
 
     $ git show -s --pretty=raw 2be7fcb476
     commit 2be7fcb4764f2dbcee52635b91fedb1b3dcf7ab4
@@ -20,43 +19,43 @@ commit:
 
         Signed-off-by: Junio C Hamano <gitster@pobox.com>
 
-As you can see, a commit is defined by:
+Como você pode ver, um commit é definido por:
 
-- a **tree**: The SHA1 name of a tree object (as defined below), representing
-  the contents of a directory at a certain point in time.
-- **parent(s)**: The SHA1 name of some number of commits which represent the
-  immediately previous step(s) in the history of the project.  The
-  example above has one parent; merge commits may have more than
-  one.  A commit with no parents is called a "root" commit, and
-  represents the initial revision of a project.  Each project must have
-  at least one root.  A project can also have multiple roots, though
-  that isn't common (or necessarily a good idea).
-- an **author**: The name of the person responsible for this change, together
-  with its date.
-- a **committer**: The name of the person who actually created the commit,
-  with the date it was done.  This may be different from the author; for
-  example, if the author wrote a patch and emailed it to another person who
-  used the patch to create the commit.
-- a **comment** describing this commit.
+- uma **tree**: O nome SHA1 do objeto tree (como definido acima), representando
+  o conteúdo de um diretório em um certo ponto no tempo. 
+- **parent(s)**: O nome SHA1 de algum número de commits que representa 
+  imediatamente o(s) passo(s) anterior(es) na história do projeto. O exemplo 
+  acima possui um parent; commits gerados por um merge podem ter mais do que um. 
+  Um commit sem nenhum parent é chamado de commit "root", e representa a 
+  versão/revisão inicial do projeto. Cada projeto deve possuir pelo menos um 
+  root. Um projeto pode também ter múltiplos roots, mesmo assim não é comum
+  (ou necessariamente uma boa idéia).
+- um **author**: O nome da pessoa responsável pela alteração, junto com uma 
+  data. 
+- um **committer**: O nome da pessoa que de fato criou o commit, com a data
+  que foi feita. Ele pode ser diferente do autor, por exemplo, se o autor 
+  escreveu um patch e enviou-o para outra pessoa que usou o patch para criar o
+  commit.  
+- um **comment** descrevendo esse commit.
 
-Note that a commit does not itself contain any information about what
-actually changed; all changes are calculated by comparing the contents
-of the tree referred to by this commit with the trees associated with
-its parents.  In particular, git does not attempt to record file renames
-explicitly, though it can identify cases where the existence of the same
-file data at changing paths suggests a rename.  (See, for example, the
--M option to linkgit:git-diff[1]).
+Note que um commit não contém qualquer informação sobre o que foi alterado;
+todas as alterações são calculadas pela comparação dos conteúdos da tree
+referenciada por esse commit com as trees associdadas com o seu parent.
+De forma particular, o git não dá atenção para arquivos renomeados 
+explicitamente, embora possa identificar casos onde a existência do mesmo 
+conteúdo do arquivo na alteração sugira a renomeação. (Veja, por exemplo, a 
+opção -M para linkgit:git-diff[1]).  
 
-A commit is usually created by linkgit:git-commit[1], which creates a
-commit whose parent is normally the current HEAD, and whose tree is
-taken from the content currently stored in the index.
+Um commit é normalmente criado por linkgit:git-commit[1], que cria um commit no 
+qual o parent é normalmente o HEAD atual, e do qual a tree é levada do conteúdo
+atualmente armazenado no index.
 
-### The Object Model ###
+### O Modelo de Objeto ###
 
-So, now that we've looked at the 3 main object types (blob, tree and commit), 
-let's take a quick look at how they all fit together.
+Então, agora o que vimos os 3 pricipais tipos de objetos (blob, tree e commit),
+vamos dar uma rápida olhada em como eles todos se relacionam juntos.
 
-If we had a simple project with the following directory structure:
+Se tivéssemos um simples projeto com a seguinte estrutura de diretório:
 
     $>tree
     .
@@ -68,10 +67,11 @@ If we had a simple project with the following directory structure:
 
     2 directories, 3 files
 
-And we committed this to a Git repository, it would be represented like this:
+E comitamos ele para um repositório Git, seria representado assim:
 
 [fig:objects-example]
 
-You can see that we have created a **tree** object for each directory (including the root)
-and a **blob** object for each file.  Then we have a **commit** object to point
-to the root, so we can track what our project looked like when it was committed.
+Você pode ver que temos criado um objeto **tree** para cada diretório 
+(incluindo o root) e um objeto **blob** para cada arquivo. Então temos um 
+objeto **commit** apontando para o root, então podemos rastreá-lo até o momento 
+em que o nosso projeto se parecia quando foi commitado.

@@ -1,11 +1,11 @@
-### Blob Object ###
+### Objeto Blob ###
 
-A blob generally stores the contents of a file.
+Um blob geralmente armazena o conteúdo de um arquivo.
 
 [fig:object-blob]
 
-You can use linkgit:git-show[1] to examine the contents of any blob. 
-Assuming we have the SHA for a blob, we can examine its contents like this:
+Você pode usar linkgit:git-show[1] para examinar o conteúdo de qualquer blob.
+Supondo que temos um SHA para um blob, podemos examinar seu conteúdo assim:
 
     $ git show 6ff87c4664
 
@@ -14,25 +14,29 @@ Assuming we have the SHA for a blob, we can examine its contents like this:
      v2.2 or v3.x or whatever), unless explicitly otherwise stated.
     ...
 
-A "blob" object is nothing but a chunk of binary data.  It doesn't refer
-to anything else or have attributes of any kind, not even a file name.
+Um objeto "blob" não é nada mais que um grande pedaço de dados binários. Ele
+não se referencia a nada ou possue atributos de qualquer tipo, nem mesmo um nome
+de arquivo.  
 
-Since the blob is entirely defined by its data, if two files in a
-directory tree (or in multiple different versions of the repository)
-have the same contents, they will share the same blob object. The object
-is totally independent of its location in the directory tree, and
-renaming a file does not change the object that file is associated with.
+Desde que o blob é inteiramente definido por esses dados, se dois arquivos em 
+uma árvore de diretório (ou dentro de múltiplas versões diferentes desse 
+repositório) possui o mesmo conteúdo, eles irão compartilhar o mesmo objeto 
+blob. O objeto é totalmente independente da localização do arquivo na árvore de 
+diretório, e renomeando esse arquivo não muda o objeto com o qual está  
+associado.
 
-### Tree Object ###
 
-A tree is a simple object that has a bunch of pointers to blobs and other
-trees - it generally represents the contents of a directory or subdirectory.
+### Objeto Tree ###
+
+Um tree é um objeto simples que possui um conjunto de ponteiros para blobs e 
+outras trees - ele geralmente representa o conteúdo de um diretório ou sub 
+diretório.
 
 [fig:object-tree]
 
-The ever-versatile linkgit:git-show[1] command can also be used to
-examine tree objects, but linkgit:git-ls-tree[1] will give you more
-details.  Assuming we have the SHA for a tree, we can examine it like this:
+O sempre versátil comando linkgit:git-show[1] pode também ser usado para 
+examinar objetos tree, mas linkgit:git-ls-tree[1] dará a você mais detalhes.
+Supondo que temos um SHA para uma tree, podemos examinar ele assim:
 
     $ git ls-tree fb3a8bdd0ce
     100644 blob 63c918c667fa005ff12ad89437f2fdc80926e21c    .gitignore
@@ -45,21 +49,21 @@ details.  Assuming we have the SHA for a tree, we can examine it like this:
     100644 blob 548142c327a6790ff8821d67c2ee1eff7a656b52    README
     ...
 
-As you can see, a tree object contains a list of entries, each with a
-mode, object type, SHA1 name, and name, sorted by name.  It represents
-the contents of a single directory tree.
+Como você pode ver, um objeto tree contém uma lista de entradas, cada uma com um 
+modo de acesso, tipo, nome SHA1, e nome de arquivo, ordenado pelo nome de 
+arquivo. Ele representa o conteúdo de uma simples árvore de diretório.
 
-An object referenced by a tree may be blob, representing the contents of a
-file, or another tree, representing the contents of a subdirectory.  Since
-trees and blobs, like all other objects, are named by the SHA1 hash of their
-contents, two trees have the same SHA1 name if and only if their contents
-(including, recursively, the contents of all subdirectories) are identical.
-This allows git to quickly determine the differences between two related tree
-objects, since it can ignore any entries with identical object names.
+Um objeto referenciado por uma tree pode ser um blob, representando o conteúdo
+de um arquivo, ou outra tree, representando o conteúdo de um sub diretório. 
+Desde trees e blobs, como todos os outros objetos, são nomeados por um hash SHA1
+de seus conteúdos, duas trees possui o mesmo hash SHA1 se somente se seus 
+conteúdos (incluindo, recursivamente, o conteúdo de todos os sub diretórios) são
+idênticos.
+Isso permite ao git determinar rapidamente as diferenças entre dois objetos tree
+,desde que ele possa ignorar qualquer entrada com nome de objetos idênticos.  
 
-(Note: in the presence of submodules, trees may also have commits as
-entries.  See the **Submodules** section.)
+(Nota: na presença de sub módulos, trees pode também ter commits como entradas. 
+veja a seção **Sub Módulos**.)
 
-Note that the files all have mode 644 or 755: git actually only pays
-attention to the executable bit.
-
+Perceba que todos os arquivos possuem o modo de acesso 644 ou 755: git 
+normalmente dá atenção para o bit executável. 

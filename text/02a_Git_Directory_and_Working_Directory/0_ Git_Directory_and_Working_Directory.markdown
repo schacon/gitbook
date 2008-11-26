@@ -1,34 +1,35 @@
-## Git Directory and Working Directory ##
+## Diretório Git e Diretório de Trabalho ##
 
-### The Git Directory ###
+### O Diretório Git ###
 
-The 'git directory' is the directory that stores all Git's history and meta
-information for your project - including all of the objects (commits, trees,
-blobs, tags), all of the pointers to where different branches are and more.
+O 'diretório git' é o diretório que armazena todos os históricos Git e meta
+informações do seu projeto - incluindo todos os objetos (commits, trees,blobs,
+tags), todos os ponteiros onde os diferentes branches estão e muito mais.
 
-There is only one Git Directory per project (as opposed to one per
-subdirectory like with SVN or CVS), and that directory is (by default, though
-not necessarily) '.git' in the root of your project.  If you look at the
-contents of that directory, you can see all of your important files:
+Existe somente um Diretório Git por projeto (o oposto de um por sub diretório
+como no SVN our CVS), e que o diretório é (por padrão, embora não 
+necessariamente) '.git' na raiz do seu projeto. Se você olha no conteúdo desse
+diretório, você pode ver todos os seus importantes arquivos:
 
     $>tree -L 1
     .
-    |-- HEAD         # pointer to your current branch
-    |-- config       # your configuration preferences
-    |-- description  # description of your project 
+    |-- HEAD         # aponta para o seu branch atual
+    |-- config       # suas configurações preferenciais
+    |-- description  # descrição do seu projeto 
     |-- hooks/       # pre/post action hooks
-    |-- index        # index file (see next section)
-    |-- logs/        # a history of where your branches have been
-    |-- objects/     # your objects (commits, trees, blobs, tags)
-    `-- refs/        # pointers to your branches
+    |-- index        # arquivo de index (veja a próxima seção)
+    |-- logs/        # um histórico de onde seus branches tem estado
+    |-- objects/     # seus objetos (commits, trees, blobs, tags)
+    `-- refs/        # ponteiros para os seus branches
 
-(there may be some other files/directories in there as well, but they are not important for now)
+(podem existir alguns outros arquivos/diretórios aqui mas eles não são importantes agora)
 
-### The Working Directory ###
 
-The Git 'working directory' is the directory that holds the current checkout 
-of the files you are working on.  Files in this directory are often removed
-or replaced by Git as you switch branches - this is normal.  All your history 
-is stored in the Git Directory; the working directory is simply a temporary 
-checkout place where you can modify the files until your next commit.
+### O Diretório de Trabalho ###
 
+O 'diretório de trabalho' do Git é o diretório que detém o atual checkout dos 
+arquivos sobre o qual você está trabalhando. Arquivos nesse diretório são
+frequentemente removidos ou renomeados pelo Git quando você troca de branches - 
+isso é normal. Todos os seus históricos são armazenados no diretório Git; o 
+diretório de trabalho é simplesmente um lugar temporário de checkout onde você 
+pode modificar os arquivos até o próximo commit.
