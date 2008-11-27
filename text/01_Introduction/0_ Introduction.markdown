@@ -38,7 +38,7 @@ work in Git.
 At any point, if you see a mistake or want to contribute to the book, you can 
 send me an email at [schacon@gmail.com](mailto://schacon@gmail.com), or you
 can clone the source of this book at 
-[http://github.com/schacon/gitscm](http://github.com/schacon/gitscm)
+[http://github.com/schacon/gitbook](http://github.com/schacon/gitbook)
 and send me a patch or a pull-request.
 
 ### References ###
