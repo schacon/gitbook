@@ -65,7 +65,7 @@ Se tivéssemos um simples projeto com a seguinte estrutura de diretório:
         |   `-- tricks.rb
         `-- mylib.rb
 
-    2 directories, 3 files
+    2 diretórios, 3 arquivos
 
 E comitamos ele para um repositório Git, seria representado assim:
 

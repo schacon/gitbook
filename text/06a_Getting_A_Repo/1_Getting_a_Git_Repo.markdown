@@ -5,7 +5,7 @@ fazer isso de duas maneiras - nós podemos *clonar* um já existente, ou podemos
 *inicializar* um dentro de algum projeto que ainda não tenha controle de versão
 , ou a partir de um diretório vazio.
 
-### Clonando um Repositorio ###
+### Clonando um Repositório ###
 
 Para que consigamos uma cópia de um projeto, você irá precisar saber qual a URL
 - a localização do repositório - do projeto Git.
@@ -23,15 +23,15 @@ ou sobre http:
 
 O protocolo git:// é mais rápido e mais eficiente, mas algumas vezes é
 necessário usar http quando estão por tráz de firewalls corporativo ou
-que você tenha. Nesses caso você deveria então ter um novo diretório chamado 
+que você tenha. Nesses casos você deveria então ter um novo diretório chamado 
 'git' que contém todos os códigos fontes do Git e o histórico - que é 
 basicamente uma cópia do que estava no servidor.
 
 Por padrão, o Git nomeará o novo diretório do projeto de sua clonagem de acordo
-com o nome do arquivo no ultímo na URL antes de '.git'.
+com o nome do arquivo no ultímo de nível na URL antes de '.git'.
 (ex.: *git clone
-http://git.kernel.org/linux/kernel/git/torvalds/linux-2.6.git* will result in
-a new directory named 'linux-2.6')
+http://git.kernel.org/linux/kernel/git/torvalds/linux-2.6.git* resultará em um 
+novo diretório chamado 'linux-2.6')
 
 ### Inicializando um Novo Repositório ###
 

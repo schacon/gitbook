@@ -20,12 +20,12 @@ mais complexas, mas podem substituir alguns dos comandos básicos que você
 aprendeu na primeira seção. Este mostrará principalmente truques e comandos
 onde se sentirá mais confortável depois que conhece os comandos básicos. 
 
-Depois que você estiver dominado, nós cobriremos **Git Avançado** - comandos 
+Depois que você estiver dominado, nós abordaremos **Git Avançado** - comandos 
 que a maioria das pesssoas não usan frequentemente, mas podem ser muito úteis
 em certas situações. Aprendendo esses comandos deverá cobrir o seu 
 conhecimento sobre o git no dia a dia; você se tornará um mestre do Git!                                                                                                             
 
-Agora que você conhece o Git, nós iremos cobrir **Trabalhando com Git**. Aqui
+Agora que você conhece o Git, nós iremos abordar **Trabalhando com Git**. Aqui
 nós iremos falar como usar o Git em scripts, com ferramentas de implantação,
 com editores e muito mais.
 Estas seções são principalmente para ajudar você a integrar o Git ao seu 

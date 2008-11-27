@@ -4,7 +4,7 @@ Altere alguns arquivos, então adicione seus conteúdos alterados para o index:
 
     $ git add file1 file2 file3
 
-Você gora está pronto para realizar o commit. Você pode ver sobre o que 
+Você agora está pronto para realizar o commit. Você pode ver sobre o que 
 será commitado usando linkgit:git-diff[1] com a opção --cached:
 
     $ git diff --cached
@@ -42,7 +42,7 @@ arquivos, adicioná-los no index, e realizar o commit, tudo de uma vez.
 Uma nota sobre as mensagens de commit: Embora não necessário, é uma boa
 idéia iniciar a mensagem de commit em uma linha curta (menos do que
 50 caracteres) resumindo as mundanças, seguido por uma linha em branco e então,
-mais uma descrição profunda. Ferrramentas que transformam commits em emails, por
+mais uma descrição profunda. Ferramentas que transformam commits em emails, por
 exemplo, usam a primeira linha para o Assunto: e o resto da mensagem do commit 
 para o corpo do email.
 

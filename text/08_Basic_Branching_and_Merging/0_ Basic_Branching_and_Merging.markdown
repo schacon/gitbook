@@ -1,7 +1,7 @@
 ﻿## Básico sobre Branching e Merging ##
 
 Um simples repositório git pode manter múltiplos branches de
-desenvolvimento. Para crear um novo branch chamado "experimental",
+desenvolvimento. Para criar um novo branch chamado "experimental",
 use :
 
     $ git branch experimental
@@ -16,14 +16,14 @@ você terá uma lista de todos os branches existentes:
     * master
 
 O branch "experimental" é o que você criou, e o branch "master" é um 
-padrão que foi criado por você automaticamente. O asterisco marca o branch
+padrão, que foi criado automaticamente. O asterisco marca o branch
 no qual você está atualmente.
 Digite
 
     $ git checkout experimental
 
-para trocar para o branch experimental. Agora edite um arquivo, commit a 
-alteração e volte para o branch master:
+para trocar para o branch experimental. Agora edite um arquivo, realize o 
+commit da alteração e volte para o branch master:
 
     (edit file)
     $ git commit -a
@@ -66,7 +66,7 @@ Nesse ponto você poderá apagar o branch experimental com
 Esse comando assegura que as alterações no branch experimental já estão no 
 no branch atual.
 
-Se você desemvolve sobre o um brach crazy-idea, então se arrependeu, você 
+Se você desenvolve sobre o um brach crazy-idea, então se arrependeu, você 
 sempre pode apagar o branch com
 
     $ git branch -D crazy-idea
@@ -80,7 +80,7 @@ linkgit:git-merge[1]:
 
     $ git merge branchname
 
-realiza um merges com as alterações feitas no branch "branchname" no branch 
+realiza um merge com as alterações feitas no branch "branchname" no branch 
 atual. Se existirem conflitos -- por exemplo, se o mesmo arquivo é modificado
 em duas diferentes formas no branch remoto e o branch local -- então você será
 avisado; a saída pode parecer alguma coisa com isso:
@@ -91,13 +91,13 @@ avisado; a saída pode parecer alguma coisa com isso:
     CONFLICT (content): Merge conflict in file.txt
     Automatic merge failed; fix conflicts and then commit the result.
 
-Marcadores dos conflitos são deixados nos arquivos problemáticos, e depois 
+Marcadores dos conflitos são deixados nos arquivos problemáticos, e depois que
 você resolve os conflitos manualmente, você pode atualizar o index com o 
 conteúdo e executar o git commit, como você faria normalmente quando modifica 
 um arquivo.
 
-Se você examinar o o resultado do commit usando o gitk, você vera que ele
-possue dois pais: um apontando para o topo do branch atual, e um para  topo
+Se você examinar o resultado do commit usando o gitk, você verá que ele
+possue dois pais: um apontando para o topo do branch atual, e um para topo
 do outro branch.
 
 ### Resolvendo um merge ###
@@ -123,14 +123,14 @@ arquivos com conflitos terão os conflitos adicionados, assim:
     >>>>>>> 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
 
 Tudo que você precisa fazer é editar os arquivos para resolver os conflitos,
-and então
+e então
 
     $ git add file.txt
     $ git commit
 
 Veja que a mensagem de commit já estará preenchida nele para você com
-algumas informações sobre o merge. Normalmente você pode só usar sem mudança 
-essa mensagem padrão, mas você pode adicionar um comentario adicional seu se
+algumas informações sobre o merge. Normalmente você pode usá-la sem mudança 
+nessa mensagem padrão, mas você pode adicionar um comentario adicional se
 desejado.
 
 Tudo acima é o que você precisa saber para resolver um simples merge. Mas o git
@@ -148,8 +148,8 @@ Ou, se você já estiver realizado o commit do merge que você quer jogar fora,
     $ git reset --hard ORIG_HEAD
 
 Contudo, esse último comando pode ser perigoso em alguns casos -- nunca jogue
-fora um commit se esse commit pode ter sido realizado um merge em outro branch,
-que pode confundir novos merges.
+fora um commit se esse commit já pode ter sido realizado um merge em outro 
+branch, que pode confundir novos merges.
 
 ### Merges Fast-forward ###
 

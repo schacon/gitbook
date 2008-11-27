@@ -1,63 +1,65 @@
-## Comparing Commits - Git Diff ##
+﻿## Comparando Commits - Git Diff ##
 
-You can generate diffs between any two versions of your project using
+Você pode gerar diffs entre duas versões quaisquer do seu projeto usando
 linkgit:git-diff[1]:
 
     $ git diff master..test
 
-That will produce the diff between the tips of the two branches.  If
-you'd prefer to find the diff from their common ancestor to test, you
-can use three dots instead of two:
+Isso produzirá o diff entre os dois branches. Se você preferir encontrar o diff
+dos ancestrais comuns do test, você pode usar três pontos ao invés de dois.
 
     $ git diff master...test
 
-linkgit:git-diff[1] is an incredibly useful tool for figuring out what has
-changed between any two points in your project's history, or to see what
-people are trying to introduce in new branches, etc.
+linkgit:git-diff[1] é uma ferramenta incrivelmente útil para entender as 
+alterações que exitem entre dois pontos quaisquer no histórico de seu projeto,
+ou para ver o que as pessoas estão tentando introduzir em novos branches, etc.
 
-### What you will commit ###
+### O que você irá commitar ###
 
-You will commonly use linkgit:git-diff[1] for figuring out differences between 
-your last commit, your index, and your current working directory.
-A common use is to simply run 
+Você usará normalmente linkgit:git-diff[1] para entender as diferenças entre
+seu último commit, seu index, e seu diretório de trabalho.
+Um uso comum é simplesmente executar
     
     $ git diff
     
-which will show you changes in the working directory that are not yet 
-staged for the next commit. 
-If you want to see what _is_ staged for the next commit, you can run
+que mostrará a você alterações no diretório de trabalho atual que ainda não foi
+selecionado para o próximo commit.
+Se você quer ver o que _está_ selecionado para o próximo commit, você pode 
+executar
 
     $ git diff --cached
 
-which will show you the difference between the index and your last commit; 
-what you would be committing if you run "git commit" without the "-a" option.
-Lastly, you can run 
+que mostrará a você as diferenças entre o index e o seu último commit;
+o que estará sendo commitado se você executar "git commit" sem a opção
+"-a".
+Finalmente, você pode executar
 
     $ git diff HEAD
 
-which shows changes in the working directory since your last commit; 
-what you would be committing if you run "git commit -a".
+que mostra as alterações no diretório de trabalho atual desde seu último commit;
+o que estará sendo commitado se você executrar "git commit -a".
 
-### More Diff Options ###
+### Mais opções Diff ###
 
-If you want to see how your current working directory differs from the state of
-the project in another branch, you can run something like
+Se você quer ver como seu diretório corrente difere do estado em outro branch
+do projeto, você pode executar algo como:
 
     $ git diff test
-    
-This will show you what is different between your current working directory
-and the snapshot on the 'test' branch.  You can also limit the comparison to a
-specific file or subdirectory by adding a *path limiter*:
+
+Isso mostrará a você a direfença entre seu diretório de trabalho atual e o 
+snapshot sobre o branch 'test'. Você também pode limitar a comparação para um
+arquivo específico ou sub diretório pela adição do *path limiter*:
 
     $ git diff HEAD -- ./lib 
 
-That command will show the changes between your current working directory and
-the last commit (or, more accurately, the tip of the current branch), limiting
-the comparison to files in the 'lib' subdirectory.
+Esse comando mostrará as alterações entre seu diretório de trabalho atual e 
+o último commit (ou, mais exatamente, dar uma dica sobre o branch atual), 
+limitando a comparação para os arquivos no diretório 'lib'.
 
-If you don't want to see the whole patch, you can add the '--stat' option,
-which will limit the output to the files that have changed along with a little
-text graph depicting how many lines changed in each file.
+Se você não quer ver o patch inteiro, você pode adicionar a opção '--stat',
+que limitará a saída para os arquivos que possui alteração junto com um 
+pequeno gráfico em texto representando a quantidade de linhas alteradas 
+em cada arquivo.
 
     $>git diff --stat
      layout/book_index_template.html                    |    8 ++-
@@ -71,4 +73,5 @@ text graph depicting how many lines changed in each file.
      .../0_ Hosting_Git_gitweb_repoorcz_github.markdown |    4 +-
      9 files changed, 115 insertions(+), 6 deletions(-)
 
-Sometimes that makes it easier to see overall what has changed, to jog your memory.
+As vezes fazer isso é mais fácil para visualizar tudo o que foi alterado, para 
+refrescar sua memória.

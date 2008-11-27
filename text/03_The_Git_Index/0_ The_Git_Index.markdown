@@ -10,9 +10,9 @@ está no seu diretório de trabalho.
 
 A forma mais fácil para ver o que está no index é com o comando 
 linkgit:git-status[1]. Quando você roda o git status, você pode ver quais
-arquivos estão preparados para o próximo commit (atualmente no seu index), 
-quais estão modificados mas não ainda não preparados, e quais estão 
-completamente sem nenhuma preparação.
+arquivos estão selecionados para o próximo commit (atualmente no seu index), 
+quais estão modificados mas não ainda não foram selecionados, e quais estão 
+completamente sem nenhuma seleção.
 
     $>git status
     # On branch master

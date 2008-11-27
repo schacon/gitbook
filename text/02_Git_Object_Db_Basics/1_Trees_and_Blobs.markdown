@@ -36,7 +36,7 @@ diretório.
 
 O sempre versátil comando linkgit:git-show[1] pode também ser usado para 
 examinar objetos tree, mas linkgit:git-ls-tree[1] dará a você mais detalhes.
-Supondo que temos um SHA para uma tree, podemos examinar ele assim:
+Supondo que temos um SHA para uma tree, podemos examinar ela assim:
 
     $ git ls-tree fb3a8bdd0ce
     100644 blob 63c918c667fa005ff12ad89437f2fdc80926e21c    .gitignore
