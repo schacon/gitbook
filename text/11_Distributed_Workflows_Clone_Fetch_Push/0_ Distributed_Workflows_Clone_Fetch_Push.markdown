@@ -1,240 +1,236 @@
-## Distributed Workflows ##
+﻿## Fluxo de Trabalho Distribuido ##
 
-Suppose that Alice has started a new project with a git repository in
-/home/alice/project, and that Bob, who has a home directory on the
-same machine, wants to contribute.
+Suponha que Alice tenha iniciado um novo projeto com um repositório git em
+/home/alice/project, e que Bob, que possui um diretório home na mesma máquina,
+quer contribuir.
 
-Bob begins with:
+Bob inicia com:
 
     $ git clone /home/alice/project myrepo
 
-This creates a new directory "myrepo" containing a clone of Alice's
-repository.  The clone is on an equal footing with the original
-project, possessing its own copy of the original project's history.
+Isso cria um novo diretório "myrepo" contendo um clone do repositório de Alice
+O clone está na mesma condição de igualdade do projeto original, possuindo sua 
+própria cópia do histórico do projeto original.
 
-Bob then makes some changes and commits them:
+Bob então faz algumas alterações e commits dele:
 
 
-    (edit files)
+    (edite alguns arquivos)
     $ git commit -a
-    (repeat as necessary)
+    (repita quando necessário)
 
-When he's ready, he tells Alice to pull changes from the repository
-at /home/bob/myrepo.  She does this with:
+Quando terminar, ele comunica a Alice para realizar um pull das alterações do 
+repositório em /home/bob/myrepo. Ela faz isso com:
 
     $ cd /home/alice/project
     $ git pull /home/bob/myrepo master
 
-This merges the changes from Bob's "master" branch into Alice's
-current branch.  If Alice has made her own changes in the meantime,
-then she may need to manually fix any conflicts.  (Note that the
-"master" argument in the above command is actually unnecessary, as it
-is the default.)
+Isso realiza um merge com as alterações do branch master de Bob para o branch 
+atual de Alice. Enquanto isso se Alice tem feito suas próprias modificações,
+então ela pode precisar corrigir manualmente quaisquer conflitos. (Veja que o
+argumento "master" no comando acima é na verdade desnecessário, já que ele é o 
+padrão).
 
-The "pull" command thus performs two operations: it fetches changes
-from a remote branch, then merges them into the current branch.
+O comando "pull" realiza assim duas operações: ele recebe as alterações mais 
+recentes do branch remoto, então realiza um merge dele no branch atual.
 
-When you are working in a small closely knit group, it is not
-unusual to interact with the same repository over and over
-again.  By defining 'remote' repository shorthand, you can make
-it easier:
+Quando você está trabalhando em um pequeno grupo muito unido, não é incomum
+interagir com o mesmo repositório e outro novamente. Definindo  um 
+repositório como 'remote', você pode fazer isso facilmente:
 
     $ git remote add bob /home/bob/myrepo
 
-With this, Alice can perform the first operation alone using the
-"git fetch" command without merging them with her own branch,
-using:
+Com isso, Alice pode realizar a primeira operação sozinha usando o comando 
+"git fetch" sem realizar um merge dele com o seu próprio branch, usando:
 
     $ git fetch bob
 
-Unlike the longhand form, when Alice fetches from Bob using a
-remote repository shorthand set up with `git remote`, what was
-fetched is stored in a remote tracking branch, in this case
-`bob/master`.  So after this:
+Ao contrário da forma longa, quando Alice recebe as novas alterações usando um
+repositório remoto configurado com 'git remote', que foi recuperado e 
+armazenado em um branch remoto, nesse caso 'bob/master'. Então depois disso:
 
     $ git log -p master..bob/master
 
-shows a list of all the changes that Bob made since he branched from
-Alice's master branch.
+mostra uma lista de todas as alterações que Bob fez desde quando ele criou o
+branch master de Alice.
 
-After examining those changes, Alice
-could merge the changes into her master branch:
+Depois de examinar essas alterações, Alice poderá realizar um merge com as 
+alterações dentro de seu branch master:
 
     $ git merge bob/master
 
-This `merge` can also be done by 'pulling from her own remote
-tracking branch', like this:
+Esse 'merge' também pode ser feito 'realizando um pull a partir de seu próprio 
+branch remoto registrado', dessa forma:
 
     $ git pull . remotes/bob/master
 
-Note that git pull always merges into the current branch,
-regardless of what else is given on the command line.
+Perceba que o git pull sempre realiza o merge dentro de seu branch atual,
+sem levar em conta o que é dado na linha de comando.
 
-Later, Bob can update his repo with Alice's latest changes using
+Por fim, Bob pode atualizar seu repositório com as últimas alterações de Alice
+usando:
 
     $ git pull
 
-Note that he doesn't need to give the path to Alice's repository;
-when Bob cloned Alice's repository, git stored the location of her
-repository in the repository configuration, and that location is
-used for pulls:
+Veja que não foi preciso dar o caminho para o repositório de Alice;
+quando Bob clonou o repositório de Alice, o git armazenou a localização do 
+repositório dela nas configurações de seu repositório, e essa localização é 
+usada pelo pull:
 
     $ git config --get remote.origin.url
     /home/alice/project
 
-(The complete configuration created by git-clone is visible using
-"git config -l", and the linkgit:git-config[1] man page
-explains the meaning of each option.)
+(A configuração completa criada por git-clone é visível usando 
+"git config -l"), e a página do manual linkgit:git-config[1] explica o
+significado de cada opção.
 
-Git also keeps a pristine copy of Alice's master branch under the
-name "origin/master":
+Git também deixa uma cópia original do branch master de Alice sobre o nome de
+"origin/master":
 
     $ git branch -r
       origin/master
 
-If Bob later decides to work from a different host, he can still
-perform clones and pulls using the ssh protocol:
+Se Bob decide trabalhar a partir de um host diferente, ele ainda pode realizar
+clones e pulls usando o protocolo ssh: 
 
     $ git clone alice.org:/home/alice/project myrepo
 
-Alternatively, git has a native protocol, or can use rsync or http;
-see linkgit:git-pull[1] for details.
+Alternativamente, git possui um protocolo nativo, ou pode usar rsync or http;
+veja linkgit:git-pull[1] para mais detalhes.   
 
-Git can also be used in a CVS-like mode, with a central repository
-that various users push changes to; see linkgit:git-push[1] and
-link:cvs-migration.html[git for CVS users].
+Git também pode ser usado no modo CVS, com um repositório central para onde 
+vários usuários enviam alterações; veja linkgit:git-push[1] e 
+link:cvs-migration.html[git para usuários CVS].
 
 
-### Public git repositories ###
+### Repositórios Git Públicos ###
 
-Another way to submit changes to a project is to tell the maintainer
-of that project to pull the changes from your repository using
-linkgit:git-pull[1].  In the section "<<getting-updates-with-git-pull,
-Getting updates with git-pull>>" we described this as a way to get
-updates from the "main" repository, but it works just as well in the
-other direction.
+Uma outra forma de enviar alterações para um projeto é informar ao responsável 
+por aquele projeto para realizar um pull das alterações de seu repositório 
+usando linkgit:git-pull[1]. Na seção "<<getting-updates-with-git-pull,
+Recuperando alterações com git-pull>>" nós descrevemos uma forma de
+recuperar do repositório "principal", mas ele também funciona em outras 
+direções.
 
-If you and the maintainer both have accounts on the same machine, then
-you can just pull changes from each other's repositories directly;
-commands that accept repository URLs as arguments will also accept a
-local directory name:
+Se o responsável pelo projeto e você possuem contas na mesma máquina, então
+você pode somente realizar um pull das alterações diretamente do outro 
+repositório; comandos que aceitam URLs de repositórios como argumentos também
+aceitam nomes de diretórios locais:
 
-    $ git clone /path/to/repository
-    $ git pull /path/to/other/repository
+    $ git clone /caminho/para/repositorio
+    $ git pull /caminho/para/outro/repositorio
 
-or an ssh URL:
+ou uma URL ssh:
 
-    $ git clone ssh://yourhost/~you/repository
+    $ git clone ssh://suamaquina/~voce/repositorio
 
-For projects with few developers, or for synchronizing a few private
-repositories, this may be all you need.
+Para projetos com alguns desenvolvedores, ou para a sincronização de alguns 
+repositórios privados, isso pode ser tudo que você precisa.   
 
-However, the more common way to do this is to maintain a separate public
-repository (usually on a different host) for others to pull changes
-from.  This is usually more convenient, and allows you to cleanly
-separate private work in progress from publicly visible work.
+Contudo, a forma mais comum de fazer isso é manter um repositório público 
+separado (na verdade em uma máquina diferente) para os outros realizarem pull
+das alterações. Isso é na verdade mais conveniente, e permite claramente a você
+separar trabalho pessoal em progresso do trabalho visível publicamente.
 
-You will continue to do your day-to-day work in your personal
-repository, but periodically "push" changes from your personal
-repository into your public repository, allowing other developers to
-pull from that repository.  So the flow of changes, in a situation
-where there is one other developer with a public repository, looks
-like this:
+Você continuará a fazer seu trabalho diário em seu repositório pessoal, mas 
+periódicamente realiza um "push" das alterações de seu repositório pessoal
+para o seu repositório público, permitindo os outros desenvolvedores realizar 
+pulls daquele repositório. Então o fluxo de alterações, na situação onde existe
+um outro desenvolvedor com repositório público, parece com isso:
 
-                            you push
-      your personal repo ------------------> your public repo
+                         você realiza push
+      seu repo pessoal --------------------> seu repo público
     	^                                     |
     	|                                     |
-    	| you pull                            | they pull
+    	| você realiza pull                   | eles realizam pull
     	|                                     |
     	|                                     |
-            |               they push             V
-      their public repo <------------------- their repo
+        |                 eles realizam push  V
+      repo público deles <------------------ repo pessoal deles
       
 
 
-### Pushing changes to a public repository ###
+### Enviando alterações para um repositório público ###
 
-Note that the two techniques outlined above (exporting via
-<<exporting-via-http,http>> or <<exporting-via-git,git>>) allow other
-maintainers to fetch your latest changes, but they do not allow write
-access, which you will need to update the public repository with the
-latest changes created in your private repository.
+Veja que as duas técnicas desenhadas acima ( exportando através
+<<exporting-via-http,http>> ou <<exporting-via-git,git>>) permite outros
+responsáveis por projetos receberem as últimas alterações sua, mas eles não
+tem permissão de escrita, no qual você precisará atualizar o repositório 
+público com as últimas alterações criadas no seu repositório pessoal.
 
-The simplest way to do this is using linkgit:git-push[1] and ssh; to
-update the remote branch named "master" with the latest state of your
-branch named "master", run
+Uma forma simples de fazer isso é usando linkgit:git-push[1] e ssh; para
+atualizar o branch remoto chamado "master" com o último estado de seu branch
+chamado "master", execute
 
-    $ git push ssh://yourserver.com/~you/proj.git master:master
+    $ git push ssh://seuservidor.com/~voce/proj.git master:master
 
-or just
+ou só
 
-    $ git push ssh://yourserver.com/~you/proj.git master
+    $ git push ssh://seuservidor.com/~voce/proj.git master
 
-As with git-fetch, git-push will complain if this does not result in a
-<<fast-forwards,fast forward>>; see the following section for details on
-handling this case.
+Como o git-fetch, git-push irá reclamar se isso não resultar em um    
+<<fast-forwards,fast forward>>; veja a seção sequinte sobre como proceder
+nesse caso.
 
-Note that the target of a "push" is normally a
-<<def_bare_repository,bare>> repository.  You can also push to a
-repository that has a checked-out working tree, but the working tree
-will not be updated by the push.  This may lead to unexpected results if
-the branch you push to is the currently checked-out branch!
+Veja que o alvo do "push" é normalmente um repositório  <<def_bare_repository,bare>>. 
+Você também pode enviar para um repositório que tem a árvore de trabalho 
+atualizada, mas essa árvore não será atualizada pelo push. Isso pode levar a
+resultados inesperados se o branch que você enviou é o branch atual.
 
-As with git-fetch, you may also set up configuration options to
-save typing; so, for example, after
+Como com o git-fetch, você também pode ajustar as opções de configuração, 
+então por exemplo, depois
 
     $ cat >>.git/config <<EOF
     [remote "public-repo"]
-    	url = ssh://yourserver.com/~you/proj.git
+    	url = ssh://seuservidor.com/~voce/proj.git
     EOF
 
-you should be able to perform the above push with just
+você deverá estar capaz de realizar o push acima só com    
 
     $ git push public-repo master
 
-See the explanations of the remote.<name>.url, branch.<name>.remote,
-and remote.<name>.push options in linkgit:git-config[1] for
-details.
+Veja as explicações das opções remote.<name>.url, branch.<name>.remote,     
+e remote.<name>.push em linkgit:git-config[1] para mais detalhes.
 
-### What to do when a push fails ###
 
-If a push would not result in a <<fast-forwards,fast forward>> of the
-remote branch, then it will fail with an error like:
+### O que fazer quando um push falha ###
+
+Se um push não resultar em um <<fast-forwards,fast forward>> do branch remoto
+então falhará com um erro desse tipo:
 
     error: remote 'refs/heads/master' is not an ancestor of
     local  'refs/heads/master'.
     Maybe you are not up-to-date and need to pull first?
-    error: failed to push to 'ssh://yourserver.com/~you/proj.git'
+    error: failed to push to 'ssh://seuservidor.com/~voce/proj.git'
 
-This can happen, for example, if you:
+Isso pode acontecer, por exemplo, se você    
 
-	- use `git-reset --hard` to remove already-published commits, or
-	- use `git-commit --amend` to replace already-published commits
-	  (as in <<fixing-a-mistake-by-rewriting-history>>), or
-	- use `git-rebase` to rebase any already-published commits (as
-	  in <<using-git-rebase>>).
+	- usar 'git-reset --hard' para remover commit já publicados, ou
+	- usar 'git-commit --amend' para substituir commits já publicados
+	  (como em <<fixing-a-mistake-by-rewriting-history>>), or
+	- usar 'git-rebase' para recriar qualquer commit já publicado (como
+	  em <<using-git-rebase>>).
 
-You may force git-push to perform the update anyway by preceding the
-branch name with a plus sign:
+Você pode forçar git-push para realizar a atualização precedendo o nome do
+branch com um sinal de +:      
 
-    $ git push ssh://yourserver.com/~you/proj.git +master
+    $ git push ssh://seuservidor.com/~voce/proj.git +master
 
-Normally whenever a branch head in a public repository is modified, it
-is modified to point to a descendant of the commit that it pointed to
-before.  By forcing a push in this situation, you break that convention.
-(See <<problems-with-rewriting-history>>.)
+Normalmente quando um brach head é modificado em um repositório público, ele
+é modificado para apontar para um descendente desse commit que ele apontou antes.
+Forçar um push nessa situação, você quebra aquela convênção.
+(Veja <<problems-with-rewriting-history>>.)
 
-Nevertheless, this is a common practice for people that need a simple
-way to publish a work-in-progress patch series, and it is an acceptable
-compromise as long as you warn other developers that this is how you
-intend to manage the branch.
+Contudo, essa é uma prática comum para pessoas que precisam de uma forma 
+simples para publicar uma série de patch de um trabalho em progresso, e é um
+compromisso aceitável contanto que você avise os outros desenvolvedores que é 
+dessa forma que pretende gerenciar o branch.
 
-It's also possible for a push to fail in this way when other people have
-the right to push to the same repository.  In that case, the correct
-solution is to retry the push after first updating your work: either by a
-pull, or by a fetch followed by a rebase; see the
-<<setting-up-a-shared-repository,next section>> and
-linkgit:gitcvs-migration[7] for more.
+Também é possível para um push falhar desta forma quando outras pessoas tem o 
+direito de enviar para o mesmo repositório. Nesse caso, a solução correta para 
+tentar re-enviar depois da primeira atualização de seu trabalho: qualquer um 
+pull, ou um fetch seguido por um rebase; veja o 
+<<setting-up-a-shared-repository,next section>> e
+linkgit:gitcvs-migration[7] para mais informações.
 
-[gitcast:c8-dist-workflow]("GitCast #8: Distributed Workflow")
+[gitcast:c8-dist-workflow]("GitCast #8: Fluxo de Trabalho Distribuido")
