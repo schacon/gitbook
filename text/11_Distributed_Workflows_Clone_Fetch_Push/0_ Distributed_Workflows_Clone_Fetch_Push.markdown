@@ -226,7 +226,7 @@ simples para publicar uma série de patch de um trabalho em progresso, e é um
 compromisso aceitável contanto que você avise os outros desenvolvedores que é 
 dessa forma que pretende gerenciar o branch.
 
-Também é possível para um push falhar desta forma quando outras pessoas tem o 
+Desta forma também é possível para um push falhar quando outras pessoas tem o 
 direito de enviar para o mesmo repositório. Nesse caso, a solução correta para 
 tentar re-enviar depois da primeira atualização de seu trabalho: qualquer um 
 pull, ou um fetch seguido por um rebase; veja o 
