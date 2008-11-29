@@ -1,26 +1,28 @@
-## Interactive Rebasing ##
+## Rebasing Interativo ##
 
-You can also rebase interactively.  This is often used to re-write your
-own commit objects before pusing them somewhere.  It is an easy way to 
-split, merge or re-order commits before sharing them with others.  You
-can also use it to clean up commits you've pulled from someone when
-applying them locally.
+Você pode também realizar um rebase interativamente. Isso é usado muitas vezes
+para re-escrever seus próprios objetos commit antes de enviá-los para algum 
+lugar. Isso é uma forma fácil de dividir, juntar, ou re-ordenar os commits
+antes de compartilhá-los com os outros. Você pode também usá-lo para limpar 
+commits que você tenha baixado de alguém quando estiver aplicando ele 
+localmente.
 
-If you have a number of commits that you would like to somehow modify
-during the rebase, you can invoke interactive mode by passing a '-i' or
-'--interactive' to the 'git rebase' command.
+Se você tem um número de commits que você gostaria de alguma maneira modificar
+durante o rebase, você pode invocar o modo interativo passando um '-i' ou 
+'--interactive' para o comando 'git rebase'.
 
 	$ git rebase -i origin/master
-	
-This will invoke interactive rebase mode on all the commits you have made
-since the last time you have pushed (or merged from the origin repository).
 
-To see what commits those are beforehand, you can run log this way:
+Isso invocará o modo de rebase interativo sobre todos os commits que você tem 
+feito desde a última vez que você realizou um pull (ou merge de um repositório
+origin).
+
+Para ver de antemão quais são os commits, você pode executar dessa forma:
 	
-	$ git log github/master..
-	
-Once you run the 'rebase -i' command, you will be thrown into your editor
-of choice with something that looks like this:
+	$ git log origin/master..
+
+Uma vez que você rodar o comando 'rebase -i', você será levado para o seu 
+editor com algo parecido com isso:
 
 	pick fc62e55 added file_size
 	pick 9824bf4 fixed little thing
@@ -39,24 +41,24 @@ of choice with something that looks like this:
 	# However, if you remove everything, the rebase will be aborted.
 	#
 
-This means that there are 5 commits since you last pushed and it gives you 
-one line per commit with the following format:
+Isso significa que existem 5 commits desde o último push realizado e lhe dará
+uma linha por commit com o seguinte formato:
 
 	(action) (partial-sha) (short commit message)
-	
-Now, you can change the action (which is by default 'pick') to either 'edit'
-or 'squash', or just leave it as 'pick'.  You can also reorder the commits
-just by moving the lines around however you want.  Then, when you exit the 
-editor, git will try to apply the commits however they are now arranged and
-do the action specified. 
 
-If 'pick' is specified, it will simply try to apply the patch and save the 
-commit with the same message as before.
+Agora, você pode alterar a ação (que é por padrão 'pick') para qualquer um 
+'edit' ou 'squash', ou deixá-lo como 'pick'. Você também pode re-ordenar os
+commits movendo as linhas como você quiser. Então, quando você sair do editor,
+o git tentará aplicar os commits como eles estão organizados agora e realizar a
+ação especificada.
 
-If 'squash' is specified, it will combine that commit with the previous one
-to create a new commit.  This will drop you into your editor again to merge
-the commit messages of the two commits it is now squashing together.  So, 
-if you exit the editor with this:
+Se 'pick' é especificado, ele simplesmente tentará aplicar o patch e salvar o
+commit com a mesma mensagem de antes.
+
+Se 'squash' é especificado, ele combinará aquele commit com um anterior para 
+criar um novo commit. Você cairá novamente em seu editor para juntar as 
+mensagens de commit dos dois commits que agora são combinados. Então, se você
+sair do editor com isso:
 
 	pick   fc62e55 added file_size
 	squash 9824bf4 fixed little thing
@@ -64,7 +66,7 @@ if you exit the editor with this:
 	squash 76b9da6 added the apply command
 	squash c264051 Revert "added file_size" - not implemented correctly
 
-Then you will have to create a single commit message from this:
+Então você terá que criar uma única mensagem de commit dele:
 
 	# This is a combination of 5 commits.
 	# The first commit's message is:
@@ -88,15 +90,15 @@ Then you will have to create a single commit message from this:
 
 	This reverts commit fc62e5543b195f18391886b9f663d5a7eca38e84.
 
-Once you have edited that down into once commit message and exit the editor,
-the commit will be saved with your new message.
+Uma vez que você tem editado a mensagem de commit e sair do editor,
+o commit será salvo com a sua nova mensagem.    
 
-If 'edit' is specified, it will do the same thing, but then pause before 
-moving on to the next one and drop you into the command line so you can 
-amend the commit, or change the commit contents somehow.
+Se 'edit' é especificado, fará a mesma coisa, mas desde então para antes
+de mover para o próximo commit e o levará para a linha de comando para você 
+poder corrigir o commit, ou modificar o conteúdo do commit de alguma forma.
 
-If you wanted to split a commit, for instance, you would specify 'edit' for
-that commit:
+Se você queria dividir um commit, por exemplo, você especificaria 'edit' para
+esse commit:
 
 	pick   fc62e55 added file_size
 	pick   9824bf4 fixed little thing
@@ -104,10 +106,10 @@ that commit:
 	pick   76b9da6 added the apply command
 	pick   c264051 Revert "added file_size" - not implemented correctly
 
-And then when you get to the command line, you revert that commit and create
-two (or more) new ones.  Lets say 21d80a5 modified two files, file1 and file2,
-and you wanted to split them into seperate commits.  You could do this after
-the rebase dropped you to the command line :
+E então quando você for levado para a linha de comando, você reverterá aquele 
+commit em dois (ou mais) novos. Digamos que o 21d80a5 modificou dois arquivos, 
+arquivo1 e arquivo2, e você queria dividir eles em commits separados. Você 
+poderia fazer isso depois que o rebase deixá-lo na linha de comando:
 
 	$ git reset HEAD^
 	$ git add file1
@@ -115,9 +117,10 @@ the rebase dropped you to the command line :
 	$ git add file2
 	$ git commit 'second part of split commit'
 	$ git rebase --continue
-	
-And now instead of 5 commits, you would have 6.
 
-The last useful thing that interactive rebase can do is drop commits for you.
-If instead of choosing 'pick', 'squash' or 'edit' for the commit line, you 
-simply remove the line, it will remove the commit from the history.
+E agora ao invés dos 5 commits, você terá 6.	
+
+A última coisa útil que o modo interativo do rebase pode fazer é retirar 
+commits para você. Se ao invés de escolher 'pick', 'squash' ou 'edit' para a
+linha do commit, você simplesmente remove a linha e isso removerá o commit do 
+histórico.
