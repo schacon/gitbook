@@ -1,28 +1,27 @@
-## Tracking Branches ##
+﻿## Tracking Branches ##
 
-A 'tracking branch' in Git is a local branch that is connected to a remote
-branch.  When you push and pull on that branch, it automatically pushes and
-pulls to the remote branch that it is connected with.
+Um 'tracking branch' no Git é um branch local que é conectado a um branch 
+remoto. Quando você realiza um push e pull nesse branch, ele automaticamente
+envia e recupera do branch remoto com quem está conectado.
 
-Use this if you always pull from the same upstream branch into the new 
-branch, and if you don't want to use "git pull <repository> <refspec>" 
-explicitly.
+Use ele se você sempre realiza um pull de um mesmo branch dentro de um novo
+, e se você não quer usar "git pull <repository> <refspec>"  explicitamente.
 
-The 'git clone' command automatically sets up a 'master' branch that is
-a tracking branch for 'origin/master' - the master branch on the cloned
-repository.
-	
-You can create a tracking branch manually by adding the '--track' option
-to the 'branch' command in Git. 
+O comando 'git clone' automaticamente configura um branch 'master' que é um
+branch associado com 'origin/master' - o branch master sobre um repositório 
+clonado.
+
+Você pode criar um tracking branch manualmente pela adição da opção '--track'
+sobre o comando branch no Git.
 
 	git branch --track experimental origin/experimental
 
-Then when you run:
+Então quando você executar:    
 
 	$ git pull experimental
-	
-It will automatically fetch from 'origin' and merge 'origin/experimental' 
-into your local 'experimental' branch.
 
-Likewise, when you push to origin, it will push what your 'experimental' points to
-to origins 'experimental', without having to specify it.
+Ele irá automaticamente recuperar do 'origin' e realizará um merge de
+'origin/experimental' dentro de seu branch local 'experimental'.
+
+Dessa forma, quando você realizar um push para o origin, ele enviará para o 
+qual seu 'experimental' aponta, sem ter que especificá-lo.

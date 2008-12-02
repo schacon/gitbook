@@ -1,28 +1,29 @@
-## Git Treeishes ##
+﻿## Git Treeishes ##
 
-There are a number of ways to refer to a particular commit or tree other
-than spelling out the entire 40-character sha.  In Git, these are referred
-to as a 'treeish'.
+Existem inúmeros caminhos para referenciar um commit ou tree particular do que
+"cuspir" o SHA de 40 dígitos inteiro. No Git, eles são conhecidos como um 
+'treeish'.
 
-### Partial Sha ###
+### SHA Parcial ###
 
-If your commit sha is '<code>980e3ccdaac54a0d4de358f3fe5d718027d96aae</code>', git will 
-recognize any of the following identically:
+Se o SHA de seu commit é '<code>980e3ccdaac54a0d4de358f3fe5d718027d96aae</code>',
+o git reconhecerá qualquer um desses igualmente: 
 
 	980e3ccdaac54a0d4de358f3fe5d718027d96aae
 	980e3ccdaac54a0d4
 	980e3cc
 
-As long as the partial sha is unique - it can't be confused with another
-(which is incredibly unlikely if you use at least 5 characters), git will
-expand a partial sha for you.
+Contanto que o SHA parcial seja único - ele não pode ser confundido com outro
+( que é inacreditávelmente improvável se você usa pelo menos 5 caracteres), git
+expandirá o SHA parcial para você.
+   
 
-### Branch, Remote or Tag Name ###
+### Branch, Remote ou Tag ###
 
-You can always use a branch, remote or tag name instead of a sha, since they
-are simply pointers anyhow.  If your master branch is on the 980e3 commit and
-you've pushed it to origin and have tagged it 'v1.0', then all of the following
-are equivalent:
+Você sempre pode usar um branch, remote ou tag ao invés de um SHA, desde que 
+eles sejam de alguma forma ponteiros. Se o seu branch master é o commit 
+980e3 e você enviou ele para o origin(remoto) e nomeado com tag 'v1.0', então
+todos os seguintes são equivalentes:
 
 	980e3ccdaac54a0d4de358f3fe5d718027d96aae
 	origin/master
@@ -31,84 +32,89 @@ are equivalent:
 	refs/heads/master
 	v1.0
 	refs/tags/v1.0
-	
-Which means the following will give you identical output:
+
+Significa que os seguintes comandos darão um resultado idêntico:	
 
 	$ git log master
 	
 	$ git log refs/tags/v1.0
 	
-### Date Spec ###
 
-The Ref Log that git keeps will allow you to do some relative stuff locally, 
-such as: 
+### Formato de Datas ###
 
-	master@{yesterday}
+O log que o git mantém permitirá a você fazer algumas coisas localmente, como:
 
-	master@{1 month ago}
+	git log master@{yesterday}
+
+	git log master@{1 month ago}
+
+No qual é um atalho para 'onde o head do branch master estava ontem', etc. 
+Veja que esse formato pode resultar em diferentes SHAs em diferentes 
+computadores, mesmo se o branch master está atualmente apontando para o 
+mesmo lugar.	
+
+
+### Formato Ordinal ###
+
+Esse formato dará a você o enésimo valor anterior de uma referência particular.
+Por exemplo:
+
+	git log master@{5}
+
+dará a você o valor do quinto elemento do head master.
+
 	
-Which is shorthand for 'where the master branch head was yesterday', etc. Note
-that this format can result in different shas on different computers, even if
-the master branch is currently pointing to the same place.
+### Carrot Parent (^) ###
 
-### Ordinal Spec ###
+Isso dará a você o enésimo pai de um commit particular. Esse formato é útil 
+sobre commits criados com merges - objetos commit que possuem mais de um pai 
+direto.
 
-This format will give you the Nth previous value of a particular reference.
-For example:
-
-	master@{5}
-
-will give you the 5th prior value of the master head ref.
-	
-### Carrot Parent ###
-
-This will give you the Nth parent of a particular commit.  This format is only
-useful on merge commits - commit objects that have more than one direct parent.
-
-	master^2
+	git log master^2
 	
 	
-### Tilde Spec ###
+### Formato til (~) ###
 
-The tilde spec will give you the Nth grandparent of a commit object.  For example,
+O ~ dará a você o enésimo avô do objeto commit. Por exemplo,
 
-	master~2
+	git log master~2
 	
-will give us the first parent of the first parent of the commit that master 
-points to.  It is equivalent to:
+nos dará o primeiro pai do primeiro pai do commit que o master aponta. Isso é
+equivalente a:
 
-	master^^
+	git log master^^
 
-You can keep doing this, too.  The following specs will point to the same commit:
+Você também pode continuar fazendo isso. Os sequintes formatos apontarão para o
+mesmo commit:
 
-	master^^^^^^
-	master~3^~2
-	master~6
+	git log master^^^^^^
+	git log master~3^~2
+	git log master~6
 
-### Tree Pointer ###
+### Apontador Tree ###
 
-This disambiguates a commit from the tree that it points to.  If you want the 
-sha that a commit points to, you can add the '^{tree}' spec to the end of it.
+Isso desambingua um commit da árvore para quem ele aponta. Se você quer o
+SHA que um commit aponta, você pode adicionar o formato '^{tree}' no final dele.
 
-	master^{tree}
+	git log master^{tree}
 
-### Blob Spec ###
+### Formato Blob ###
 
-If you want the sha of a particular blob, you can add the blob path at the
-end of the treeish, like so:
+Se você quer o SHA de um blob particular, você pode adicionar o caminho do blob
+no final do treeish, assim:
 
-	master:/path/to/file
+	git log master:/path/to/file
 	
-### Range ###
+### Range (..) ###
 
-Finally, you can specify a range of commits with the range spec.  This will
-give you all the commits between 7b593b5 and 51bea1 (where 51bea1 is most recent),
-excluding 7b593b5 but including 51bea1:
+Finalmente, você pode especificar uma faixa de commits com o formato (..).
+Isso dará a você todos os commits entre 7b593b5 e 51bea1 (onde 51bea1 é o 
+mais recente), excluindo 7b593b5 mas incluindo 51bea1:
 
-	7b593b5..51bea1
+	git log 7b593b5..51bea1
 
-This will include every commit *since* 7b593b:
+Isso incluirá cada commit *desde* 7b593b:     
 
-	7b593b.. 
+	git log 7b593b.. 
 	
 	
