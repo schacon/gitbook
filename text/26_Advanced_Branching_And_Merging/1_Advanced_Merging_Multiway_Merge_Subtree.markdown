@@ -1,35 +1,36 @@
-### Multiway Merge ###
+﻿### Merge Múltiplos ###
 
-You can merge several heads at one time by simply listing them on the same 
-linkgit:git-merge[1] command.  For instance,
+Você pode realizar um merge de diversos heads de uma vez só simplesmente 
+listando eles sobre o mesmo comando linkgit:git-merge[1]. Por exemplo,
 
 	$ git merge scott/master rick/master tom/master
-	
-is the equivalent of:
+
+é equivalente a :
 
 	$ git merge scott/master
 	$ git merge rick/master
 	$ git merge tom/master
 
-### Subtree ###
+### Subtrees ###
 
-There are situations where you want to include contents in your project from 
-an independently developed project. You can just pull from the other project 
-as long as there are no conflicting paths.
+Existem situações onde você quer incluir o conteúdo em seus projetos de um 
+projeto desenvolvido independentemente. Você só realiza um pull do outro projeto
+contanto que não existam conflitos nos caminhos. 
 
-The problematic case is when there are conflicting files. Potential 
-candidates are Makefiles and other standard filenames. You could merge 
-these files but probably you do not want to. A better solution for this 
-problem can be to merge the project as its own subdirectory. This is not 
-supported by the recursive merge strategy, so just pulling won't work.
+O caso problemátivo é quando existem arquivos conflitantes. Candidatos 
+potênciais são Makefiles e outros nomes de arquivos padrões. Você poderia 
+realizar um merge desses arquivos mas provavelmente você não vai querer fazê-lo.
+Uma melhor solução para esse problema pode ser realizar um merge do projeto com
+o seu próprio sub-diretório. Isso não é suportado pela estratégia de merges 
+recursivos, então realizar pulls não funcionará.
 
-What you want is the subtree merge strategy, which helps you in such a situation.
+O que você quer é a estratégia de subtrees do merge, que ajuda você nessa situação.
 
-In this example, let's say you have the repository at /path/to/B 
-(but it can be an URL as well, if you want). You want to merge the master 
-branch of that repository to the dir-B subdirectory in your current branch.
+Nesse exemplo, digamos que você tem o repositório em /path/to/B (mas ele pode
+ser uma URL, se quiser). Você quer realizar o merge do branch master daquele
+repositório para o sub-diretório dir-B em seu branch atual.
 
-Here is the command sequence you need:
+Aqui está a sequencia do comando que você precisa:
 
 	$ git remote add -f Bproject /path/to/B (1)
 	$ git merge -s ours --no-commit Bproject/master (2)
@@ -38,16 +39,14 @@ Here is the command sequence you need:
 	$ git pull -s subtree Bproject master (5)
 	
 
-The benefit of using subtree merge is that it requires less administrative 
-burden from the users of your repository. It works with older 
-(before Git v1.5.2) clients and you have the code right after clone.
+O benefício de usar subtree merges é que ele requer menos carga 
+administrativa dos usuários de seu repositório. Isso funciona com clientes 
+antigos (antes de Git v1.5.2) e tem o código correto depois do clone.
 
-However if you use submodules then you can choose not to transfer the 
-submodule objects. This may be a problem with the subtree merge.
+Contudo se você usa sub-módulos então você pode escolher não transferir os
+objetos do sub-módulo. Isso pode ser um problema com subtree merges.
 
-Also, in case you make changes to the other project, it is easier to 
-submit changes if you just use submodules.
+Também, nesse caso de você fazer alterações para outro projeto, é mais fácil para
+enviar alterações se você só usa sub-módulos.
 
-(from [Using Subtree Merge](http://www.kernel.org/pub/software/scm/git/docs/howto/using-merge-subtree.html))
-
-
+(de [Using Subtree Merge](http://www.kernel.org/pub/software/scm/git/docs/howto/using-merge-subtree.html))

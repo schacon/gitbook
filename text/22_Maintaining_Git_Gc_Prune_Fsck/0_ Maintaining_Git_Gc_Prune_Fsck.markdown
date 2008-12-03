@@ -1,24 +1,24 @@
-## Maintaining Git ##
+﻿## Manutenção no Git ##
 
-### Ensuring good performance ###
+### Garantindo bom desempenho ###
 
-On large repositories, git depends on compression to keep the history
-information from taking up too much space on disk or in memory.
+Em grandes repositórios, git conta com a compressão para manter as informações 
+do histórico que ocupam muito espaço no disco ou memória.
 
-This compression is not performed automatically.  Therefore you
-should occasionally run linkgit:git-gc[1]:
+Essa compressão não é realizado automaticamente. Portanto você deveria
+executar ocasionalmente linkgit:git-gc[1]:
 
     $ git gc
 
-to recompress the archive.  This can be very time-consuming, so
-you may prefer to run git-gc when you are not doing other work.
+para recomprimir o arquivo. Isso pode consumir muito tempo, então você pode
+preferir executar git-gc quando não estiver trabalhando.    
 
 
-### Ensuring reliability ###
+### Garantindo a confiabilidade ###
 
-The linkgit:git-fsck[1] command runs a number of self-consistency checks
-on the repository, and reports on any problems.  This may take some
-time.  The most common warning by far is about "dangling" objects:
+O comando linkgit:git-fsck[1] executa um número de verificações de consistência
+sobre o repositório, e relata algum problema. Isso pode levar algum tempo.
+De longe, o aviso mais comum é sobre objetos "dangling":
 
     $ git fsck
     dangling commit 7281251ddd2a61e38657c827739c57015671a6b3
@@ -30,7 +30,6 @@ time.  The most common warning by far is about "dangling" objects:
     dangling tree d50bb86186bf27b681d25af89d3b5b68382e4085
     dangling tree b24c2473f1fd3d91352a624795be026d64c8841f
     ...
-
-Dangling objects are not a problem.  At worst they may take up a little
-extra disk space.  They can sometimes provide a last-resort method for
-recovering lost work.
+Objetos dangling não são problemas. No pior caso eles podem ocupar um pouco de
+espaço extra. Eles algumas vezes podem prover um último método para recuperação
+do trabalho perdido.
