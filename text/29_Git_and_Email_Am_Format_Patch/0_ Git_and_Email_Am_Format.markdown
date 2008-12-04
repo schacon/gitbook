@@ -1,47 +1,47 @@
-## Git and Email ##
+﻿## Git e Email ##
 
-### Submitting patches to a project ###
+### Enviando patches para um projeto ###
 
-If you just have a few changes, the simplest way to submit them may
-just be to send them as patches in email:
+Se você já possui algumas alterações, a forma mais simples de fazê-lo é 
+enviá-los como patches por email:
 
-First, use linkgit:git-format-patch[1]; for example:
+Primeiro, use linkgit:git-format-patch[1]; por exemplo:
 
     $ git format-patch origin
 
-will produce a numbered series of files in the current directory, one
-for each patch in the current branch but not in origin/HEAD.
+produzirá uma série numerada de arquivos no diretório atual, um para cada
+patch do branch atual, mas não do origin/HEAD.
 
-You can then import these into your mail client and send them by
-hand.  However, if you have a lot to send at once, you may prefer to
-use the linkgit:git-send-email[1] script to automate the process.
-Consult the mailing list for your project first to determine how they
-prefer such patches be handled.
+Você pode então importar eles para seu cliente de email e enviá-los.
+Contudo, se você tem que enviar todos de uma vez, você pode preferir usar
+o script linkgit:git-send-email[1] para automatizar o processo.
+Consulte primeiro a lista de email do seu projeto para determinar como eles
+preferem que os patches sejam manipulados.
 
 
-### Importing patches to a project ###
+### Importando patches para o projeto ###
 
-Git also provides a tool called linkgit:git-am[1] (am stands for
-"apply mailbox"), for importing such an emailed series of patches.
-Just save all of the patch-containing messages, in order, into a
-single mailbox file, say "patches.mbox", then run
+Git também provê uma ferramenta chamada linkgit:git-am[1] ( uma abreviação de
+"apply mailbox"), para importar uma série de patches recebidos.
+Grave todas as mensagens que contém patches, em orderm, para um arquivo mailbox 
+simples, digamos "patches.mbox", então execute
 
     $ git am -3 patches.mbox
 
-Git will apply each patch in order; if any conflicts are found, it
-will stop, and you can fix the conflicts as described in
-"<<resolving-a-merge,Resolving a merge>>".  (The "-3" option tells
-git to perform a merge; if you would prefer it just to abort and
-leave your tree and index untouched, you may omit that option.)
+Git aplicará cada patch em ordem; se algum conflito for encontrado, ele irá
+parar, e você pode corrigir os conflitos como descrito em 
+"<<resolving-a-merge,Resolvendo um merge>>". (A opção "-3" chama o git para 
+realizar um merge; se você prefere exatamente abortar e deixar sua árvore e 
+index intácta, você pode omitir essa opção.)
 
-Once the index is updated with the results of the conflict
-resolution, instead of creating a new commit, just run
+Somente o index é atualizado com o resultado da resolução do conflito, ao invés
+de criar um novo commit, execute
 
     $ git am --resolved
 
-and git will create the commit for you and continue applying the
-remaining patches from the mailbox.
+e o git criará o commit para você e continua aplicando o restante dos patches do
+mailbox.    
 
-The final result will be a series of commits, one for each patch in
-the original mailbox, with authorship and commit log message each
-taken from the message containing each patch.
+O resultado final será uma série de commits, um para cada patch no mailbox 
+original,cada um com o autor e a mensagem de commit trazido da mensagem contido
+em cada patch.
