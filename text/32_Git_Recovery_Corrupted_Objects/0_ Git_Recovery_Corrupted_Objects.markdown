@@ -1,4 +1,4 @@
-## Recovering Corrupted Objects ##
+﻿## Recuperando Objetos Corrompidos ##
 
 [Recovering Lost Commits Blog Post](http://programblings.com/2008/06/07/the-illustrated-guide-to-recovering-lost-commits-with-git)
 
