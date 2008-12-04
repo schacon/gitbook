@@ -1,12 +1,12 @@
-## Customizing Git ##
+﻿## Customizando o Git ##
 
 linkgit:git-config[1]
 
-### Changing your Editor ###
+### Alterando o seu editor ###
 
 	$ git config --global core.editor emacs
 
-### Adding Aliases ###
+### Adicionando Aliases ###
 	
 	$ git config --global alias.last 'cat-file commit HEAD'
 	
@@ -26,16 +26,16 @@ linkgit:git-config[1]
 
 	fixed a weird formatting problem
 
-### Adding Color ###
+### Adicionando Cores ###
 
-See all color.* options in the linkgit:git-config[1] docs
+Veja todas as opções de cores na documentação de linkgit:git-config[1] 
 
 	$ git config color.branch auto
 	$ git config color.diff auto
 	$ git config color.interactive auto
 	$ git config color.status auto
 
-Or, you can set all of them on with the color.ui option:
+Ou, você pode configurar todos eles com a opção color.ui:    
 
 	$ git config color.ui true
 	
@@ -48,8 +48,8 @@ Or, you can set all of them on with the color.ui option:
 	$ git config format.pretty oneline
 
 
-### Other Config Options ###
+### Outras Opções de Configuração ###
 
-There are also a number of interesting options for packing, gc-ing, merging,
-remotes, branches, http transport, diffs, paging, whitespace and more.  If you
-want to tweak these, check out the linkgit:git-config[1] docs.
+Existem também um número de opções interessantes para packing, gc-ing, merging,
+remotes, branches, http transport, diffs, paging, whitespace e mais.  Se você
+quer saber mais dê uma olhada na documentação do linkgit:git-config[1].
