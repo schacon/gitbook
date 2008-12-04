@@ -1,20 +1,20 @@
-## Git Hooks ##
+﻿## Git Hooks ##
 
 [Git Hooks](http://www.kernel.org/pub/software/scm/git/docs/githooks.html)
 
-### Server Side Hooks ###
+### Hooks do lado do Servidor ###
 
 #### Post Receive ####
 
 
 	GIT_DIR/hooks/post-receive
 
-If you wrote it in Ruby, you might get the args this way:
+Se você escreveu ele em Ruby, pode ser que você consiga os argumentos dessa forma:    
 
 	ruby
 	rev_old, rev_new, ref = STDIN.read.split(" ")
 
-Or in a bash script, something like this would work:
+Ou em um bash script, alguma coisa como essa funcionará:
 	
 	#!/bin/sh
 	# <oldrev> <newrev> <refname>
@@ -30,16 +30,17 @@ Or in a bash script, something like this would work:
 	done
 	
 
-### Client Side Hooks ###
+### Hooks do lado do cliente ###
 
 
-#### Pre Commit ####
+#### Pré Commit ####
 
-Running your tests automatically before you commit
+
+Executando seus testes automaticamente antes de você realizar o commit
 
  	GIT_DIR/hooks/pre-commit
 
-Here is an example of a Ruby script that runs RSpec tests before allowing a commit.
+Aqui é um exemplo de um script Ruby que executa testes RSpec antes de permitir um commit.
 
 	ruby  
 	html_path = "spec_results.html"  
