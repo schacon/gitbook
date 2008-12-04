@@ -1,10 +1,9 @@
-## Finding Issues - Git Bisect ##
+﻿## Procurando Erros - Git Bisect ##
 
-Suppose version 2.6.18 of your project worked, but the version at
-"master" crashes.  Sometimes the best way to find the cause of such a
-regression is to perform a brute-force search through the project's
-history to find the particular commit that caused the problem.  The
-linkgit:git-bisect[1] command can help you do this:
+Suponha uma versão 2.6.18 de seu projeto, mas a versão no "master" está defeituosa.
+As vezes a melhor forma de encotrar a causa é realizar uma busca usando
+força-bruta no histórico do projeto para encontrar o commit em particular que
+causou o problema. O comando linkgit:git-bisect[1] pode ajudar você a fazer isso:
 
     $ git bisect start
     $ git bisect good v2.6.18
@@ -12,44 +11,38 @@ linkgit:git-bisect[1] command can help you do this:
     Bisecting: 3537 revisions left to test after this
     [65934a9a028b88e83e2b0f8b36618fe503349f8e] BLOCK: Make USB storage depend on SCSI rather than selecting it [try #6]
 
-If you run "git branch" at this point, you'll see that git has
-temporarily moved you to a new branch named "bisect".  This branch
-points to a commit (with commit id 65934...) that is reachable from
-"master" but not from v2.6.18.  Compile and test it, and see whether
-it crashes.  Assume it does crash.  Then:
+Se você executar "git branch" neste momento, você verá que o git moveu você
+temporariamente para um novo branch chamado "bisect". Esse branch aponta para 
+um commit (o commit 65934...) que está próximo do "master" mas não do v2.6.18.
+Compile e teste-o, e veja se possui erro. Assumindo que ele possui erro. 
+Então:
 
     $ git bisect bad
     Bisecting: 1769 revisions left to test after this
     [7eff82c8b1511017ae605f0c99ac275a7e21b867] i2c-core: Drop useless bitmaskings
 
-checks out an older version.  Continue like this, telling git at each
-stage whether the version it gives you is good or bad, and notice
-that the number of revisions left to test is cut approximately in
-half each time.
-
-After about 13 tests (in this case), it will output the commit id of
-the guilty commit.  You can then examine the commit with
-linkgit:git-show[1], find out who wrote it, and mail them your bug
-report with the commit id.  Finally, run
+vai para uma versão mais antiga. Continua assim, chamando o git em cada estágio
+se a versão dele dá a você que é bom ou ruim, e avisa que o número de revisões 
+restante para testar é cortado aproximadamente no meio em cada vez.
+    
+Depois de 13 testes (nesse caso), ele mostrará o id do commit culpado. Você pode 
+então examinar o commit com linkgit:git-show[1], encontrar quem escreveu ele, e 
+enviar um email a ele sobre esse bug com o id do commit. Finalmente , execute
 
     $ git bisect reset
 
-to return you to the branch you were on before and delete the
-temporary "bisect" branch.
+para retorna ao branch onde estava antes e apagar o branch temporário "bisect".
 
-Note that the version which git-bisect checks out for you at each
-point is just a suggestion, and you're free to try a different
-version if you think it would be a good idea.  For example,
-occasionally you may land on a commit that broke something unrelated;
-run
+Veja que a versão que git-bisect verifica para você em cada ponto é só uma 
+sugestão, você está livre para tentar uma versão diferente se achar que isso
+é uma boa idéia. Por exemplo, ocasionalmente você pode cair em um commit que 
+possue um erro não registrado; execute
 
     $ git bisect visualize
 
-which will run gitk and label the commit it chose with a marker that
-says "bisect".  Choose a safe-looking commit nearby, note its commit
-id, and check it out with:
+que executará um gitk e marcar o commit escolhido com "bisect". Escolha um commit
+seguro mais próximo, veja seu id, e mova-se até ele com:
 
     $ git reset --hard fb47ddb2db...
 
-then test, run "bisect good" or "bisect bad" as appropriate, and
-continue.
+então teste, execute "bisect good" ou "bisect bad" de acordo, e continue.
