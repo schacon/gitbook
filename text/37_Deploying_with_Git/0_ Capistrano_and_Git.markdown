@@ -1,4 +1,4 @@
-## Deploying with Git ##
+﻿## Deploying com Git ##
 
 ### Capistrano and Git ###
 
