@@ -1,8 +1,8 @@
-## The Git Index ##
+﻿## O Index do Git ##
 
-The index is a binary file (generally kept in .git/index) containing a
-sorted list of path names, each with permissions and the SHA1 of a blob
-object; linkgit:git-ls-files[1] can show you the contents of the index:
+O index é um arquivo binário (geralmente mantido em .git/index) contém uma
+lista ordenada de caminhos, cada um com permissões e o SHA1 de um objeto 
+blob; linkgit:git-ls-files[1] pode mostrar a você o conteúdo do index:
 
     $ git ls-files --stage
     100644 63c918c667fa005ff12ad89437f2fdc80926e21c 0	.gitignore
@@ -15,37 +15,36 @@ object; linkgit:git-ls-files[1] can show you the contents of the index:
     100644 2ade97b2574a9f77e7ae4002a4e07a6a38e46d07 0	xdiff/xutils.c
     100644 d5de8292e05e7c36c4b68857c1cf9855e3d2f70a 0	xdiff/xutils.h
 
-Note that in older documentation you may see the index called the
-"current directory cache" or just the "cache".  It has three important
-properties:
+Veja que em uma documentação mais antiga você pode ver o index ser chamado de
+"cache do diretório atual" ou só "cache". Ele possui três propriedades 
+importantes:
 
-1. The index contains all the information necessary to generate a single
-    (uniquely determined) tree object.
+1. O index contém todas as informações necessárias para gerar um simples
+    (unicamente determinado) objeto tree.
 
-    For example, running linkgit:git-commit[1] generates this tree object
-    from the index, stores it in the object database, and uses it as the
-    tree object associated with the new commit.
+    Por exemplo, executando linkgit:git-commit[1] gera esse objeto tree do
+    index, armazena ele no banco de dados de objetos, e usa ele como o objeto
+    tree associado com o novo commit.
 
-2. The index enables fast comparisons between the tree object it defines
-    and the working tree.
+2. O index habilita rápidas comparações entre o objeto tree e a árvore de 
+    trabalho.
 
-    It does this by storing some additional data for each entry (such as
-    the last modified time).  This data is not displayed above, and is not
-    stored in the created tree object, but it can be used to determine
-    quickly which files in the working directory differ from what was
-    stored in the index, and thus save git from having to read all of the
-    data from such files to look for changes.
+    Ele faz isso através do armazenamento de algum dado adicional para cada
+    entrada (por exemplo a última hora modificada). Esse dado não é mostrado
+    acima, e não está armazenado no objeto tree criado, mas ele pode ser usado
+    para determinar rapidamente quais arquivos no diretório de trabalho diferem
+    de qual foi armazenado no index, e dessa maneira economizar o git de ter
+    que ler todos os dados de cada arquivo em busca de alterações.
 
-3. It can efficiently represent information about merge conflicts
-    between different tree objects, allowing each pathname to be
-    associated with sufficient information about the trees involved that
-    you can create a three-way merge between them.
+3. Ele pode eficientemente representar informações sobre os conflitos de merge
+    entre diferentes objetos tree, permitindo cada caminho ser associado
+    com informação suficiente sobre as trees envolvidas que você pode criar um 
+    merge de três-passos entre eles.
 
-    We saw in <<conflict-resolution>> that during a merge the index can
-    store multiple versions of a single file (called "stages").  The third
-    column in the linkgit:git-ls-files[1] output above is the stage
-    number, and will take on values other than 0 for files with merge
-    conflicts.
+    Nós vimos na <<conflict-resolution>> que durante um merge o index pode 
+    armazenar múltiplas versões de um simples arquivo (chamados de "estágios").
+    A terceira coluna na saída do linkgit:git-ls-files[1] acima é o número do 
+    estágio, e  aceitará valores exceto 0 para arquivo com conflidos de merge.
 
-The index is thus a sort of temporary staging area, which is filled with
-a tree which you are in the process of working on.
+O index é dessa maneira uma área ordenada de estágios temporários, que é
+preenchido com uma tree no qual você está, no processo de trabalho.

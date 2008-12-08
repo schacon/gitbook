@@ -1,23 +1,22 @@
-## Scripting and Git ##
+﻿## Scripting e Git ##
 
 
-### Ruby and Git ###
+### Ruby e Git ###
 
 grit
 
 jgit + jruby
 
 
-### PHP and Git ###
+### PHP e Git ###
 
 
 
-### Python and Git ###
+### Python e Git ###
 
 pygit
 
 
-### Perl and Git ###
+### Perl e Git ###
 
 perlgit
-

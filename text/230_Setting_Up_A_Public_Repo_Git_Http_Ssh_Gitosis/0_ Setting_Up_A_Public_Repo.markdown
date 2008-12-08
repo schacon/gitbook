@@ -1,56 +1,56 @@
-## Setting Up A Public Repository ##
+﻿## Configurando um Repositório Público ##
 
-Assume your personal repository is in the directory ~/proj.  We
-first create a new clone of the repository and tell git-daemon that it
-is meant to be public:
+Assuma que seu repositório pessoal está no diretório ~/proj. Primeiro
+criamos um novo clone do repositório e pedimos ao git-daemon que ele
+seja público:
 
     $ git clone --bare ~/proj proj.git
     $ touch proj.git/git-daemon-export-ok
 
-The resulting directory proj.git contains a "bare" git repository--it is
-just the contents of the ".git" directory, without any files checked out
-around it.
+O diretório resultante proj.git contém um repositório git "mínimo" -- ele 
+é só o conteúdo do diretório ".git", sem qualquer arquivo dentro dele.
 
-Next, copy proj.git to the server where you plan to host the
-public repository.  You can use scp, rsync, or whatever is most
-convenient.
+Depois, copie o proj.git para o servidor onde você planeja hospedar o
+repositório público. Você pode usar scp, rsync, ou qualquer coisa mais 
+conveniente.
 
-### Exporting a git repository via the git protocol ###
+### Exportando um repositório git via protocolo git ###
 
-This is the preferred method.
+Esse é o método preferido.
 
-If someone else administers the server, they should tell you what
-directory to put the repository in, and what git:// URL it will appear
-at.
+Se alguém então administrar o servidor, ele deveráo pedir a você qual o
+diretório para colocar o repositório dentro, e qual URL git:// aparecerá nele.
 
-Otherwise, all you need to do is start linkgit:git-daemon[1]; it will
-listen on port 9418.  By default, it will allow access to any directory
-that looks like a git directory and contains the magic file
-git-daemon-export-ok.  Passing some directory paths as git-daemon
-arguments will further restrict the exports to those paths.
+Se não fosse assim, tudo que você precisa para fazer isso é iniciar 
+linkgit:git-daemon[1]; ele ouvirá a porta 9418. Por padrão, permitirá acessar
+qualquer diretório que se pareça com um diretório git e contém o arquivo mágico
+git-daemon-export-ok. Passando alguns caminhos de diretórios como argumentos 
+para git-daemon restringirá mais ainda esses caminhos exportados.
 
-You can also run git-daemon as an inetd service; see the
-linkgit:git-daemon[1] man page for details.  (See especially the
-examples section.)
+Você pode também executar git-daemon como um serviço inetd; veja as páginas
+de manual do linkgit:git-daemon[1] para mais detalhes. (Veja especialmente a
+seção de exemplos.)
 
-### Exporting a git repository via http ###
+### Exportando um repositório git via http ###
 
-The git protocol gives better performance and reliability, but on a
-host with a web server set up, http exports may be simpler to set up.
+O protocolo git dá melhor desempenho e confiabilidade, mas sobre host com
+um servidor web configurado, exportar via http pode ser mais simples de
+configurar.
 
-All you need to do is place the newly created bare git repository in
-a directory that is exported by the web server, and make some
-adjustments to give web clients some extra information they need:
+Tudo que você precisa fazer é colocar o recém criado repositório git
+mínimo no diretório que está exportado pelo web server, e fazer alguns 
+ajustes para dar os clientes webs algumas informações extras que eles
+precisam:
 
     $ mv proj.git /home/you/public_html/proj.git
     $ cd proj.git
     $ git --bare update-server-info
     $ chmod a+x hooks/post-update
 
-(For an explanation of the last two lines, see
-linkgit:git-update-server-info[1] and linkgit:githooks[5].)
+(Para uma explicação das últimas duas linhas, veja
+linkgit:git-update-server-info[1] e linkgit:githooks[5].)
 
-Advertise the URL of proj.git.  Anybody else should then be able to
-clone or pull from that URL, for example with a command line like:
+Divulgue a URL do proj.git. Qualquer um então deveria ser capaz de clonar
+ou receber dessa URL, por exemplo com a linha de comando:
 
     $ git clone http://yourserver.com/~you/proj.git

@@ -1,7 +1,7 @@
-## Git and Editors ##
+﻿## Git e Editors ##
 
-textmate 
+textmate
 
 eclipse
- 
+
 netbeans

@@ -1,6 +1,5 @@
-## Hosted Git ##
+﻿## Hospedagem Git ##
 
 github
 
-repoorcz 
-
+repoorcz

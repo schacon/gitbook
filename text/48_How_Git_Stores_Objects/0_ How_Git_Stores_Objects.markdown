@@ -1,43 +1,44 @@
-## How Git Stores Objects ##
+﻿## Como o Git Armazena Objetos ##
 
-This chapter goes into detail about how Git physically stores objects.
+Esse capítulo mostra em detalhes como o Git fisicamente armazenda os objetos.
 
-All objects are stored as compressed contents by their sha values.  They
-contain the object type, size and contents in a gzipped format.
+Todos os objetos são armazenados pela compressão do conteúdo de acordo com os
+seus valores sha. Eles contém o tipo de objeto, tamanho e conteúdo no formato
+gzip.
 
-There are two formats that Git keeps objects in - loose objects and 
-packed objects. 
+Existem dois formatos que o Git mantém os objetos - objetos loose e packed.
 
-### Loose Objects ###
+### Objetos Loose ###
 
-Loose objects are the simpler format.  It is simply the compressed data stored
-in a single file on disk.  Every object written to a seperate file.
+Objetos loose é o formato mais simples. Ele é simplesmente a compressão dos dados
+armazenados em um simples arquivo no disco. Cada objeto é escrito em um arquivo
+separado.
 
-If the sha of your object is <code>ab04d884140f7b0cf8bbf86d6883869f16a46f65</code>,
-then the file will be stored in the following path:
+Se o sha do seu objeto é <code>ab04d884140f7b0cf8bbf86d6883869f16a46f65</code>,
+então o arquivo será armazenado com o seguinte caminho:
 
 	GIT_DIR/objects/ab/04d884140f7b0cf8bbf86d6883869f16a46f65
 
-It pulls the first two characters off and uses that as the subdirectory, so that
-there are never too many objects in one directory.  The actual file name is 
-the remaining 38 characters.
+Ele retira os dois primeiros caracteres e usa-o como sub-diretório, para que
+nunca exista muitos objetos em um diretório. O nome do arquivo na verdade é o
+restante dos 38 caracteres.
 
-The easiest way to describe exactly how the object data is stored is this Ruby
-implementation of object storage:
+A forma mais fácil de descrever exatamente como os dados do objeto são
+armazenados é essa implementação em Ruby do armazenamento do objeto:
 
 	ruby
 	def put_raw_object(content, type)
 	  size = content.length.to_s
- 
+
 	  header = "#{type} #{size}\0"
 	  store = header + content
-           
+
 	  sha1 = Digest::SHA1.hexdigest(store)
 	  path = @git_dir + '/' + sha1[0...2] + '/' + sha1[2..40]
- 
+
 	  if !File.exists?(path)
 	    content = Zlib::Deflate.deflate(store)
- 
+
 	    FileUtils.mkdir_p(@directory+'/'+sha1[0...2])
 	    File.open(path, 'w') do |f|
 	      f.write content
@@ -46,32 +47,31 @@ implementation of object storage:
 	  return sha1
 	end
 
-### Packed Objects ###
+### Objetos Packed ###
 
-The other format for object storage is the packfile. Since Git stores each 
-version of each file as a seperate object, it can get pretty inefficient. 
-Imagine having a file several thousand lines long and changing a single line.
-Git will store the second file in it's entirety, which is a great big waste
-of space.
+O outro formato para o armazenamento de objetos é o packfile. Desde que o Git
+armazena cada versão do arquivo em um objeto separado, isso pode ser bastante
+ineficiente.
+Imagine tendo um arquivo com milhares de linhas e então altera uma simples linha.
+Git armazenará o segundo arquivo inteiramente nele, que é um grande desperdício
+de espaço.
 
-In order to save that space, Git utilizes the packfile.  This is a format
-where Git will only save the part that has changed in the second file, with 
-a pointer to the file it is similar to.  
+Segundo as regras para a economia de espaço, Git utiliza o packfile. Esse é um
+formato onde o Git somente gravará a parte que foi alterada no segundo arquivo,
+com um apontador para o arquivo original.
 
-When objects are written to disk, it is often in the loose format, since
-that format is less expensive to access.  However, eventually you'll want
-to save the space by packing up the objects - this is done with the 
-linkgit:git-gc[1] command.  It will use a rather complicated heuristic to 
-determine which files are likely most similar and base the deltas off that
-analysis.  There can be multiple packfiles, they can be repacked if neccesary
-(linkgit:git-repack[1]) or unpacked back into loose files 
-(linkgit:git-unpack-objects[1]) relatively easily. 
+Quando os objetos são escritos no disco, frquentemente é no formato loose,
+desde que o formato seja menos dispendioso para acessar. Contudo, finalmente
+você irá querer economizar espaço através do empacotamento dos objetos - isso
+é feito com o comando linkgit:git-gc[1]. Ele usará uma heurística bastante
+complicada para determinar quais arquivos são provavelmente mais semelhantes e
+e basear os deltas dessa análise. Podem ser múltiplos packfiles, eles podem ser
+re-empacotados se necessário (linkgit:git-repack[1]) ou desempacotados de volta
+em arquivos loose (linkgit:git-unpack-objects[1]) com relativa facilidade.
 
-Git will also write out an index file for each packfile that is much smaller 
-and contains offsets into the packfile to more quickly find specific objects 
-by sha.
+Git também escreverá um arquivo index para cada packfile que é muito menor e
+contém o deslocamento dentro do packfile para rapidamente encontrar objetos
+específicos através do sha.
 
-The actual details of the packfile implementation are found in the Packfile
-chapter a little later on.
-
-
+Os detalhes exatos da implementação do packfile são encontrados no capítulo
+Packfile um pouco mais tarde.
