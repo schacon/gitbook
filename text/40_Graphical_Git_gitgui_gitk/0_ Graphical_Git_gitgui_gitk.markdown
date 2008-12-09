@@ -18,8 +18,8 @@ command line, but for many of the basic operations, it's pretty good.
  
 ### Third Party Projects ###
 
-For Mac users, there is 
-[GitNub](http://github.com/Caged/gitnub/wikis)
+For Mac users, there are
+[GitX](http://gitx.frim.nl/) and [GitNub](http://github.com/Caged/gitnub/wikis)
 
 For Linux or other Qt users, there is
 [QGit](http://digilander.libero.it/mcostalba/)
