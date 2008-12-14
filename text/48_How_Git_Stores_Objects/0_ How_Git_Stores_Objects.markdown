@@ -49,7 +49,7 @@ armazenados é essa implementação em Ruby do armazenamento do objeto:
 
 ### Objetos Packed ###
 
-O outro formato para o armazenamento de objetos é o packfile. Desde que o Git
+O outro formato para o armazenamento de objetos é o packfile. Visto que o Git
 armazena cada versão do arquivo em um objeto separado, isso pode ser bastante
 ineficiente.
 Imagine tendo um arquivo com milhares de linhas e então altera uma simples linha.

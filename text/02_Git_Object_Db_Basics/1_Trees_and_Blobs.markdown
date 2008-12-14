@@ -18,7 +18,7 @@ Um objeto "blob" não é nada mais que um grande pedaço de dados binários. Ele
 não se referencia a nada ou possue atributos de qualquer tipo, nem mesmo um nome
 de arquivo.  
 
-Desde que o blob é inteiramente definido por esses dados, se dois arquivos em 
+Visto que o blob é inteiramente definido por esses dados, se dois arquivos em 
 uma árvore de diretório (ou dentro de múltiplas versões diferentes desse 
 repositório) possui o mesmo conteúdo, eles irão compartilhar o mesmo objeto 
 blob. O objeto é totalmente independente da localização do arquivo na árvore de 
@@ -55,15 +55,16 @@ arquivo. Ele representa o conteúdo de uma simples árvore de diretório.
 
 Um objeto referenciado por uma tree pode ser um blob, representando o conteúdo
 de um arquivo, ou outra tree, representando o conteúdo de um sub diretório. 
-Desde trees e blobs, como todos os outros objetos, são nomeados por um hash SHA1
+Visto que trees e blobs, como todos os outros objetos, são nomeados por um hash SHA1
 de seus conteúdos, duas trees possui o mesmo hash SHA1 se somente se seus 
-conteúdos (incluindo, recursivamente, o conteúdo de todos os sub diretórios) são
+conteúdos (incluindo, recursivamente, o conteúdo de todos os sub-diretórios) são
 idênticos.
 Isso permite ao git determinar rapidamente as diferenças entre dois objetos tree
-,desde que ele possa ignorar qualquer entrada com nome de objetos idênticos.  
+relacionados, desde que ele possa ignorar qualquer entrada com nome de objetos
+idênticos.  
 
 (Nota: na presença de sub módulos, trees pode também ter commits como entradas. 
 veja a seção **Sub Módulos**.)
 
-Perceba que todos os arquivos possuem o modo de acesso 644 ou 755: git 
-normalmente dá atenção para o bit executável. 
+Perceba que todos os arquivos possuem o modo de acesso 644 ou 755: o git na
+verdade somente dá atenção para o bit executável. 
