@@ -16,7 +16,7 @@ você terá uma lista de todos os branches existentes:
     * master
 
 O branch "experimental" é o que você criou, e o branch "master" é um 
-padrão, que foi criado automaticamente. O asterisco marca o branch
+padrão, que foi criado automaticamente para você. O asterisco marca o branch
 no qual você está atualmente.
 Digite
 
@@ -29,8 +29,8 @@ commit da alteração e volte para o branch master:
     $ git commit -a
     $ git checkout master
 
-Verifique que a alteração que você fez não está mais visível, que foi feito 
-sobre o branch experimental e agora que você está de volta sobre o branch 
+Verifique que a alteração que você fez não está mais visível, visto que foi 
+feito sobre o branch experimental e agora que você está de volta sobre o branch 
 master.
 
 Você pode fazer uma alteração diferente sobre o branch master:
@@ -57,7 +57,7 @@ irá realizar o commit do resultado do merge. Finalmente
 
     $ gitk
 
-mostrará um belo gráfico da representação resultante do histórico.
+mostrará uma ótima representação gráfica resultante do histórico.
 
 Nesse ponto você poderá apagar o branch experimental com
 
@@ -66,7 +66,7 @@ Nesse ponto você poderá apagar o branch experimental com
 Esse comando assegura que as alterações no branch experimental já estão no 
 no branch atual.
 
-Se você desenvolve sobre o um brach crazy-idea, então se arrependeu, você 
+Se você desenvolve sobre o um branch crazy-idea, então se arrependeu, você 
 sempre pode apagar o branch com
 
     $ git branch -D crazy-idea
@@ -114,7 +114,7 @@ irá falhar.
     file.txt: needs merge
 
 Também, linkgit:git-status[1] listará esses arquivos como "unmerged", e os 
-arquivos com conflitos terão os conflitos adicionados, assim:
+arquivos com conflitos terão os marcadores dos conflitos adicionados, assim:
 
     <<<<<<< HEAD:file.txt
     Hello world
@@ -157,7 +157,7 @@ Existe um caso especial não mencionado acima, que é tratado diferentemente.
 Normalmente, um merge resulta em um commit com dois pais, um de cada uma das
 duas linhas de desenvolvimento que foram realizados o merge.
 
-Contudo, se o branch atual não tem divergência do outro -- então cada commit 
+Contudo, se o branch atual não divergiu do outro -- então cada commit 
 presente no branch atual já está contido no outro -- então o git só realiza um
 "fast foward"; o HEAD do branch atual é movido para o ponto do HEAD do branch 
 que realiza o merge, sem que qualquer novo commit seja criado.

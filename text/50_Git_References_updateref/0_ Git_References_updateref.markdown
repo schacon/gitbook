@@ -19,7 +19,7 @@ linkgit:git-pack-refs[1]).
 
 Um outro atalho útil, o "HEAD" de um repositório pode ser referenciado para
 usar somente o nome daquele repositório. Então, por exemplo, "origin" é 
-normalmente um atalho para o brach HEAD no repositório "origin".
+normalmente um atalho para o branch HEAD no repositório "origin".
 
 Para completar a lista de caminhos que o git verifica pelas referências, e
 a ordem que ele usa para decidir qual escolher quando existem múltiplas
@@ -41,7 +41,7 @@ Podemos listar todos os heads nesse repositório com linkgit:git-show-ref[1]:
     24dbc180ea14dc1aebe09f14c8ecf32010690627 refs/heads/tutorial-2
     1e87486ae06626c2f31eaa63d26fc0fd646c8af2 refs/heads/tutorial-fixes
 
-Podemos conseguir só os nomes do brach, e remover "master", com a ajuda dos
+Podemos conseguir só os nomes do branch, e remover "master", com a ajuda dos
 utilitários padrões cut e grep:
 
     $ git show-ref --heads | cut -d' ' -f2 | grep -v '^refs/heads/master'

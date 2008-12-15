@@ -23,8 +23,8 @@ conseguir uma breve sumário da situação com linkgit:git-status[1]:
     #	modified:   file3
     #
 
-Se você precisar fazer qualquer ajustes a mais, então faça-o agora, e 
-adicione qualquer nova alteração no conteúdo no index. Finalmente, commit
+Se você precisar fazer qualquer ajustes a mais, então faça-o agora, e então
+adicione qualquer novo conteúdo modificado no index. Finalmente, commit
 suas mudanças com:
 
     $ git commit
@@ -36,8 +36,8 @@ Alternativamente, ao invés de executar `git add`, você pode usar:
 
     $ git commit -a
     
-que irá automaticamente avisar sobre qualquer modificações nos (mas não novos)
-arquivos, adicioná-los no index, e realizar o commit, tudo de uma vez.
+que irá automaticamente avisar sobre quaisquer arquivos modificados (mas não 
+novos), adicioná-los no index, e realizar o commit, tudo de uma vez.
 
 Uma nota sobre as mensagens de commit: Embora não necessário, é uma boa
 idéia iniciar a mensagem de commit em uma linha curta (menos do que
@@ -50,8 +50,8 @@ para o corpo do email.
 #### Git percebe conteúdo não arquivos ####
 
 Muitos sistemas de controle de revisões dispõem de um comando "add" que
-chama o sistema para rastrear as mudanças para um novo arquivo. O comando
-"add" faz algumas coisas da mais simples as mais poderosas: `git add` é usado
+chama o sistema para iniciar a busca por mudanças em novos arquivos. O comando
+"add" faz algumas coisas das mais simples as mais poderosas: `git add` é usado
 ambos para arquivos novos e arquivos alterados, e em ambos os casos fornece um 
 snapshot dos arquivos dados e os que estão no index, prontos para inclusão no 
 próximo commit. 

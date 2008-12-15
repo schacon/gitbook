@@ -45,8 +45,8 @@ Com isso, Alice pode realizar a primeira operação sozinha usando o comando
 
     $ git fetch bob
 
-Ao contrário da forma longa, quando Alice recebe as novas alterações usando um
-repositório remoto configurado com 'git remote', que foi recuperado e 
+Ao contrário da forma longa, quando Alice recebe as novas alterações de Bob
+usando um repositório remoto configurado com 'git remote', que foi recuperado e 
 armazenado em um branch remoto, nesse caso 'bob/master'. Então depois disso:
 
     $ git log -p master..bob/master
@@ -133,7 +133,7 @@ das alterações. Isso é na verdade mais conveniente, e permite claramente a vo
 separar trabalho pessoal em progresso do trabalho visível publicamente.
 
 Você continuará a fazer seu trabalho diário em seu repositório pessoal, mas 
-periódicamente realiza um "push" das alterações de seu repositório pessoal
+periódicamente realizar um "push" das alterações de seu repositório pessoal
 para o seu repositório público, permitindo os outros desenvolvedores realizar 
 pulls daquele repositório. Então o fluxo de alterações, na situação onde existe
 um outro desenvolvedor com repositório público, parece com isso:
@@ -216,7 +216,7 @@ branch com um sinal de +:
 
     $ git push ssh://seuservidor.com/~voce/proj.git +master
 
-Normalmente quando um brach head é modificado em um repositório público, ele
+Normalmente quando um branch head é modificado em um repositório público, ele
 é modificado para apontar para um descendente desse commit que ele apontou antes.
 Forçar um push nessa situação, você quebra aquela convênção.
 (Veja <<problems-with-rewriting-history>>.)
@@ -226,7 +226,7 @@ simples para publicar uma série de patch de um trabalho em progresso, e é um
 compromisso aceitável contanto que você avise os outros desenvolvedores que é 
 dessa forma que pretende gerenciar o branch.
 
-Desta forma também é possível para um push falhar quando outras pessoas tem o 
+Dessa forma também é possível para um push falhar quando outras pessoas tem o 
 direito de enviar para o mesmo repositório. Nesse caso, a solução correta para 
 tentar re-enviar depois da primeira atualização de seu trabalho: qualquer um 
 pull, ou um fetch seguido por um rebase; veja o 

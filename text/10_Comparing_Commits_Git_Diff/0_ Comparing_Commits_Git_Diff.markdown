@@ -41,7 +41,7 @@ o que estará sendo commitado se você executrar "git commit -a".
 
 ### Mais opções Diff ###
 
-Se você quer ver como seu diretório corrente difere do estado em outro branch
+Se você quer ver como seu diretório atual difere do estado em outro branch
 do projeto, você pode executar algo como:
 
     $ git diff test
