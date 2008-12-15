@@ -109,8 +109,7 @@ linkgit:gitcvs-migration[1].
 
 Another way to submit changes to a project is to tell the maintainer
 of that project to pull the changes from your repository using
-linkgit:git-pull[1].  In the section "<<getting-updates-with-git-pull,
-Getting updates with git-pull>>" we described this as a way to get
+linkgit:git-pull[1].  This is a way to get
 updates from the "main" repository, but it works just as well in the
 other direction.
 
@@ -155,10 +154,9 @@ like this:
 
 ### Pushing changes to a public repository ###
 
-Note that the two techniques outlined above (exporting via
-<<exporting-via-http,http>> or <<exporting-via-git,git>>) allow other
+Note that exporting via http or git allow other
 maintainers to fetch your latest changes, but they do not allow write
-access, which you will need to update the public repository with the
+access.  For this, you will need to update the public repository with the
 latest changes created in your private repository.
 
 The simplest way to do this is using linkgit:git-push[1] and ssh; to
@@ -172,11 +170,10 @@ or just
     $ git push ssh://yourserver.com/~you/proj.git master
 
 As with git-fetch, git-push will complain if this does not result in a
-<<fast-forwards,fast forward>>; see the following section for details on
+fast forward; see the following section for details on
 handling this case.
 
-Note that the target of a "push" is normally a
-<<def_bare_repository,bare>> repository.  You can also push to a
+Note that the target of a "push" is normally a bare repository.  You can also push to a
 repository that has a checked-out working tree, but the working tree
 will not be updated by the push.  This may lead to unexpected results if
 the branch you push to is the currently checked-out branch!
@@ -199,7 +196,7 @@ details.
 
 ### What to do when a push fails ###
 
-If a push would not result in a <<fast-forwards,fast forward>> of the
+If a push would not result in a fast forward of the
 remote branch, then it will fail with an error like:
 
     error: remote 'refs/heads/master' is not an ancestor of
@@ -210,10 +207,8 @@ remote branch, then it will fail with an error like:
 This can happen, for example, if you:
 
 	- use `git-reset --hard` to remove already-published commits, or
-	- use `git-commit --amend` to replace already-published commits
-	  (as in <<fixing-a-mistake-by-rewriting-history>>), or
-	- use `git-rebase` to rebase any already-published commits (as
-	  in <<using-git-rebase>>).
+	- use `git-commit --amend` to replace already-published commits, or
+	- use `git-rebase` to rebase any already-published commits.
 
 You may force git-push to perform the update anyway by preceding the
 branch name with a plus sign:
@@ -223,7 +218,6 @@ branch name with a plus sign:
 Normally whenever a branch head in a public repository is modified, it
 is modified to point to a descendant of the commit that it pointed to
 before.  By forcing a push in this situation, you break that convention.
-(See <<problems-with-rewriting-history>>.)
 
 Nevertheless, this is a common practice for people that need a simple
 way to publish a work-in-progress patch series, and it is an acceptable
@@ -233,8 +227,7 @@ intend to manage the branch.
 It's also possible for a push to fail in this way when other people have
 the right to push to the same repository.  In that case, the correct
 solution is to retry the push after first updating your work: either by a
-pull, or by a fetch followed by a rebase; see the
-<<setting-up-a-shared-repository,next section>> and
+pull, or by a fetch followed by a rebase; see the next section and
 linkgit:gitcvs-migration[7] for more.
 
 [gitcast:c8-dist-workflow]("GitCast #8: Distributed Workflow")
