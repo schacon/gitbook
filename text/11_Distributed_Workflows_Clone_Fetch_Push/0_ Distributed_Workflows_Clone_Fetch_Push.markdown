@@ -102,7 +102,7 @@ see linkgit:git-pull[1] for details.
 
 Git can also be used in a CVS-like mode, with a central repository
 that various users push changes to; see linkgit:git-push[1] and
-link:cvs-migration.html[git for CVS users].
+linkgit:gitcvs-migration[1].
 
 
 ### Public git repositories ###
