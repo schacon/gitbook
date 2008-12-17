@@ -41,7 +41,7 @@ properties:
     associated with sufficient information about the trees involved that
     you can create a three-way merge between them.
 
-    We saw in <<conflict-resolution>> that during a merge the index can
+    During a merge, the index can
     store multiple versions of a single file (called "stages").  The third
     column in the linkgit:git-ls-files[1] output above is the stage
     number, and will take on values other than 0 for files with merge

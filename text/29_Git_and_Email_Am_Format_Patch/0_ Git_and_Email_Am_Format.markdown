@@ -29,8 +29,8 @@ single mailbox file, say "patches.mbox", then run
     $ git am -3 patches.mbox
 
 Git will apply each patch in order; if any conflicts are found, it
-will stop, and you can fix the conflicts as described in
-"<<resolving-a-merge,Resolving a merge>>".  (The "-3" option tells
+will stop, and you can manually fix the conflicts and
+resolve the merge.  (The "-3" option tells
 git to perform a merge; if you would prefer it just to abort and
 leave your tree and index untouched, you may omit that option.)
 
