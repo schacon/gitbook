@@ -29,7 +29,7 @@ implementation of object storage:
 	def put_raw_object(content, type)
 	  size = content.length.to_s
  
-	  header = "#{type} #{size}\0"
+	  header = "#{type} #{size}\\0" # type(space)size(null byte)
 	  store = header + content
            
 	  sha1 = Digest::SHA1.hexdigest(store)
