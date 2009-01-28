@@ -63,7 +63,7 @@ Now create the superproject and add all the submodules:
     $ git init
     $ for i in a b c d
     do
-        git submodule add ~/git/$i
+        git submodule add ~/git/$i $i
     done
 
 NOTE: Do not use local URLs here if you plan to publish your superproject!
@@ -105,7 +105,7 @@ The submodule directories are there, but they're empty:
 
 NOTE: The commit object names shown above would be different for you, but they
 should match the HEAD commit object names of your repositories.  You can check
-it by running `git ls-remote ../a`.
+it by running `git ls-remote ../git/a`.
 
 Pulling down the submodules is a two-step process. First run `git submodule
 init` to add the submodule repository URLs to `.git/config`:
