@@ -63,7 +63,7 @@ Now create the superproject and add all the submodules:
     $ git init
     $ for i in a b c d
     do
-        git submodule add ~/git/$i
+        git submodule add ~/git/$i $i
     done
 
 NOTE: Do not use local URLs here if you plan to publish your superproject!
@@ -105,7 +105,7 @@ The submodule directories are there, but they're empty:
 
 NOTE: The commit object names shown above would be different for you, but they
 should match the HEAD commit object names of your repositories.  You can check
-it by running `git ls-remote ../a`.
+it by running `git ls-remote ../git/a`.
 
 Pulling down the submodules is a two-step process. First run `git submodule
 init` to add the submodule repository URLs to `.git/config`:
@@ -180,6 +180,48 @@ others won't be able to clone the repository:
     error: pathspec '261dfac35cb99d380eb966e102c1197139f7fa24' did not match any file(s) known to git.
     Did you forget to 'git add'?
     Unable to checkout '261dfac35cb99d380eb966e102c1197139f7fa24' in submodule path 'a'
+
+If you are staging an updated submodule for commit manually, be careful to not
+add a trailing slash when specifying the path. With the slash appended, Git
+will assume you are removing the submodule and checking that directory's
+contents into the containing repository.
+
+    $ cd ~/git/super/a
+    $ echo i added another line to this file >> a.txt
+    $ git commit -a -m "doing it wrong this time"
+    $ cd ..
+    $ git add a/
+    $ git status
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #       deleted:    a
+    #       new file:   a/a.txt
+    #
+    # Modified submodules:
+    #
+    # * a aa5c351...0000000 (1):
+    #   < Initial commit, submodule a
+    #
+
+To fix the index after performing this operation, reset the changes and then
+add the submodule without the trailing slash.
+
+    $ git reset HEAD A
+    $ git add a
+    $ git status
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #       modified:   a
+    #
+    # Modified submodules:
+    #
+    # * a aa5c351...8d3ba36 (1):
+    #   > doing it wrong this time
+    #
 
 You also should not rewind branches in a submodule beyond commits that were
 ever recorded in any superproject.
