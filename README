@@ -6,8 +6,13 @@ resource to be hosted on the main Git website.
 == Contributing ==
 
 * Clone this source, add to it and send me (schacon@gmail.com) a patch or pull request
-* Install gems 'ultraviolet' and 'discount'
-* Install prince (http://www.princexml.com/download/)
+* Install required gems:
+    $ gem install rake ultraviolet discount rdiscount builder
+* For PDF output install prince (http://www.princexml.com/download/)
+* Generate book through
+    $ rake html
+  or
+    $ rake pdf
 
 == References ==
 
@@ -17,4 +22,3 @@ resource to be hosted on the main Git website.
 
 * Scott Chacon
 * Emil Sit
-
