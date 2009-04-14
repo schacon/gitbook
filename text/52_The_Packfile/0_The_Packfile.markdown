@@ -56,7 +56,7 @@ Ruby, you might read the header data like this:
 	  [sig, ver, entries]
 	end
 
-After that, you get a series of packed objects, in order of thier SHAs
+After that, you get a series of packed objects, in order of their SHAs
 which each consist of an object header and object contents.  At the end
 of the packfile is a 20-byte SHA1 sum of all the shas (in sorted order) in that
 packfile. 
