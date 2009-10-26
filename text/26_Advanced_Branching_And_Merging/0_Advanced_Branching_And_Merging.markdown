@@ -54,7 +54,7 @@ index), the diff will look like:
     +++ b/file.txt
     @@@ -1,1 -1,1 +1,1 @@@
     - Hello world
-    -Goodbye
+     -Goodbye
     ++Goodbye world
 
 This shows that our resolved version deleted "Hello world" from the
