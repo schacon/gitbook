@@ -19,9 +19,9 @@ the conflicts.  It uses an unusual syntax:
     ++>>>>>>> 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
 
 Recall that the commit which will be committed after we resolve this
-conflict will have two parents instead of the usual one: one parent
-will be HEAD, the tip of the current branch; the other will be the
-tip of the other branch, which is stored temporarily in MERGE_HEAD.
+conflict will have two parents instead of the usual one: The HEAD, the tip
+of the current branch, will become one parent; the tip of the other branch,
+which is stored temporarily in MERGE_HEAD, will become the other parent.
 
 During the merge, the index holds three versions of each file.  Each of
 these three "file stages" represents a different version of the file:
