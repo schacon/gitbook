@@ -10,9 +10,9 @@ Suppose that you create a branch "mywork" on a remote-tracking branch
 Now you do some work, creating two new commits.
 
     $ vi file.txt
-    $ git commit
+    $ git commit -a
     $ vi otherfile.txt
-    $ git commit
+    $ git commit -a
     ...
     
 Meanwhile, someone else does some work creating two new commits on the origin
