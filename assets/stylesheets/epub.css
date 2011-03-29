@@ -1,0 +1,24 @@
+pre {
+  background-color: #efefef;
+  padding: 5px;
+  -webkit-border-radius: 3px;
+}
+
+ul {
+  -webkit-padding-start: 20px;
+}
+
+.imprint {
+  font-size: 80%;
+}
+
+div.halftitlepage, div.titlepage, div.imprint, div.dedication { page: blank }
+div.foreword, div.toc, div.preface { page: frontmatter }
+
+/* page breaks */
+div.frontcover, div.halftitlepage, div.titlepage { page-break-before: right }
+div.imprint { page-break-before: always }
+div.dedication, div.foreword, div.toc, div.preface, div.chapter, div.reference, 
+div.appendix, div.bibliography, div.glossary, div.index, div.colophon { 
+  page-break-before: always 
+}

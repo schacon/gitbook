@@ -22,7 +22,7 @@ def do_replacements(html, type = :html)
   end
   
   # replace figures
-  html.gsub! /\[fig:(.*?)\]/, '<div class="center"><img src="images/figure/\1.png"></div>'
+  html.gsub! /\[fig:(.*?)\]/, '<div class="center whatever"><img src="images/figure/\1.png"/></div>'
   
   # fix images in pdf
   html.gsub!('src="images', 'src="assets/images')
