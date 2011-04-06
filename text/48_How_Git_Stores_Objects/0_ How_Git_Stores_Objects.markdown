@@ -11,7 +11,7 @@ packed objects.
 ### Loose Objects ###
 
 Loose objects are the simpler format.  It is simply the compressed data stored
-in a single file on disk.  Every object written to a seperate file.
+in a single file on disk.  Every object written to a separate file.
 
 If the sha of your object is <code>ab04d884140f7b0cf8bbf86d6883869f16a46f65</code>,
 then the file will be stored in the following path:
