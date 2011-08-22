@@ -106,7 +106,7 @@ that commit:
 
 And then when you get to the command line, you revert that commit and create
 two (or more) new ones.  Lets say 21d80a5 modified two files, file1 and file2,
-and you wanted to split them into seperate commits.  You could do this after
+and you wanted to split them into separate commits.  You could do this after
 the rebase dropped you to the command line :
 
 	$ git reset HEAD^
