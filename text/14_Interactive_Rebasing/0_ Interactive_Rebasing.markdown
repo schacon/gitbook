@@ -123,6 +123,10 @@ Then you will have to create a single commit message from this:
 Once you have edited that down into once commit message and exit the editor,
 the commit will be saved with your new message.
 
+If 'fixup' is specified, the commit will be merged with the previous commit like
+with 'squash', but this commit's message will be discarded and you will not need
+to merge the commit messages. 
+
 The last useful thing that interactive rebase can do is drop commits for you.
 If instead of choosing 'pick', 'squash' or 'edit' for the commit line, you 
 simply remove the line, it will remove the commit from the history.
