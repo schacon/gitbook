@@ -58,6 +58,33 @@ commit with the same message as before.
 If 'reword' is specified, it will also try to apply the patch but will allow you
 to change the commit message before moving on.
 
+If 'edit' is specified, it will do the same thing, but then pause before 
+moving on to the next one and drop you into the command line so you can 
+amend the commit, or change the commit contents somehow.
+
+If you wanted to split a commit, for instance, you would specify 'edit' for
+that commit:
+
+	pick   fc62e55 added file_size
+	pick   9824bf4 fixed little thing
+	edit   21d80a5 added number to log
+	pick   76b9da6 added the apply command
+	pick   c264051 Revert "added file_size" - not implemented correctly
+
+And then when you get to the command line, you revert that commit and create
+two (or more) new ones.  Lets say 21d80a5 modified two files, file1 and file2,
+and you wanted to split them into seperate commits.  You could do this after
+the rebase dropped you to the command line :
+
+	$ git reset HEAD^
+	$ git add file1
+	$ git commit 'first part of split commit'
+	$ git add file2
+	$ git commit 'second part of split commit'
+	$ git rebase --continue
+	
+And now instead of 5 commits, you would have 6.
+
 If 'squash' is specified, it will combine that commit with the previous one
 to create a new commit.  This will drop you into your editor again to merge
 the commit messages of the two commits it is now squashing together.  So, 
@@ -95,33 +122,6 @@ Then you will have to create a single commit message from this:
 
 Once you have edited that down into once commit message and exit the editor,
 the commit will be saved with your new message.
-
-If 'edit' is specified, it will do the same thing, but then pause before 
-moving on to the next one and drop you into the command line so you can 
-amend the commit, or change the commit contents somehow.
-
-If you wanted to split a commit, for instance, you would specify 'edit' for
-that commit:
-
-	pick   fc62e55 added file_size
-	pick   9824bf4 fixed little thing
-	edit   21d80a5 added number to log
-	pick   76b9da6 added the apply command
-	pick   c264051 Revert "added file_size" - not implemented correctly
-
-And then when you get to the command line, you revert that commit and create
-two (or more) new ones.  Lets say 21d80a5 modified two files, file1 and file2,
-and you wanted to split them into seperate commits.  You could do this after
-the rebase dropped you to the command line :
-
-	$ git reset HEAD^
-	$ git add file1
-	$ git commit 'first part of split commit'
-	$ git add file2
-	$ git commit 'second part of split commit'
-	$ git rebase --continue
-	
-And now instead of 5 commits, you would have 6.
 
 The last useful thing that interactive rebase can do is drop commits for you.
 If instead of choosing 'pick', 'squash' or 'edit' for the commit line, you 
