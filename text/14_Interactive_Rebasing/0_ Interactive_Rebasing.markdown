@@ -58,8 +58,8 @@ commit with the same message as before.
 If 'reword' is specified, it will also try to apply the patch but will allow you
 to change the commit message before moving on.
 
-If 'edit' is specified, it will do the same thing, but then pause before 
-moving on to the next one and drop you into the command line so you can 
+If 'edit' is specified, it will do the same thing as 'pick', but then pause
+before moving on to the next one and drop you into the command line so you can
 amend the commit, or change the commit contents somehow.
 
 If you wanted to split a commit, for instance, you would specify 'edit' for
