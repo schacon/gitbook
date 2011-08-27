@@ -55,6 +55,9 @@ and do the action specified.
 If 'pick' is specified, it will simply try to apply the patch and save the 
 commit with the same message as before.
 
+If 'reword' is specified, it will also try to apply the patch but will allow you
+to change the commit message before moving on.
+
 If 'squash' is specified, it will combine that commit with the previous one
 to create a new commit.  This will drop you into your editor again to merge
 the commit messages of the two commits it is now squashing together.  So, 
