@@ -32,8 +32,10 @@ of choice with something that looks like this:
 	#
 	# Commands:
 	#  p, pick = use commit
+	#  r, reword = use commit, but edit the commit message
 	#  e, edit = use commit, but stop for amending
 	#  s, squash = use commit, but meld into previous commit
+	#  f, fixup = like "squash", but discard this commit's log message
 	#
 	# If you remove a line here THAT COMMIT WILL BE LOST.
 	# However, if you remove everything, the rebase will be aborted.
@@ -44,11 +46,11 @@ one line per commit with the following format:
 
 	(action) (partial-sha) (short commit message)
 	
-Now, you can change the action (which is by default 'pick') to either 'edit'
-or 'squash', or just leave it as 'pick'.  You can also reorder the commits
-just by moving the lines around however you want.  Then, when you exit the 
-editor, git will try to apply the commits however they are now arranged and
-do the action specified. 
+Now, you can change the action (which is by default 'pick') to 'reword', 'edit',
+'squash', 'fixup', or 'exec', or just leave it as 'pick'.  You can also reorder
+the commits just by moving the lines around however you want. Then, when you
+exit the editor, git will try to apply the commits however they are now arranged
+and do the action specified. 
 
 If 'pick' is specified, it will simply try to apply the patch and save the 
 commit with the same message as before.
