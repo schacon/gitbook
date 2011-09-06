@@ -354,5 +354,6 @@ to abort.
 
 ### References ###
 
-[Git Hooks](http://www.kernel.org/pub/software/scm/git/docs/githooks.html)
-* http://probablycorey.wordpress.com/2008/03/07/git-hooks-make-me-giddy/
+* [Git Hooks](http://www.kernel.org/pub/software/scm/git/docs/githooks.html)
+* ["Git hooks make me giddy" blog post](http://probablyinteractive.com/2008/11/7/Git-hooks-make-me-giddy.html)
+
