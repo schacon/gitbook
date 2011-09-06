@@ -105,7 +105,7 @@ The submodule directories are there, but they're empty:
 
 NOTE: The commit object names shown above would be different for you, but they
 should match the HEAD commit object names of your repositories.  You can check
-it by running `git ls-remote ../git/a`.
+it by running `git ls-remote ../super/a`.
 
 Pulling down the submodules is a two-step process. First run `git submodule
 init` to add the submodule repository URLs to `.git/config`:
