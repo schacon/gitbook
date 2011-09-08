@@ -29,4 +29,4 @@ a tool called Gitosis.  In gitosis, there is an authorized_keys file that
 contains the public keys of everyone authorized to access the repository,
 and then everyone uses the 'git' user to do pushes and pulls.
 
-[Installing and Setting up Gitosis](http://www.urbanpuddle.com/articles/2008/07/11/installing-git-on-a-server-ubuntu-or-debian)
+[Installing and Setting up Gitosis](http://www.hackido.com/2010/01/installing-git-on-server-ubuntu-or.html)
