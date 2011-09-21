@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Advanced Branching And Merging</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="5_modifying_your_history.html">Prev</a>  <a href="5_finding_issues_-_git_bisect.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Advanced Branching And Merging</h2>
+
+<h3>Getting conflict-resolution help during a merge</h3>
+
+<p>All of the changes that git was able to merge automatically are
+already added to the index file, so <a href="http://www.kernel.org/pub/software/scm/git/docs/git-diff.html">git diff</a> shows only
+the conflicts.  It uses an unusual syntax:</p>
+
+<pre><code>$ git diff
+diff --cc file.txt
+index 802992c,2b60207..0000000
+--- a/file.txt
++++ b/file.txt
+@@@ -1,1 -1,1 +1,5 @@@
+++&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:file.txt
+ +Hello world
+++=======
++ Goodbye
+++&gt;&gt;&gt;&gt;&gt;&gt;&gt; 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
+</code></pre>
+
+<p>Recall that the commit which will be committed after we resolve this
+conflict will have two parents instead of the usual one: one parent
+will be HEAD, the tip of the current branch; the other will be the
+tip of the other branch, which is stored temporarily in MERGE_HEAD.</p>
+
+<p>During the merge, the index holds three versions of each file.  Each of
+these three "file stages" represents a different version of the file:</p>
+
+<pre><code>$ git show :1:file.txt  # the file in a common ancestor of both branches
+$ git show :2:file.txt  # the version from HEAD.
+$ git show :3:file.txt  # the version from MERGE_HEAD.
+</code></pre>
+
+<p>When you ask <a href="http://www.kernel.org/pub/software/scm/git/docs/git-diff.html">git diff</a> to show the conflicts, it runs a
+three-way diff between the conflicted merge results in the work tree with
+stages 2 and 3 to show only hunks whose contents come from both sides,
+mixed (in other words, when a hunk's merge results come only from stage 2,
+that part is not conflicting and is not shown.  Same for stage 3).</p>
+
+<p>The diff above shows the differences between the working-tree version of
+file.txt and the stage 2 and stage 3 versions.  So instead of preceding
+each line by a single "+" or "-", it now uses two columns: the first
+column is used for differences between the first parent and the working
+directory copy, and the second for differences between the second parent
+and the working directory copy.  (See the "COMBINED DIFF FORMAT" section
+of <a href="http://www.kernel.org/pub/software/scm/git/docs/git-diff-files.html">git diff-files</a> for a details of the format.)</p>
+
+<p>After resolving the conflict in the obvious way (but before updating the
+index), the diff will look like:</p>
+
+<pre><code>$ git diff
+diff --cc file.txt
+index 802992c,2b60207..0000000
+--- a/file.txt
++++ b/file.txt
+@@@ -1,1 -1,1 +1,1 @@@
+- Hello world
+-Goodbye
+++Goodbye world
+</code></pre>
+
+<p>This shows that our resolved version deleted "Hello world" from the
+first parent, deleted "Goodbye" from the second parent, and added
+"Goodbye world", which was previously absent from both.</p>
+
+<p>Some special diff options allow diffing the working directory against
+any of these stages:</p>
+
+<pre><code>$ git diff -1 file.txt      # diff against stage 1
+$ git diff --base file.txt  # same as the above
+$ git diff -2 file.txt      # diff against stage 2
+$ git diff --ours file.txt  # same as the above
+$ git diff -3 file.txt      # diff against stage 3
+$ git diff --theirs file.txt    # same as the above.
+</code></pre>
+
+<p>The <a href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">git log</a> and <a href="http://www.kernel.org/pub/software/scm/git/docs/gitk.html">gitk</a> commands also provide special help
+for merges:</p>
+
+<pre><code>$ git log --merge
+$ gitk --merge
+</code></pre>
+
+<p>These will display all commits which exist only on HEAD or on
+MERGE_HEAD, and which touch an unmerged file.</p>
+
+<p>You may also use <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mergetool.html">git mergetool</a>, which lets you merge the
+unmerged files using external tools such as emacs or kdiff3.</p>
+
+<p>Each time you resolve the conflicts in a file and update the index:</p>
+
+<pre><code>$ git add file.txt
+</code></pre>
+
+<p>the different stages of that file will be "collapsed", after which
+git-diff will (by default) no longer show diffs for that file.</p>
+
+<h3>Multiway Merge</h3>
+
+<p>You can merge several heads at one time by simply listing them on the same
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git merge</a> command.  For instance,</p>
+
+<pre><code>$ git merge scott/master rick/master tom/master
+</code></pre>
+
+<p>is the equivalent of:</p>
+
+<pre><code>$ git merge scott/master
+$ git merge rick/master
+$ git merge tom/master
+</code></pre>
+
+<h3>Subtree</h3>
+
+<p>There are situations where you want to include contents in your project from
+an independently developed project. You can just pull from the other project
+as long as there are no conflicting paths.</p>
+
+<p>The problematic case is when there are conflicting files. Potential
+candidates are Makefiles and other standard filenames. You could merge
+these files but probably you do not want to. A better solution for this
+problem can be to merge the project as its own subdirectory. This is not
+supported by the recursive merge strategy, so just pulling won't work.</p>
+
+<p>What you want is the subtree merge strategy, which helps you in such a situation.</p>
+
+<p>In this example, let's say you have the repository at /path/to/B
+(but it can be an URL as well, if you want). You want to merge the master
+branch of that repository to the dir-B subdirectory in your current branch.</p>
+
+<p>Here is the command sequence you need:</p>
+
+<pre><code>$ git remote add -f Bproject /path/to/B (1)
+$ git merge -s ours --no-commit Bproject/master (2)
+$ git read-tree --prefix=dir-B/ -u Bproject/master (3)
+$ git commit -m "Merge B project as our subdirectory" (4)
+$ git pull -s subtree Bproject master (5)
+</code></pre>
+
+<p>The benefit of using subtree merge is that it requires less administrative
+burden from the users of your repository. It works with older
+(before Git v1.5.2) clients and you have the code right after clone.</p>
+
+<p>However if you use submodules then you can choose not to transfer the
+submodule objects. This may be a problem with the subtree merge.</p>
+
+<p>Also, in case you make changes to the other project, it is easier to
+submit changes if you just use submodules.</p>
+
+<p>(from <a href="http://www.kernel.org/pub/software/scm/git/docs/howto/using-merge-subtree.html">Using Subtree Merge</a>)</p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="5_modifying_your_history.html">Prev</a>  <a href="5_finding_issues_-_git_bisect.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

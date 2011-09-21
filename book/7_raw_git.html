@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Raw Git</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="7_the_packfile.html">Prev</a>  <a href="7_transfer_protocols.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Raw Git</h2></li>
+</ul>
+
+
+<p>Here we will take a look at how to manipulate git at a more raw level, in
+case you would like to write a tool that generates new blobs, trees or commits
+in a more artificial way.  If you want to write a script that uses more low-level
+git plumbing to do something new, here are some of the tools you'll need.</p>
+
+<h3>Creating Blobs</h3>
+
+<p>Creating a blob in your Git repository and getting a SHA back is pretty easy.
+The <a href="http://www.kernel.org/pub/software/scm/git/docs/git-hash-object.html">git hash-object</a> command is all you'll need.  To create a blob
+object from an existing file, just run it with the '-w' option (which tells it
+to write the blob, not just compute the SHA).</p>
+
+<pre><code>$ git hash-object -w myfile.txt
+6ff87c4664981e4397625791c8ea3bbb5f2279a3
+
+$ git hash-object -w myfile2.txt
+3bb0e8592a41ae3185ee32266c860714980dbed7
+</code></pre>
+
+<p>The STDOUT output of the command will the the SHA of the blob that was created.</p>
+
+<h3>Creating Trees</h3>
+
+<p>Now lets say you want to create a tree from your new objects.
+The <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mktree.html">git mktree</a> command makes it pretty simple to generate new
+tree objects from <a href="http://www.kernel.org/pub/software/scm/git/docs/git-ls-tree.html">git ls-tree</a> formatted output.  For example, if
+you write the following to a file named '/tmp/tree.txt' :</p>
+
+<pre><code>100644 blob 6ff87c4664981e4397625791c8ea3bbb5f2279a3    file1
+100644 blob 3bb0e8592a41ae3185ee32266c860714980dbed7    file2
+</code></pre>
+
+<p>and then piped that through the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mktree.html">git mktree</a> command, Git will
+write a new tree to the object database and give you back the new sha of that
+tree.</p>
+
+<pre><code>$ cat /tmp/tree.txt | git mk-tree
+f66a66ab6a7bfe86d52a66516ace212efa00fe1f
+</code></pre>
+
+<p>Then, we can take that and make it a subdirectory of yet another tree, and so
+on.  If we wanted to create a new tree with that one as a subtree, we just
+create a new file (/tmp/newtree.txt) with our new SHA as a tree in it:</p>
+
+<pre><code>100644 blob 6ff87c4664981e4397625791c8ea3bbb5f2279a3    file1-copy
+040000 tree f66a66ab6a7bfe86d52a66516ace212efa00fe1f    our_files
+</code></pre>
+
+<p>and then use <a href="http://www.kernel.org/pub/software/scm/git/docs/git-mk-tree.html">git mk-tree</a> again:</p>
+
+<pre><code>$ cat /tmp/newtree.txt | git mk-tree
+5bac6559179bd543a024d6d187692343e2d8ae83
+</code></pre>
+
+<p>And we now have an artificial directory structure in Git that looks like this:</p>
+
+<pre><code>.
+|-- file1-copy
+`-- our_files
+    |-- file1
+    `-- file2
+
+1 directory, 3 files
+</code></pre>
+
+<p>without that structure ever having actually existed on disk.  Plus, we have
+a SHA (<code>5bac6559</code>) that points to it.</p>
+
+<h3>Rearranging Trees</h3>
+
+<p>We can also do tree manipulation by combining trees into new structures using
+the index file.  As a simple example, let's take the tree we just created and
+make a new tree that has two copies of our <code>5bac6559</code> tree in it
+using a temporary index file. (You can do this by resetting the GIT_INDEX_FILE
+environment variable or on the command line)</p>
+
+<p>First, we read the tree into our index file under a new prefix using the
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-read-tree.html">git read-tree</a> command, and then write the index contents as
+a tree using the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-write-tree.html">git write-tree</a> command:</p>
+
+<pre><code>$ export GIT_INDEX_FILE=/tmp/index
+$ git read-tree --prefix=copy1/  5bac6559
+$ git read-tree --prefix=copy2/  5bac6559
+$ git write-tree 
+bb2fa6de7625322322382215d9ea78cfe76508c1
+
+$&gt;git ls-tree bb2fa
+040000 tree 5bac6559179bd543a024d6d187692343e2d8ae83    copy1
+040000 tree 5bac6559179bd543a024d6d187692343e2d8ae83    copy2
+</code></pre>
+
+<p>So now we can see that we've created a new tree just from index manipulation.
+You can also do interesting merge operations and such in a temporary index
+this way - see the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-read-tree.html">git read-tree</a> docs for more information.</p>
+
+<h3>Creating Commits</h3>
+
+<p>Now that we have a tree SHA, we can create a commit object that points to it.
+We can do this using the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-commit-tree.html">git commit-tree</a> command.  Most of the data
+that goes into the commit has to be set as environment variables, so you'll want
+to set the following:</p>
+
+<pre><code>GIT_AUTHOR_NAME
+GIT_AUTHOR_EMAIL
+GIT_AUTHOR_DATE
+GIT_COMMITTER_NAME
+GIT_COMMITTER_EMAIL
+GIT_COMMITTER_DATE
+</code></pre>
+
+<p>Then you will need to write your commit message to a file or somehow pipe it
+into the command through STDIN. Then, you can create your commit object
+based on the tree sha we have.</p>
+
+<pre><code>$ git commit-tree bb2fa &lt; /tmp/message
+a5f85ba5875917319471dfd98dfc636c1dc65650
+</code></pre>
+
+<p>If you want to specify one or more parent commits, simply add the shas on the
+command line with a '-p' option before each.  The SHA of the new commit object
+will be returned via STDOUT.</p>
+
+<h3>Updating a Branch Ref</h3>
+
+<p>Now that we have a new commit object SHA, we can update a branch to point to
+it if we want to.  Lets say we want to update our 'master' branch to point to
+the new commit we just created - we would use the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-update-ref.html">git update-ref</a>
+command:</p>
+
+<pre><code>$ git update-ref refs/heads/master a5f85ba5875917319471dfd98dfc636c1dc65650
+</code></pre>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="7_the_packfile.html">Prev</a>  <a href="7_transfer_protocols.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

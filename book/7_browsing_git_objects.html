@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Browsing Git Objects</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="7_how_git_stores_objects.html">Prev</a>  <a href="7_git_references.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Browsing Git Objects</h2>
+
+<p>We can ask git about particular objects with the cat-file
+command. Note that you can shorten the shas to only a few
+characters to save yourself typing all 40 hex digits:</p>
+
+<pre><code>$ git-cat-file -t 54196cc2
+commit
+$ git-cat-file commit 54196cc2
+tree 92b8b694ffb1675e5975148e1121810081dbdffe
+author J. Bruce Fields &lt;bfields@puzzle.fieldses.org&gt; 1143414668 -0500
+committer J. Bruce Fields &lt;bfields@puzzle.fieldses.org&gt; 1143414668 -0500
+
+initial commit
+</code></pre>
+
+<p>A tree can refer to one or more "blob" objects, each corresponding to
+a file.  In addition, a tree can also refer to other tree objects,
+thus creating a directory hierarchy.  You can examine the contents of
+any tree using ls-tree (remember that a long enough initial portion
+of the SHA1 will also work):</p>
+
+<pre><code>$ git ls-tree 92b8b694
+100644 blob 3b18e512dba79e4c8300dd08aeb37f8e728b8dad    file.txt
+</code></pre>
+
+<p>Thus we see that this tree has one file in it.  The SHA1 hash is a
+reference to that file's data:</p>
+
+<pre><code>$ git cat-file -t 3b18e512
+blob
+</code></pre>
+
+<p>A "blob" is just file data, which we can also examine with cat-file:</p>
+
+<pre><code>$ git cat-file blob 3b18e512
+hello world
+</code></pre>
+
+<p>Note that this is the old file data; so the object that git named in
+its response to the initial tree was a tree with a snapshot of the
+directory state that was recorded by the first commit.</p>
+
+<p>All of these objects are stored under their SHA1 names inside the git
+directory:</p>
+
+<pre><code>$ find .git/objects/
+.git/objects/
+.git/objects/pack
+.git/objects/info
+.git/objects/3b
+.git/objects/3b/18e512dba79e4c8300dd08aeb37f8e728b8dad
+.git/objects/92
+.git/objects/92/b8b694ffb1675e5975148e1121810081dbdffe
+.git/objects/54
+.git/objects/54/196cc2703dc165cbd373a65a4dcf22d50ae7f7
+.git/objects/a0
+.git/objects/a0/423896973644771497bdc03eb99d5281615b51
+.git/objects/d0
+.git/objects/d0/492b368b66bdabf2ac1fd8c92b39d3db916e59
+.git/objects/c4
+.git/objects/c4/d59f390b9cfd4318117afde11d601c1085f241
+</code></pre>
+
+<p>and the contents of these files is just the compressed data plus a
+header identifying their length and their type.  The type is either a
+blob, a tree, a commit, or a tag.</p>
+
+<p>The simplest commit to find is the HEAD commit, which we can find
+from .git/HEAD:</p>
+
+<pre><code>$ cat .git/HEAD
+ref: refs/heads/master
+</code></pre>
+
+<p>As you can see, this tells us which branch we're currently on, and it
+tells us this by naming a file under the .git directory, which itself
+contains a SHA1 name referring to a commit object, which we can
+examine with cat-file:</p>
+
+<pre><code>$ cat .git/refs/heads/master
+c4d59f390b9cfd4318117afde11d601c1085f241
+$ git cat-file -t c4d59f39
+commit
+$ git cat-file commit c4d59f39
+tree d0492b368b66bdabf2ac1fd8c92b39d3db916e59
+parent 54196cc2703dc165cbd373a65a4dcf22d50ae7f7
+author J. Bruce Fields &lt;bfields@puzzle.fieldses.org&gt; 1143418702 -0500
+committer J. Bruce Fields &lt;bfields@puzzle.fieldses.org&gt; 1143418702 -0500
+
+add emphasis
+</code></pre>
+
+<p>The "tree" object here refers to the new state of the tree:</p>
+
+<pre><code>$ git ls-tree d0492b36
+100644 blob a0423896973644771497bdc03eb99d5281615b51    file.txt
+$ git cat-file blob a0423896
+hello world!
+</code></pre>
+
+<p>and the "parent" object refers to the previous commit:</p>
+
+<pre><code>$ git-cat-file commit 54196cc2
+tree 92b8b694ffb1675e5975148e1121810081dbdffe
+author J. Bruce Fields &lt;bfields@puzzle.fieldses.org&gt; 1143414668 -0500
+committer J. Bruce Fields &lt;bfields@puzzle.fieldses.org&gt; 1143414668 -0500
+</code></pre>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="7_how_git_stores_objects.html">Prev</a>  <a href="7_git_references.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

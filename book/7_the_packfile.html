@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - The Packfile</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="7_the_git_index.html">Prev</a>  <a href="7_raw_git.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>The Packfile</h2>
+
+<p>This chapter explains in detail, down to the bits, how the packfile and
+pack index files are formatted.</p>
+
+<h3>The Packfile Index</h3>
+
+<p>First off, we have the packfile index, which is basically just a series of
+bookmarks into a packfile.</p>
+
+<p>There are two versions of the packfile index - version one, which is the default
+in versions of Git earlier than 1.6, and version two, which is the default
+from 1.6 forward, but which can be read by Git versions going back to 1.5.2, and
+has been further backported to 1.4.4.5 if you are still on the 1.4 series.</p>
+
+<p>Version 2 also includes a CRC checksum of each object so compressed data
+can be copied directly from pack to pack during repacking without
+undetected data corruption.  Version 2 indexes can also handle packfiles
+larger than 4 Gb.</p>
+
+<p><div class="center"><img src="assets/images/figure/packfile-index.png"></div></p>
+
+<p>In both formats, the fanout table is simply a way to find the offset of a
+particular sha faster within the index file.  The offset/sha1[]
+tables are sorted by sha1[] values (this is to allow binary search of this
+table), and fanout[] table points at the offset/sha1[] table in a specific
+way (so that part of the latter table that covers all hashes that start
+with a given byte can be found to avoid 8 iterations of the binary
+search).</p>
+
+<p>In version 1, the offsets and shas are in the same space, where in version two,
+there are seperate tables
+for the shas, crc checksums and offsets.  At the end of both files are
+checksum shas for both the index file and the packfile it references.</p>
+
+<p>Importantly, packfile indexes are <em>not</em> neccesary to extract objects from
+a packfile, they are simply used to <em>quickly</em> retrieve individual objects from
+a pack.  The packfile format is used in upload-pack and receieve-pack programs
+(push and fetch protocols) to transfer objects and there is no index used then
+- it can be built after the fact by scanning the packfile.</p>
+
+<h3>The Packfile Format</h3>
+
+<p>The packfile itself is a very simple format.  There is a header, a series of
+packed objects (each with it's own header and body) and then a checksum trailer.
+The first four bytes is the string 'PACK', which is sort of used to make sure
+you're getting the start of the packfile correctly.  This is followed by a 4-byte
+packfile version number and then a 4-byte number of entries in that file.  In
+Ruby, you might read the header data like this:</p>
+
+<pre class="mac_classic">
+<span class="Keyword">def</span> <span class="FunctionName">read_pack_header</span>
+  sig <span class="Keyword">=</span> <span class="Variable"><span class="Variable">@</span>session</span>.<span class="FunctionName">recv</span>(<span class="Number">4</span>)
+  ver <span class="Keyword">=</span> <span class="Variable"><span class="Variable">@</span>session</span>.<span class="FunctionName">recv</span>(<span class="Number">4</span>).<span class="FunctionName">unpack</span>(<span class="String"><span class="String">&quot;</span>N<span class="String">&quot;</span></span>)[<span class="Number">0</span>]
+  entries <span class="Keyword">=</span> <span class="Variable"><span class="Variable">@</span>session</span>.<span class="FunctionName">recv</span>(<span class="Number">4</span>).<span class="FunctionName">unpack</span>(<span class="String"><span class="String">&quot;</span>N<span class="String">&quot;</span></span>)[<span class="Number">0</span>]
+  [sig, ver, entries]
+<span class="Keyword">end</span>
+</pre>
+
+<p>After that, you get a series of packed objects, in order of thier SHAs
+which each consist of an object header and object contents.  At the end
+of the packfile is a 20-byte SHA1 sum of all the shas (in sorted order) in that
+packfile.</p>
+
+<p><div class="center"><img src="assets/images/figure/packfile-format.png"></div></p>
+
+<p>The object header is a series of one or more 1 byte (8 bit) hunks that
+specify the type of object the following data is, and the size of the data
+when expanded.  Each byte is really 7 bits of data, with the first bit being
+used to say if that hunk is the last one or not before the data starts.  If
+the first bit is a 1, you will read another byte, otherwise the data starts
+next.  The first 3 bits in the first byte specifies the type of data,
+according to the table below.</p>
+
+<p>(Currently, of the 8 values that can be expressed
+with 3 bits (0-7), 0 (000) is 'undefined' and 5 (101) is not yet used.)</p>
+
+<p>Here, we can see an example of a header of two bytes, where the first
+specifies that the following data is a commit, and the remainder of the first
+and the last 7 bits of the second specifies that the data will be 144 bytes
+when expanded.</p>
+
+<p><div class="center"><img src="assets/images/figure/packfile-logic.png"></div></p>
+
+<p>It is important to note that the size specified in the header data is not
+the size of the data that actually follows, but the size of that data <em>when
+expanded</em>. This is why the offsets in the packfile index are so useful,
+otherwise you have to expand every object just to tell when the next header
+starts.</p>
+
+<p>The data part is just zlib stream for non-delta object types; for the two
+delta object representations, the data portion contains something that
+identifies which base object this delta representation depends on, and the
+delta to apply on the base object to resurrect this object.  <code>ref-delta</code>
+uses 20-byte hash of the base object at the beginning of data, while
+<code>ofs-delta</code> stores an offset within the same packfile to identify the base
+object.  In either case, two important constraints a reimplementor must
+adhere to are:</p>
+
+<ul>
+<li><p>delta representation must be based on some other object within the same
+packfile;</p></li>
+<li><p>the base object must be of the same underlying type (blob, tree, commit
+or tag);</p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="7_the_git_index.html">Prev</a>  <a href="7_raw_git.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

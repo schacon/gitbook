@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Setting Up a Private Repository</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="4_setting_up_a_public_repository.html">Prev</a>  <a href="5_creating_new_empty_branches.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Setting Up a Private Repository</h2>
+
+<p>If you need to setup a private repository and want to do so locally,
+rather than using a hosted solution, you have a number of options.</p>
+
+<h3>Repo Access over SSH</h3>
+
+<p>Generally, the easiest solution is to simply use Git over SSH.  If users
+already have ssh accounts on a machine, you can put the git repository
+anywhere on the box that they have access to and let them access it over
+normal ssh logins.  For example, say you have a repository you want to
+host.  You can export it as a bare repo and then scp it onto your server
+like so:</p>
+
+<pre><code>$ git clone --bare /home/user/myrepo/.git /tmp/myrepo.git
+$ scp -r /tmp/myrepo.git myserver.com:/opt/git/myrepo.git
+</code></pre>
+
+<p>Then someone else with an ssh account on myserver.com can clone via:</p>
+
+<pre><code>$ git clone myserver.com:/opt/git/myrepo.git
+</code></pre>
+
+<p>Which will simply prompt them for thier ssh password or use thier public key,
+however they have ssh authentication setup.</p>
+
+<h3>Multiple User Access using Gitosis</h3>
+
+<p>If you don't want to setup seperate accounts for every user, you can use
+a tool called Gitosis.  In gitosis, there is an authorized_keys file that
+contains the public keys of everyone authorized to access the repository,
+and then everyone uses the 'git' user to do pushes and pulls.</p>
+
+<p><a href="http://www.urbanpuddle.com/articles/2008/07/11/installing-git-on-a-server-ubuntu-or-debian">Installing and Setting up Gitosis</a></p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="4_setting_up_a_public_repository.html">Prev</a>  <a href="5_creating_new_empty_branches.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

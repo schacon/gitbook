@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Git Hooks</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="5_customizing_git.html">Prev</a>  <a href="5_recovering_corrupted_objects.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Git Hooks</h2>
+
+<p>Hooks are little scripts you can place in $GIT_DIR/hooks directory to trigger
+action at certain points. When git-init is run, a handful example hooks are
+copied in the hooks directory of the new repository, but by default they are
+all disabled. To enable a hook, rename it by removing its .sample suffix.</p>
+
+<h3>applypatch-msg</h3>
+
+<pre><code>GIT_DIR/hooks/applypatch-msg
+</code></pre>
+
+<p>This hook is invoked by git-am script. It takes a single parameter, the name
+of the file that holds the proposed commit log message. Exiting with non-zero
+status causes git-am to abort before applying the patch.</p>
+
+<p>The hook is allowed to edit the message file in place, and can be used to
+normalize the message into some project standard format (if the project has one).
+It can also be used to refuse the commit after inspecting the message file.
+The default applypatch-msg hook, when enabled, runs the commit-msg hook, if the
+latter is enabled.</p>
+
+<h3>pre-applypatch</h3>
+
+<pre><code>GIT_DIR/hooks/pre-applypatch
+</code></pre>
+
+<p>This hook is invoked by git-am. It takes no parameter, and is invoked after the
+patch is applied, but before a commit is made.
+If it exits with non-zero status, then the working tree will not be committed
+after applying the patch.</p>
+
+<p>It can be used to inspect the current working tree and refuse to make a commit
+if it does not pass certain test.
+The default pre-applypatch hook, when enabled, runs the pre-commit hook, if the
+latter is enabled.</p>
+
+<h3>post-applypatch</h3>
+
+<pre><code>GIT_DIR/hooks/post-applypatch
+</code></pre>
+
+<p>This hook is invoked by 'git-am'.  It takes no parameter,
+and is invoked after the patch is applied and a commit is made.</p>
+
+<p>This hook is meant primarily for notification, and cannot affect
+the outcome of 'git-am'.</p>
+
+<h3>pre-commit</h3>
+
+<pre><code>GIT_DIR/hooks/pre-commit
+</code></pre>
+
+<p>This hook is invoked by 'git-commit', and can be bypassed
+with <code>\--no-verify</code> option.  It takes no parameter, and is
+invoked before obtaining the proposed commit log message and
+making a commit.  Exiting with non-zero status from this script
+causes the 'git-commit' to abort.</p>
+
+<p>The default 'pre-commit' hook, when enabled, catches introduction
+of lines with trailing whitespaces and aborts the commit when
+such a line is found.</p>
+
+<p>All the 'git-commit' hooks are invoked with the environment
+variable <code>GIT_EDITOR=:</code> if the command will not bring up an editor
+to modify the commit message.</p>
+
+<p>Here is an example of a Ruby script that runs RSpec tests before allowing a commit.</p>
+
+<pre class="mac_classic">  
+html_path <span class="Keyword">=</span> <span class="String"><span class="String">&quot;</span>spec_results.html<span class="String">&quot;</span></span>  
+<span class="String"><span class="String">`</span>spec -f h:<span class="StringInterpolation"><span class="StringInterpolation">#{</span>html_path<span class="StringInterpolation">}</span></span> -f p spec<span class="String">`</span></span> <span class="Comment"><span class="Comment">#</span> run the spec. send progress to screen. save html results to html_path  </span>
+
+<span class="Comment"><span class="Comment">#</span> find out how many errors were found  </span>
+html <span class="Keyword">=</span> <span class="FunctionName">open</span>(html_path).<span class="FunctionName">read</span>  
+examples <span class="Keyword">=</span> html.<span class="FunctionName">match</span>(<span class="String"><span class="String">/</span></span><span class="String"><span class="String"><span class="String">(</span><span class="StringInterpolation">\d</span>+<span class="String">)</span></span> examples</span><span class="String"><span class="String">/</span></span>)[<span class="Number">0</span>].<span class="FunctionName">to_i</span> <span class="Keyword">rescue</span> <span class="Number">0</span>  
+failures <span class="Keyword">=</span> html.<span class="FunctionName">match</span>(<span class="String"><span class="String">/</span></span><span class="String"><span class="String"><span class="String">(</span><span class="StringInterpolation">\d</span>+<span class="String">)</span></span> failures</span><span class="String"><span class="String">/</span></span>)[<span class="Number">0</span>].<span class="FunctionName">to_i</span> <span class="Keyword">rescue</span> <span class="Number">0</span>  
+pending <span class="Keyword">=</span> html.<span class="FunctionName">match</span>(<span class="String"><span class="String">/</span></span><span class="String"><span class="String"><span class="String">(</span><span class="StringInterpolation">\d</span>+<span class="String">)</span></span> pending</span><span class="String"><span class="String">/</span></span>)[<span class="Number">0</span>].<span class="FunctionName">to_i</span> <span class="Keyword">rescue</span> <span class="Number">0</span>  
+
+<span class="Keyword">if</span> failures.<span class="FunctionName">zero?</span>  
+  puts <span class="String"><span class="String">&quot;</span>0 failures! <span class="StringInterpolation"><span class="StringInterpolation">#{</span>examples<span class="StringInterpolation">}</span></span> run, <span class="StringInterpolation"><span class="StringInterpolation">#{</span>pending<span class="StringInterpolation">}</span></span> pending<span class="String">&quot;</span></span>  
+<span class="Keyword">else</span>  
+  puts <span class="String"><span class="String">&quot;</span><span class="StringInterpolation">\a</span>DID NOT COMMIT YOUR FILES!<span class="String">&quot;</span></span>  
+  puts <span class="String"><span class="String">&quot;</span>View spec results at <span class="StringInterpolation"><span class="StringInterpolation">#{</span><span class="LibraryObject">File</span><span class="StringInterpolation"><span class="StringInterpolation">.</span><span class="FunctionName">expand_path</span></span><span class="StringInterpolation">(</span>html_path<span class="StringInterpolation">)</span><span class="StringInterpolation">}</span></span><span class="String">&quot;</span></span>  
+  puts  
+  puts <span class="String"><span class="String">&quot;</span><span class="StringInterpolation"><span class="StringInterpolation">#{</span>failures<span class="StringInterpolation">}</span></span> failures! <span class="StringInterpolation"><span class="StringInterpolation">#{</span>examples<span class="StringInterpolation">}</span></span> run, <span class="StringInterpolation"><span class="StringInterpolation">#{</span>pending<span class="StringInterpolation">}</span></span> pending<span class="String">&quot;</span></span>  
+  exit <span class="Number">1</span>  
+<span class="Keyword">end</span>
+</pre>
+
+<h3>prepare-commit-msg</h3>
+
+<pre><code>GIT_DIR/hooks/prepare-commit-msg
+</code></pre>
+
+<p>This hook is invoked by 'git-commit' right after preparing the
+default log message, and before the editor is started.</p>
+
+<p>It takes one to three parameters.  The first is the name of the file
+that the commit log message.  The second is the source of the commit
+message, and can be: <code>message</code> (if a <code>-m</code> or <code>-F</code> option was
+given); <code>template</code> (if a <code>-t</code> option was given or the
+configuration option <code>commit.template</code> is set); <code>merge</code> (if the
+commit is a merge or a <code>.git/MERGE_MSG</code> file exists); <code>squash</code>
+(if a <code>.git/SQUASH_MSG</code> file exists); or <code>commit</code>, followed by
+a commit SHA1 (if a <code>-c</code>, <code>-C</code> or <code>\--amend</code> option was given).</p>
+
+<p>If the exit status is non-zero, 'git-commit' will abort.</p>
+
+<p>The purpose of the hook is to edit the message file in place, and
+it is not suppressed by the <code>\--no-verify</code> option.  A non-zero exit
+means a failure of the hook and aborts the commit.  It should not
+be used as replacement for pre-commit hook.</p>
+
+<p>The sample <code>prepare-commit-msg</code> hook that comes with git comments
+out the <code>Conflicts:</code> part of a merge's commit message.</p>
+
+<h3>commit-msg</h3>
+
+<pre><code>GIT_DIR/hooks/commit-msg
+</code></pre>
+
+<p>This hook is invoked by 'git-commit', and can be bypassed
+with <code>\--no-verify</code> option.  It takes a single parameter, the
+name of the file that holds the proposed commit log message.
+Exiting with non-zero status causes the 'git-commit' to
+abort.</p>
+
+<p>The hook is allowed to edit the message file in place, and can
+be used to normalize the message into some project standard
+format (if the project has one). It can also be used to refuse
+the commit after inspecting the message file.</p>
+
+<p>The default 'commit-msg' hook, when enabled, detects duplicate
+"Signed-off-by" lines, and aborts the commit if one is found.</p>
+
+<h3>post-commit</h3>
+
+<pre><code>GIT_DIR/hooks/post-commit
+</code></pre>
+
+<p>This hook is invoked by 'git-commit'.  It takes no
+parameter, and is invoked after a commit is made.</p>
+
+<p>This hook is meant primarily for notification, and cannot affect
+the outcome of 'git-commit'.</p>
+
+<h3>pre-rebase</h3>
+
+<pre><code>GIT_DIR/hooks/pre-rebase
+</code></pre>
+
+<p>This hook is called by 'git-rebase' and can be used to prevent a branch
+from getting rebased.</p>
+
+<h3>post-checkout</h3>
+
+<pre><code>GIT_DIR/hooks/post-checkout
+</code></pre>
+
+<p>This hook is invoked when a 'git-checkout' is run after having updated the
+worktree.  The hook is given three parameters: the ref of the previous HEAD,
+the ref of the new HEAD (which may or may not have changed), and a flag
+indicating whether the checkout was a branch checkout (changing branches,
+flag=1) or a file checkout (retrieving a file from the index, flag=0).
+This hook cannot affect the outcome of 'git-checkout'.</p>
+
+<p>This hook can be used to perform repository validity checks, auto-display
+differences from the previous HEAD if different, or set working dir metadata
+properties.</p>
+
+<h3>post-merge</h3>
+
+<pre><code>GIT_DIR/hooks/post-merge
+</code></pre>
+
+<p>This hook is invoked by 'git-merge', which happens when a 'git-pull'
+is done on a local repository.  The hook takes a single parameter, a status
+flag specifying whether or not the merge being done was a squash merge.
+This hook cannot affect the outcome of 'git-merge' and is not executed,
+if the merge failed due to conflicts.</p>
+
+<p>This hook can be used in conjunction with a corresponding pre-commit hook to
+save and restore any form of metadata associated with the working tree
+(eg: permissions/ownership, ACLS, etc).  See contrib/hooks/setgitperms.perl
+for an example of how to do this.</p>
+
+<h3>pre-receive</h3>
+
+<pre><code>GIT_DIR/hooks/pre-receive
+</code></pre>
+
+<p>This hook is invoked by 'git-receive-pack' on the remote repository,
+which happens when a 'git-push' is done on a local repository.
+Just before starting to update refs on the remote repository, the
+pre-receive hook is invoked.  Its exit status determines the success
+or failure of the update.</p>
+
+<p>This hook executes once for the receive operation. It takes no
+arguments, but for each ref to be updated it receives on standard
+input a line of the format:</p>
+
+<p>  <old-value> SP <new-value> SP <ref-name> LF</p>
+
+<p>where <code>&lt;old-value&gt;</code> is the old object name stored in the ref,
+<code>&lt;new-value&gt;</code> is the new object name to be stored in the ref and
+<code>&lt;ref-name&gt;</code> is the full name of the ref.
+When creating a new ref, <code>&lt;old-value&gt;</code> is 40 <code>0</code>.</p>
+
+<p>If the hook exits with non-zero status, none of the refs will be
+updated. If the hook exits with zero, updating of individual refs can
+still be prevented by the &lt;&lt;update,'update'>> hook.</p>
+
+<p>Both standard output and standard error output are forwarded to
+'git-send-pack' on the other end, so you can simply <code>echo</code> messages
+for the user.</p>
+
+<p>If you wrote it in Ruby, you might get the args this way:</p>
+
+<pre class="mac_classic">
+rev_old, rev_new, ref <span class="Keyword">=</span> <span class="Variable">STDIN</span>.<span class="FunctionName">read</span>.<span class="FunctionName">split</span>(<span class="String"><span class="String">&quot;</span> <span class="String">&quot;</span></span>)
+</pre>
+
+<p>Or in a bash script, something like this would work:</p>
+
+<pre><code>#!/bin/sh
+# &lt;oldrev&gt; &lt;newrev&gt; &lt;refname&gt;
+# update a blame tree
+while read oldrev newrev ref
+do
+    echo "STARTING [$oldrev $newrev $ref]"
+    for path in `git diff-tree -r $oldrev..$newrev | awk '{print $6}'`
+    do
+      echo "git update-ref refs/blametree/$ref/$path $newrev"
+      `git update-ref refs/blametree/$ref/$path $newrev`
+    done
+done
+</code></pre>
+
+<h3>update</h3>
+
+<pre><code>GIT_DIR/hooks/update
+</code></pre>
+
+<p>This hook is invoked by 'git-receive-pack' on the remote repository,
+which happens when a 'git-push' is done on a local repository.
+Just before updating the ref on the remote repository, the update hook
+is invoked.  Its exit status determines the success or failure of
+the ref update.</p>
+
+<p>The hook executes once for each ref to be updated, and takes
+three parameters:</p>
+
+<ul>
+<li>the name of the ref being updated,</li>
+<li>the old object name stored in the ref,</li>
+<li>and the new objectname to be stored in the ref.</li>
+</ul>
+
+
+<p>A zero exit from the update hook allows the ref to be updated.
+Exiting with a non-zero status prevents 'git-receive-pack'
+from updating that ref.</p>
+
+<p>This hook can be used to prevent 'forced' update on certain refs by
+making sure that the object name is a commit object that is a
+descendant of the commit object named by the old object name.
+That is, to enforce a "fast forward only" policy.</p>
+
+<p>It could also be used to log the old..new status.  However, it
+does not know the entire set of branches, so it would end up
+firing one e-mail per ref when used naively, though.  The
+&lt;&lt;post-receive,'post-receive'>> hook is more suited to that.</p>
+
+<p>Another use suggested on the mailing list is to use this hook to
+implement access control which is finer grained than the one
+based on filesystem group.</p>
+
+<p>Both standard output and standard error output are forwarded to
+'git-send-pack' on the other end, so you can simply <code>echo</code> messages
+for the user.</p>
+
+<p>The default 'update' hook, when enabled--and with
+<code>hooks.allowunannotated</code> config option turned on--prevents
+unannotated tags to be pushed.</p>
+
+<h3>post-receive</h3>
+
+<pre><code>GIT_DIR/hooks/post-receive
+</code></pre>
+
+<p>This hook is invoked by 'git-receive-pack' on the remote repository,
+which happens when a 'git-push' is done on a local repository.
+It executes on the remote repository once after all the refs have
+been updated.</p>
+
+<p>This hook executes once for the receive operation.  It takes no
+arguments, but gets the same information as the
+&lt;&lt;pre-receive,'pre-receive'>>
+hook does on its standard input.</p>
+
+<p>This hook does not affect the outcome of 'git-receive-pack', as it
+is called after the real work is done.</p>
+
+<p>This supersedes the &lt;&lt;post-update,'post-update'>> hook in that it gets
+both old and new values of all the refs in addition to their
+names.</p>
+
+<p>Both standard output and standard error output are forwarded to
+'git-send-pack' on the other end, so you can simply <code>echo</code> messages
+for the user.</p>
+
+<p>The default 'post-receive' hook is empty, but there is
+a sample script <code>post-receive-email</code> provided in the <code>contrib/hooks</code>
+directory in git distribution, which implements sending commit
+emails.</p>
+
+<h3>post-update</h3>
+
+<pre><code>GIT_DIR/hooks/post-update
+</code></pre>
+
+<p>This hook is invoked by 'git-receive-pack' on the remote repository,
+which happens when a 'git-push' is done on a local repository.
+It executes on the remote repository once after all the refs have
+been updated.</p>
+
+<p>It takes a variable number of parameters, each of which is the
+name of ref that was actually updated.</p>
+
+<p>This hook is meant primarily for notification, and cannot affect
+the outcome of 'git-receive-pack'.</p>
+
+<p>The 'post-update' hook can tell what are the heads that were pushed,
+but it does not know what their original and updated values are,
+so it is a poor place to do log old..new. The
+&lt;&lt;post-receive,'post-receive'>> hook does get both original and
+updated values of the refs. You might consider it instead if you need
+them.</p>
+
+<p>When enabled, the default 'post-update' hook runs
+'git-update-server-info' to keep the information used by dumb
+transports (e.g., HTTP) up-to-date.  If you are publishing
+a git repository that is accessible via HTTP, you should
+probably enable this hook.</p>
+
+<p>Both standard output and standard error output are forwarded to
+'git-send-pack' on the other end, so you can simply <code>echo</code> messages
+for the user.</p>
+
+<h3>pre-auto-gc</h3>
+
+<pre><code>GIT_DIR/hooks/pre-auto-gc
+</code></pre>
+
+<p>This hook is invoked by 'git-gc --auto'. It takes no parameter, and
+exiting with non-zero status from this script causes the 'git-gc --auto'
+to abort.</p>
+
+<h3>References</h3>
+
+<p><a href="http://www.kernel.org/pub/software/scm/git/docs/githooks.html">Git Hooks</a>
+* http://probablycorey.wordpress.com/2008/03/07/git-hooks-make-me-giddy/</p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="5_customizing_git.html">Prev</a>  <a href="5_recovering_corrupted_objects.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Git Tag</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="3_distributed_workflows.html">Prev</a>  <a href="4_ignoring_files.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Git Tag</h2>
+
+<h3>Lightweight Tags</h3>
+
+<p>We can create a tag to refer to a particular commit by running <a href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git tag</a>
+with no arguments.</p>
+
+<pre><code>$ git tag stable-1 1b2e1d63ff
+</code></pre>
+
+<p>After that, we can use stable-1 to refer to the commit 1b2e1d63ff.</p>
+
+<p>This creates a "lightweight" tag, basically a branch that never moves.
+If you would also like to include a comment with the tag,
+and possibly sign it cryptographically, then we can create a <em>tag object</em> instead.</p>
+
+<h3>Tag Objects</h3>
+
+<p>If one of <strong>-a</strong>, <strong>-s</strong>, or <strong>-u <key-id></strong> is passed, the command creates a tag object,
+and requires the tag message. Unless -m <msg> or -F <file> is given, an editor
+is started for the user to type in the tag message.</p>
+
+<p>When this happens, a new object is added to the Git object database and the
+tag ref points to that <em>tag object</em>, rather than the commit itself. The strength
+of this is that you can sign the tag, so you can verify that it is the correct
+commit later.  You can create a tag object like this:</p>
+
+<pre><code>$ git tag -a stable-1 1b2e1d63ff
+</code></pre>
+
+<p>It is actually possible to tag any object, but tagging commit objects is the
+most common. (In the Linux kernel source, the first tag object
+references a tree, rather than a commit)</p>
+
+<h3>Signed Tags</h3>
+
+<p>If you have a GPG key setup, you can create signed tags fairly easily.  First,
+you will probably want to setup your key id in your <em>.git/config</em> or <em>~.gitconfig</em>
+file.</p>
+
+<pre><code>[user]
+    signingkey = &lt;gpg-key-id&gt;
+</code></pre>
+
+<p>You can also set that with</p>
+
+<pre><code>$ git config (--global) user.signingkey &lt;gpg-key-id&gt;
+</code></pre>
+
+<p>Now you can create a signed tag simply by replacing the <strong>-a</strong> with a <strong>-s</strong>.</p>
+
+<pre><code>$ git tag -s stable-1 1b2e1d63ff
+</code></pre>
+
+<p>If you don't have your GPG key in your config file, you can accomplish the same
+thing this way:</p>
+
+<pre><code>$ git tag -u &lt;gpg-key-id&gt; stable-1 1b2e1d63ff
+</code></pre>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="3_distributed_workflows.html">Prev</a>  <a href="4_ignoring_files.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

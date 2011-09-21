@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Basic Branching and Merging</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="3_normal_workflow.html">Prev</a>  <a href="3_reviewing_history_-_git_log.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Basic Branching and Merging</h2>
+
+<p>A single git repository can maintain multiple branches of
+development.  To create a new branch named "experimental", use</p>
+
+<pre><code>$ git branch experimental
+</code></pre>
+
+<p>If you now run</p>
+
+<pre><code>$ git branch
+</code></pre>
+
+<p>you'll get a list of all existing branches:</p>
+
+<pre><code>  experimental
+* master
+</code></pre>
+
+<p>The "experimental" branch is the one you just created, and the
+"master" branch is a default branch that was created for you
+automatically.  The asterisk marks the branch you are currently on;
+type</p>
+
+<pre><code>$ git checkout experimental
+</code></pre>
+
+<p>to switch to the experimental branch.  Now edit a file, commit the
+change, and switch back to the master branch:</p>
+
+<pre><code>(edit file)
+$ git commit -a
+$ git checkout master
+</code></pre>
+
+<p>Check that the change you made is no longer visible, since it was
+made on the experimental branch and you're back on the master branch.</p>
+
+<p>You can make a different change on the master branch:</p>
+
+<pre><code>(edit file)
+$ git commit -a
+</code></pre>
+
+<p>at this point the two branches have diverged, with different changes
+made in each.  To merge the changes made in experimental into master, run</p>
+
+<pre><code>$ git merge experimental
+</code></pre>
+
+<p>If the changes don't conflict, you're done.  If there are conflicts,
+markers will be left in the problematic files showing the conflict;</p>
+
+<pre><code>$ git diff
+</code></pre>
+
+<p>will show this.  Once you've edited the files to resolve the
+conflicts,</p>
+
+<pre><code>$ git commit -a
+</code></pre>
+
+<p>will commit the result of the merge. Finally,</p>
+
+<pre><code>$ gitk
+</code></pre>
+
+<p>will show a nice graphical representation of the resulting history.</p>
+
+<p>At this point you could delete the experimental branch with</p>
+
+<pre><code>$ git branch -d experimental
+</code></pre>
+
+<p>This command ensures that the changes in the experimental branch are
+already in the current branch.</p>
+
+<p>If you develop on a branch crazy-idea, then regret it, you can always
+delete the branch with</p>
+
+<pre><code>$ git branch -D crazy-idea
+</code></pre>
+
+<p>Branches are cheap and easy, so this is a good way to try something
+out.</p>
+
+<h3>How to merge</h3>
+
+<p>You can rejoin two diverging branches of development using
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git merge</a>:</p>
+
+<pre><code>$ git merge branchname
+</code></pre>
+
+<p>merges the changes made in the branch "branchname" into the current
+branch.  If there are conflicts--for example, if the same file is
+modified in two different ways in the remote branch and the local
+branch--then you are warned; the output may look something like this:</p>
+
+<pre><code>$ git merge next
+ 100% (4/4) done
+Auto-merged file.txt
+CONFLICT (content): Merge conflict in file.txt
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre>
+
+<p>Conflict markers are left in the problematic files, and after
+you resolve the conflicts manually, you can update the index
+with the contents and run git commit, as you normally would when
+modifying a file.</p>
+
+<p>If you examine the resulting commit using gitk, you will see that it
+has two parents: one pointing to the top of the current branch, and
+one to the top of the other branch.</p>
+
+<h3>Resolving a merge</h3>
+
+<p>When a merge isn't resolved automatically, git leaves the index and
+the working tree in a special state that gives you all the
+information you need to help resolve the merge.</p>
+
+<p>Files with conflicts are marked specially in the index, so until you
+resolve the problem and update the index, <a href="http://www.kernel.org/pub/software/scm/git/docs/git-commit.html">git commit</a> will
+fail:</p>
+
+<pre><code>$ git commit
+file.txt: needs merge
+</code></pre>
+
+<p>Also, <a href="http://www.kernel.org/pub/software/scm/git/docs/git-status.html">git status</a> will list those files as "unmerged", and the
+files with conflicts will have conflict markers added, like this:</p>
+
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:file.txt
+Hello world
+=======
+Goodbye
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 77976da35a11db4580b80ae27e8d65caf5208086:file.txt
+</code></pre>
+
+<p>All you need to do is edit the files to resolve the conflicts, and then</p>
+
+<pre><code>$ git add file.txt
+$ git commit
+</code></pre>
+
+<p>Note that the commit message will already be filled in for you with
+some information about the merge.  Normally you can just use this
+default message unchanged, but you may add additional commentary of
+your own if desired.</p>
+
+<p>The above is all you need to know to resolve a simple merge.  But git
+also provides more information to help resolve conflicts:</p>
+
+<h3>Undoing a merge</h3>
+
+<p>If you get stuck and decide to just give up and throw the whole mess
+away, you can always return to the pre-merge state with</p>
+
+<pre><code>$ git reset --hard HEAD
+</code></pre>
+
+<p>Or, if you've already committed the merge that you want to throw away,</p>
+
+<pre><code>$ git reset --hard ORIG_HEAD
+</code></pre>
+
+<p>However, this last command can be dangerous in some cases--never throw away a
+commit if that commit may itself have been merged into another branch, as
+doing so may confuse further merges.</p>
+
+<h3>Fast-forward merges</h3>
+
+<p>There is one special case not mentioned above, which is treated differently.
+Normally, a merge results in a merge commit with two parents, one for each of
+the two lines of development that were merged.</p>
+
+<p>However, if the current branch has not diverged from the other--so every
+commit present in the current branch is already contained in the other--then
+git just performs a "fast forward"; the head of the current branch is moved
+forward to point at the head of the merged-in branch, without any new commits
+being created.</p>
+
+<p><a href="" title="GitCast #6: Branching and Merging">gitcast:c6-branch-merge</a></p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="3_normal_workflow.html">Prev</a>  <a href="3_reviewing_history_-_git_log.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

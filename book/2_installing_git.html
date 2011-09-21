@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Installing Git</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="1_the_git_index.html">Prev</a>  <a href="2_setup_and_initialization.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Installing Git</h2>
+
+<h3>Installing from Source</h3>
+
+<p>In short, on a Unix-based system, you can download the Git source code from the
+<a href="http://git-scm.com/download">Git Download Page</a>, and then run something
+along the lines of :</p>
+
+<pre><code>$ make prefix=/usr all ;# as yourself
+$ make prefix=/usr install ;# as root
+</code></pre>
+
+<p>You will need the <a href="http://expat.sourceforge.net/">expat</a>,
+<a href="http://curl.linux-mirror.org">curl</a>,
+<a href="http://www.zlib.net">zlib</a>, and <a href="http://www.openssl.org">openssl</a> libraries
+installed - though with the possible exception of <em>expat</em>, these will normally already
+be there.</p>
+
+<h3>Linux</h3>
+
+<p>If you are running Linux, you can likely install Git easily via your native
+package management system:</p>
+
+<pre><code>$ yum install git-core
+
+$ apt-get install git-core
+</code></pre>
+
+<p>If that doesn't work, you can download the .deb or .rpm packages from here:</p>
+
+<p><a href="http://kernel.org/pub/software/scm/git/RPMS/">RPM Packages</a></p>
+
+<p><a href="http://www.backports.org/debian/pool/main/g/git-core/">Stable Debs</a></p>
+
+<p>If you prefer to install from source on a Linux system, this article may be
+helpful:</p>
+
+<p><a href="http://chrisolsen.org/2008/03/10/installing-git-on-ubuntu/">Article: Installing Git on Ubuntu</a></p>
+
+<h3>Mac 10.4</h3>
+
+<p>In both Mac 10.4 and 10.5, you can install Git via <a href="http://www.macports.org/">MacPorts</a>,
+if you have that installed.  If not, you can install it from <a href="http://www.macports.org/install.php">here</a>.</p>
+
+<p>Once MacPorts is installed, all you should have to do is:</p>
+
+<pre><code>$ sudo port install git-core
+</code></pre>
+
+<p>If you prefer to install from source, these articles may be helpful:</p>
+
+<p><a href="http://rails.wincent.com/wiki/Installing_Git_1.5.2.3_on_Mac_OS_X_Tiger">Article: Installing Git on Tiger</a></p>
+
+<p><a href="http://larrytheliquid.com/2007/12/29/compiling-git-and-git-svn-on-osx-tiger/">Article: Installing Git and git-svn on Tiger from source</a></p>
+
+<h3>Mac 10.5</h3>
+
+<p>With Leopard, you can also install via MacPorts, but here you have the
+additional option of using a nice installer, which you can download from here:
+<a href="http://code.google.com/p/git-osx-installer/downloads/list?can=3">Git OSX
+Installer</a></p>
+
+<p>If you prefer to install it from source, these guides may be particularly helpful to you :</p>
+
+<p><a href="http://solutions.treypiepmeier.com/2008/02/25/installing-git-on-os-x-leopard/">Article: Installing Git on OSX Leopard</a></p>
+
+<p><a href="http://dysinger.net/2007/12/30/installing-git-on-mac-os-x-105-leopard/">Article: Installing Git on OS 10.5</a></p>
+
+<h3>Windows</h3>
+
+<p>On Windows, installing Git is pretty easy.  Simply download and install the
+<a href="http://code.google.com/p/msysgit/downloads/list">msysGit</a> package.</p>
+
+<p>See the <em>Git on Windows</em> chapter for a screencast demonstrating installing
+and using Git on Windows.</p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="1_the_git_index.html">Prev</a>  <a href="2_setup_and_initialization.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Git Directory and Working Directory</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="1_the_git_object_model.html">Prev</a>  <a href="1_the_git_index.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Git Directory and Working Directory</h2>
+
+<h3>The Git Directory</h3>
+
+<p>The 'git directory' is the directory that stores all Git's history and meta
+information for your project - including all of the objects (commits, trees,
+blobs, tags), all of the pointers to where different branches are and more.</p>
+
+<p>There is only one Git Directory per project (as opposed to one per
+subdirectory like with SVN or CVS), and that directory is (by default, though
+not necessarily) '.git' in the root of your project.  If you look at the
+contents of that directory, you can see all of your important files:</p>
+
+<pre><code>$&gt;tree -L 1
+.
+|-- HEAD         # pointer to your current branch
+|-- config       # your configuration preferences
+|-- description  # description of your project 
+|-- hooks/       # pre/post action hooks
+|-- index        # index file (see next section)
+|-- logs/        # a history of where your branches have been
+|-- objects/     # your objects (commits, trees, blobs, tags)
+`-- refs/        # pointers to your branches
+</code></pre>
+
+<p>(there may be some other files/directories in there as well, but they are not important for now)</p>
+
+<h3>The Working Directory</h3>
+
+<p>The Git 'working directory' is the directory that holds the current checkout
+of the files you are working on.  Files in this directory are often removed
+or replaced by Git as you switch branches - this is normal.  All your history
+is stored in the Git Directory; the working directory is simply a temporary
+checkout place where you can modify the files until your next commit.</p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="1_the_git_object_model.html">Prev</a>  <a href="1_the_git_index.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

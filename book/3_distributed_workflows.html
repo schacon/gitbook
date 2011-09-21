@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Distributed Workflows</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="3_comparing_commits_-_git_diff.html">Prev</a>  <a href="3_git_tag.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Distributed Workflows</h2>
+
+<p>Suppose that Alice has started a new project with a git repository in
+/home/alice/project, and that Bob, who has a home directory on the
+same machine, wants to contribute.</p>
+
+<p>Bob begins with:</p>
+
+<pre><code>$ git clone /home/alice/project myrepo
+</code></pre>
+
+<p>This creates a new directory "myrepo" containing a clone of Alice's
+repository.  The clone is on an equal footing with the original
+project, possessing its own copy of the original project's history.</p>
+
+<p>Bob then makes some changes and commits them:</p>
+
+<pre><code>(edit files)
+$ git commit -a
+(repeat as necessary)
+</code></pre>
+
+<p>When he's ready, he tells Alice to pull changes from the repository
+at /home/bob/myrepo.  She does this with:</p>
+
+<pre><code>$ cd /home/alice/project
+$ git pull /home/bob/myrepo master
+</code></pre>
+
+<p>This merges the changes from Bob's "master" branch into Alice's
+current branch.  If Alice has made her own changes in the meantime,
+then she may need to manually fix any conflicts.  (Note that the
+"master" argument in the above command is actually unnecessary, as it
+is the default.)</p>
+
+<p>The "pull" command thus performs two operations: it fetches changes
+from a remote branch, then merges them into the current branch.</p>
+
+<p>When you are working in a small closely knit group, it is not
+unusual to interact with the same repository over and over
+again.  By defining 'remote' repository shorthand, you can make
+it easier:</p>
+
+<pre><code>$ git remote add bob /home/bob/myrepo
+</code></pre>
+
+<p>With this, Alice can perform the first operation alone using the
+"git fetch" command without merging them with her own branch,
+using:</p>
+
+<pre><code>$ git fetch bob
+</code></pre>
+
+<p>Unlike the longhand form, when Alice fetches from Bob using a
+remote repository shorthand set up with <code>git remote</code>, what was
+fetched is stored in a remote tracking branch, in this case
+<code>bob/master</code>.  So after this:</p>
+
+<pre><code>$ git log -p master..bob/master
+</code></pre>
+
+<p>shows a list of all the changes that Bob made since he branched from
+Alice's master branch.</p>
+
+<p>After examining those changes, Alice
+could merge the changes into her master branch:</p>
+
+<pre><code>$ git merge bob/master
+</code></pre>
+
+<p>This <code>merge</code> can also be done by 'pulling from her own remote
+tracking branch', like this:</p>
+
+<pre><code>$ git pull . remotes/bob/master
+</code></pre>
+
+<p>Note that git pull always merges into the current branch,
+regardless of what else is given on the command line.</p>
+
+<p>Later, Bob can update his repo with Alice's latest changes using</p>
+
+<pre><code>$ git pull
+</code></pre>
+
+<p>Note that he doesn't need to give the path to Alice's repository;
+when Bob cloned Alice's repository, git stored the location of her
+repository in the repository configuration, and that location is
+used for pulls:</p>
+
+<pre><code>$ git config --get remote.origin.url
+/home/alice/project
+</code></pre>
+
+<p>(The complete configuration created by git-clone is visible using
+"git config -l", and the <a href="http://www.kernel.org/pub/software/scm/git/docs/git-config.html">git config</a> man page
+explains the meaning of each option.)</p>
+
+<p>Git also keeps a pristine copy of Alice's master branch under the
+name "origin/master":</p>
+
+<pre><code>$ git branch -r
+  origin/master
+</code></pre>
+
+<p>If Bob later decides to work from a different host, he can still
+perform clones and pulls using the ssh protocol:</p>
+
+<pre><code>$ git clone alice.org:/home/alice/project myrepo
+</code></pre>
+
+<p>Alternatively, git has a native protocol, or can use rsync or http;
+see <a href="http://www.kernel.org/pub/software/scm/git/docs/git-pull.html">git pull</a> for details.</p>
+
+<p>Git can also be used in a CVS-like mode, with a central repository
+that various users push changes to; see <a href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git push</a> and
+<a href="http://www.kernel.org/pub/software/scm/git/docs/gitcvs-migration.html">gitcvs-migration</a>.</p>
+
+<h3>Public git repositories</h3>
+
+<p>Another way to submit changes to a project is to tell the maintainer
+of that project to pull the changes from your repository using
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-pull.html">git pull</a>.  This is a way to get
+updates from the "main" repository, but it works just as well in the
+other direction.</p>
+
+<p>If you and the maintainer both have accounts on the same machine, then
+you can just pull changes from each other's repositories directly;
+commands that accept repository URLs as arguments will also accept a
+local directory name:</p>
+
+<pre><code>$ git clone /path/to/repository
+$ git pull /path/to/other/repository
+</code></pre>
+
+<p>or an ssh URL:</p>
+
+<pre><code>$ git clone ssh://yourhost/~you/repository
+</code></pre>
+
+<p>For projects with few developers, or for synchronizing a few private
+repositories, this may be all you need.</p>
+
+<p>However, the more common way to do this is to maintain a separate public
+repository (usually on a different host) for others to pull changes
+from.  This is usually more convenient, and allows you to cleanly
+separate private work in progress from publicly visible work.</p>
+
+<p>You will continue to do your day-to-day work in your personal
+repository, but periodically "push" changes from your personal
+repository into your public repository, allowing other developers to
+pull from that repository.  So the flow of changes, in a situation
+where there is one other developer with a public repository, looks
+like this:</p>
+
+<pre><code>                        you push
+  your personal repo ------------------&gt; your public repo
+    ^                                     |
+    |                                     |
+    | you pull                            | they pull
+    |                                     |
+    |                                     |
+        |               they push             V
+  their public repo &lt;------------------- their repo
+</code></pre>
+
+<h3>Pushing changes to a public repository</h3>
+
+<p>Note that exporting via http or git allow other
+maintainers to fetch your latest changes, but they do not allow write
+access.  For this, you will need to update the public repository with the
+latest changes created in your private repository.</p>
+
+<p>The simplest way to do this is using <a href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git push</a> and ssh; to
+update the remote branch named "master" with the latest state of your
+branch named "master", run</p>
+
+<pre><code>$ git push ssh://yourserver.com/~you/proj.git master:master
+</code></pre>
+
+<p>or just</p>
+
+<pre><code>$ git push ssh://yourserver.com/~you/proj.git master
+</code></pre>
+
+<p>As with git-fetch, git-push will complain if this does not result in a
+fast forward; see the following section for details on
+handling this case.</p>
+
+<p>Note that the target of a "push" is normally a bare repository.  You can also push to a
+repository that has a checked-out working tree, but the working tree
+will not be updated by the push.  This may lead to unexpected results if
+the branch you push to is the currently checked-out branch!</p>
+
+<p>As with git-fetch, you may also set up configuration options to
+save typing; so, for example, after</p>
+
+<pre><code>$ cat &gt;&gt;.git/config &lt;&lt;EOF
+[remote "public-repo"]
+    url = ssh://yourserver.com/~you/proj.git
+EOF
+</code></pre>
+
+<p>you should be able to perform the above push with just</p>
+
+<pre><code>$ git push public-repo master
+</code></pre>
+
+<p>See the explanations of the remote.<name>.url, branch.<name>.remote,
+and remote.<name>.push options in <a href="http://www.kernel.org/pub/software/scm/git/docs/git-config.html">git config</a> for
+details.</p>
+
+<h3>What to do when a push fails</h3>
+
+<p>If a push would not result in a fast forward of the
+remote branch, then it will fail with an error like:</p>
+
+<pre><code>error: remote 'refs/heads/master' is not an ancestor of
+local  'refs/heads/master'.
+Maybe you are not up-to-date and need to pull first?
+error: failed to push to 'ssh://yourserver.com/~you/proj.git'
+</code></pre>
+
+<p>This can happen, for example, if you:</p>
+
+<pre><code>- use `git-reset --hard` to remove already-published commits, or
+- use `git-commit --amend` to replace already-published commits, or
+- use `git-rebase` to rebase any already-published commits.
+</code></pre>
+
+<p>You may force git-push to perform the update anyway by preceding the
+branch name with a plus sign:</p>
+
+<pre><code>$ git push ssh://yourserver.com/~you/proj.git +master
+</code></pre>
+
+<p>Normally whenever a branch head in a public repository is modified, it
+is modified to point to a descendant of the commit that it pointed to
+before.  By forcing a push in this situation, you break that convention.</p>
+
+<p>Nevertheless, this is a common practice for people that need a simple
+way to publish a work-in-progress patch series, and it is an acceptable
+compromise as long as you warn other developers that this is how you
+intend to manage the branch.</p>
+
+<p>It's also possible for a push to fail in this way when other people have
+the right to push to the same repository.  In that case, the correct
+solution is to retry the push after first updating your work: either by a
+pull, or by a fetch followed by a rebase; see the next section and
+<a href="http://www.kernel.org/pub/software/scm/git/docs/gitcvs-migration.html">gitcvs-migration</a> for more.</p>
+
+<p><a href="" title="GitCast #8: Distributed Workflow">gitcast:c8-dist-workflow</a></p>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="3_comparing_commits_-_git_diff.html">Prev</a>  <a href="3_git_tag.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>

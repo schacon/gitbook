@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Git Book - Git Treeishes</title>
+	<meta http-equiv="content-language" content="en">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="icon" href="favicon.png" type="image/png">
+	<link rel="stylesheet" href="assets/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="assets/blueprint/print.css" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="assets/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/stylesheets/mac_classic.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/stylesheets/style.css" type="text/css" media="screen, projection">
+</head>
+
+<body>
+<div class="container chapter showgrids">
+
+  <div class="span-21 header">
+    <div class="nav"><a href="4_stashing.html">Prev</a>  <a href="4_tracking_branches.html">Next</a></div>
+    <div class="title"><a href='index.html'>Git Community Book</a></div>
+  </div>
+  
+  <div class="span-21">
+    <br/>
+  </div>
+  
+  <div class="span-21">
+    <h2>Git Treeishes</h2>
+
+<p>There are a number of ways to refer to a particular commit or tree other
+than spelling out the entire 40-character sha.  In Git, these are referred
+to as a 'treeish'.</p>
+
+<h3>Partial Sha</h3>
+
+<p>If your commit sha is '<code>980e3ccdaac54a0d4de358f3fe5d718027d96aae</code>', git will
+recognize any of the following identically:</p>
+
+<pre><code>980e3ccdaac54a0d4de358f3fe5d718027d96aae
+980e3ccdaac54a0d4
+980e3cc
+</code></pre>
+
+<p>As long as the partial sha is unique - it can't be confused with another
+(which is incredibly unlikely if you use at least 5 characters), git will
+expand a partial sha for you.</p>
+
+<h3>Branch, Remote or Tag Name</h3>
+
+<p>You can always use a branch, remote or tag name instead of a sha, since they
+are simply pointers anyhow.  If your master branch is on the 980e3 commit and
+you've pushed it to origin and have tagged it 'v1.0', then all of the following
+are equivalent:</p>
+
+<pre><code>980e3ccdaac54a0d4de358f3fe5d718027d96aae
+origin/master
+refs/remotes/origin/master
+master
+refs/heads/master
+v1.0
+refs/tags/v1.0
+</code></pre>
+
+<p>Which means the following will give you identical output:</p>
+
+<pre><code>$ git log master
+
+$ git log refs/tags/v1.0
+</code></pre>
+
+<h3>Date Spec</h3>
+
+<p>The Ref Log that git keeps will allow you to do some relative stuff locally,
+such as:</p>
+
+<pre><code>master@{yesterday}
+
+master@{1 month ago}
+</code></pre>
+
+<p>Which is shorthand for 'where the master branch head was yesterday', etc. Note
+that this format can result in different shas on different computers, even if
+the master branch is currently pointing to the same place.</p>
+
+<h3>Ordinal Spec</h3>
+
+<p>This format will give you the Nth previous value of a particular reference.
+For example:</p>
+
+<pre><code>master@{5}
+</code></pre>
+
+<p>will give you the 5th prior value of the master head ref.</p>
+
+<h3>Carrot Parent</h3>
+
+<p>This will give you the Nth parent of a particular commit.  This format is only
+useful on merge commits - commit objects that have more than one direct parent.</p>
+
+<pre><code>master^2
+</code></pre>
+
+<h3>Tilde Spec</h3>
+
+<p>The tilde spec will give you the Nth grandparent of a commit object.  For example,</p>
+
+<pre><code>master~2
+</code></pre>
+
+<p>will give us the first parent of the first parent of the commit that master
+points to.  It is equivalent to:</p>
+
+<pre><code>master^^
+</code></pre>
+
+<p>You can keep doing this, too.  The following specs will point to the same commit:</p>
+
+<pre><code>master^^^^^^
+master~3^~2
+master~6
+</code></pre>
+
+<h3>Tree Pointer</h3>
+
+<p>This disambiguates a commit from the tree that it points to.  If you want the
+sha that a commit points to, you can add the '<sup>{tree}'</sup> spec to the end of it.</p>
+
+<pre><code>master^{tree}
+</code></pre>
+
+<h3>Blob Spec</h3>
+
+<p>If you want the sha of a particular blob, you can add the blob path at the
+end of the treeish, like so:</p>
+
+<pre><code>master:/path/to/file
+</code></pre>
+
+<h3>Range</h3>
+
+<p>Finally, you can specify a range of commits with the range spec.  This will
+give you all the commits between 7b593b5 and 51bea1 (where 51bea1 is most recent),
+excluding 7b593b5 but including 51bea1:</p>
+
+<pre><code>7b593b5..51bea1
+</code></pre>
+
+<p>This will include every commit <em>since</em> 7b593b:</p>
+
+<pre><code>7b593b.. 
+</code></pre>
+
+
+  </div>
+  
+  <div class="span-21">
+    <hr/>
+    <div class="center"><a href="4_stashing.html">Prev</a>  <a href="4_tracking_branches.html">Next</a></div>
+    <hr/>
+  </div>
+  
+  <div class="span-17 footer">
+  	<div class="menu">
+  		This book is maintained by Scott Chacon, and hosting is donated by GitHub.
+  		<br>
+  		Please email me at <a href="mailto:schacon@gmail.com">schacon@gmail.com</a>
+  		with patches, suggestions and comments.
+	  </div>
+  </div>
+  <div class="span-4 last center">
+    <a href="http://github.com"><img src="assets/images/github.png" alt="github logo"></a>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-82337-12");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<script src="http://static.getclicky.com/40584.js" type="text/javascript"></script>
+<noscript><p><img alt="Clicky" src="http://in.getclicky.com/40584-db6.gif" /></p></noscript>
+
+</body>
+</html>
