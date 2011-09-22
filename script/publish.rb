@@ -1,5 +1,5 @@
 task :publish do
-  File.open("output/CNAME", 'w+') do |f|
+  File.open("output/book/CNAME", 'w+') do |f|
     f.puts("book.git-scm.com")
   end
 
