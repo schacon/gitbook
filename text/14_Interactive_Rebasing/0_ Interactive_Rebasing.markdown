@@ -17,7 +17,7 @@ since the last time you have pushed (or merged from the origin repository).
 
 To see what commits those are beforehand, you can run log this way:
 	
-	$ git log github/master..
+	$ git log origin/master..
 	
 Once you run the 'rebase -i' command, you will be thrown into your editor
 of choice with something that looks like this:
