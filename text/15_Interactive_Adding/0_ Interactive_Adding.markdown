@@ -82,7 +82,7 @@ If you type '5' or 'p' in the menu, git will show you your diff patch by patch
 (or hunk by hunk) and ask if you want to stage each one.  That way you can 
 actually stage for a commit a part of a file edit.  If you've edited a file
 and want to only commit part of it and not an unfinished part, or commit 
-documentation or whitespace changes seperate from substantive changes, you can
+documentation or whitespace changes separate from substantive changes, you can
 use 'git add -i' to do so relatively easily.
 
 Here I've staged some changes to the book_index_template.html file, but not all
