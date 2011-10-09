@@ -147,7 +147,7 @@ like this:
     	| you pull                            | they pull
     	|                                     |
     	|                                     |
-            |               they push             V
+        |                   they push         V
       their public repo <------------------- their repo
       
 
