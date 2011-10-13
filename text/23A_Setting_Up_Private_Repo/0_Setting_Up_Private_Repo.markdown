@@ -12,7 +12,7 @@ normal ssh logins.  For example, say you have a repository you want to
 host.  You can export it as a bare repo and then scp it onto your server
 like so:
 	
-	$ git clone --bare /home/user/myrepo/.git /tmp/myrepo.git
+	$ git clone --bare /home/user/myrepo.git /tmp/myrepo.git
 	$ scp -r /tmp/myrepo.git myserver.com:/opt/git/myrepo.git
 	
 Then someone else with an ssh account on myserver.com can clone via:
@@ -28,5 +28,3 @@ If you don't want to setup seperate accounts for every user, you can use
 a tool called Gitosis.  In gitosis, there is an authorized_keys file that
 contains the public keys of everyone authorized to access the repository,
 and then everyone uses the 'git' user to do pushes and pulls.
-
-[Installing and Setting up Gitosis](http://www.urbanpuddle.com/articles/2008/07/11/installing-git-on-a-server-ubuntu-or-debian)
