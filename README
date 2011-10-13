@@ -7,12 +7,14 @@ resource to be hosted on the main Git website.
 
 * Clone this source, add to it and send me (schacon@gmail.com) a patch or pull request
 * Install required gems:
-    $ gem install rake ultraviolet discount rdiscount builder
+    $ gem install rake ultraviolet discount rdiscount builder nokogiri eeepub
 * For PDF output install prince (http://www.princexml.com/download/)
 * Generate book through
     $ rake html
   or
     $ rake pdf
+  or
+    $ rake epub
 
 == References ==
 
