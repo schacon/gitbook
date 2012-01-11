@@ -16,7 +16,7 @@ Now you do some work, creating two new commits.
     ...
     
 Meanwhile, someone else does some work creating two new commits on the origin
-branch too. This means both 'origin' and 'mywork' has advanced, which means 
+branch too. This means both 'origin' and 'mywork' have advanced, which means 
 the work has diverged.
 
 [fig:rebase1]
