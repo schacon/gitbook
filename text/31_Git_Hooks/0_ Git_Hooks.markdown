@@ -199,7 +199,7 @@ This hook executes once for the receive operation. It takes no
 arguments, but for each ref to be updated it receives on standard
 input a line of the format:
 
-  <old-value> SP <new-value> SP <ref-name> LF
+    <old-value> SP <new-value> SP <ref-name> LF
 
 where `<old-value>` is the old object name stored in the ref,
 `<new-value>` is the new object name to be stored in the ref and
