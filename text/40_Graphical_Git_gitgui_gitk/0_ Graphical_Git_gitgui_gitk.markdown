@@ -1,7 +1,7 @@
 ## Graphical Git ##
 
-Git has a couple of fairly popular Graphial User Interfaces that can
-read and/or maniplulate Git repositories. 
+Git has a couple of fairly popular Graphical User Interfaces that can
+read and/or manipulate Git repositories. 
 
 ### Bundled GUIs ###
 
