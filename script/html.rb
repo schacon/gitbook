@@ -18,7 +18,7 @@ def do_replacements(html, type = :html)
 
   # replace gitlinks
   html.gsub! /linkgit:(.*?)\[\d\]/ do |code, waa|
-    "<a href=\"http://www.kernel.org/pub/software/scm/git/docs/#{$1}.html\">#{$1.gsub('git-', 'git ')}</a>"
+    "<a href=\"http://schacon.github.com/git/#{$1}.html\">#{$1.gsub('git-', 'git ')}</a>"
   end
   
   # replace figures
