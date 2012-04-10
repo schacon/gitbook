@@ -8,13 +8,13 @@ read and/or maniplulate Git repositories.
 Git comes with two major GUI programs written in Tcl/Tk.  Gitk is a 
 repository browser and commit history visualization tool.
 
-[gitk](http://www.kernel.org/pub/software/scm/git/docs/gitk.html)
+[gitk](http://schacon.github.com/git/gitk.html)
 
 linkgit:git-gui[1] is a tool that helps you visualize the index operations,
 like add, remove and commit.  It won't do everything you can do on the 
 command line, but for many of the basic operations, it's pretty good.
 
-[git gui](http://www.kernel.org/pub/software/scm/git/docs/git-gui.html)
+[git gui](http://schacon.github.com/git/git-gui.html)
  
 ### Third Party Projects ###
 
