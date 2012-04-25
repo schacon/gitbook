@@ -1,7 +1,7 @@
 ## Interactive Rebasing ##
 
 You can also rebase interactively.  This is often used to re-write your
-own commit objects before pusing them somewhere.  It is an easy way to 
+own commit objects before pushing them somewhere.  It is an easy way to 
 split, merge or re-order commits before sharing them with others.  You
 can also use it to clean up commits you've pulled from someone when
 applying them locally.
