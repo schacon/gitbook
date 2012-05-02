@@ -88,7 +88,7 @@ Then you will have to create a single commit message from this:
 
 	This reverts commit fc62e5543b195f18391886b9f663d5a7eca38e84.
 
-Once you have edited that down into once commit message and exit the editor,
+Once you have edited that down into one commit message and exit the editor,
 the commit will be saved with your new message.
 
 If 'edit' is specified, it will do the same thing, but then pause before 
