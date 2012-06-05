@@ -60,7 +60,7 @@ For example:
 
 will give you the 5th prior value of the master head ref.
 	
-### Carrot Parent ###
+### Caret Parent ###
 
 This will give you the Nth parent of a particular commit.  This format is only
 useful on merge commits - commit objects that have more than one direct parent.

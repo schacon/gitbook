@@ -25,4 +25,4 @@ It will automatically fetch from 'origin' and merge 'origin/experimental'
 into your local 'experimental' branch.
 
 Likewise, when you push to origin, it will push what your 'experimental' points to
-to origins 'experimental', without having to specify it.
+to origin's 'experimental', without having to specify it.

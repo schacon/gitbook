@@ -5,7 +5,7 @@ and convert your whole project to Git.  How can you do that easily?
 
 ### Importing Subversion ###
 
-Git comes with a script called git-svn that has a clone command that
+Git comes with a script called linkgit:git-svn[1] that has a clone command that
 will import a subversion repository into a new git repository.  There
 is also a free tool on the GitHub service that will do this for you.
 	
