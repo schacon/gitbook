@@ -111,9 +111,9 @@ the rebase dropped you to the command line :
 
 	$ git reset HEAD^
 	$ git add file1
-	$ git commit 'first part of split commit'
+	$ git commit -m 'first part of split commit'
 	$ git add file2
-	$ git commit 'second part of split commit'
+	$ git commit -m 'second part of split commit'
 	$ git rebase --continue
 	
 And now instead of 5 commits, you would have 6.
