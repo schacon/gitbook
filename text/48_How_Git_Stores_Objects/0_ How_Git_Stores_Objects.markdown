@@ -11,7 +11,7 @@ packed objects.
 ### Loose Objects ###
 
 Loose objects are the simpler format.  It is simply the compressed data stored
-in a single file on disk.  Every object written to a seperate file.
+in a single file on disk.  Every object written to a separate file.
 
 If the sha of your object is <code>ab04d884140f7b0cf8bbf86d6883869f16a46f65</code>,
 then the file will be stored in the following path:
@@ -49,7 +49,7 @@ implementation of object storage:
 ### Packed Objects ###
 
 The other format for object storage is the packfile. Since Git stores each 
-version of each file as a seperate object, it can get pretty inefficient. 
+version of each file as a separate object, it can get pretty inefficient. 
 Imagine having a file several thousand lines long and changing a single line.
 Git will store the second file in it's entirety, which is a great big waste
 of space.

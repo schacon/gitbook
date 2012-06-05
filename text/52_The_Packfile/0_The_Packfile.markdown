@@ -29,7 +29,7 @@ with a given byte can be found to avoid 8 iterations of the binary
 search).
 
 In version 1, the offsets and shas are in the same space, where in version two, 
-there are seperate tables
+there are separate tables
 for the shas, crc checksums and offsets.  At the end of both files are 
 checksum shas for both the index file and the packfile it references.
 
