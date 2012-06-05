@@ -1,7 +1,7 @@
 ## Interactive Rebasing ##
 
 You can also rebase interactively.  This is often used to re-write your
-own commit objects before pusing them somewhere.  It is an easy way to 
+own commit objects before pushing them somewhere.  It is an easy way to 
 split, merge or re-order commits before sharing them with others.  You
 can also use it to clean up commits you've pulled from someone when
 applying them locally.
@@ -111,9 +111,9 @@ the rebase dropped you to the command line :
 
 	$ git reset HEAD^
 	$ git add file1
-	$ git commit 'first part of split commit'
+	$ git commit -m 'first part of split commit'
 	$ git add file2
-	$ git commit 'second part of split commit'
+	$ git commit -m 'second part of split commit'
 	$ git rebase --continue
 	
 And now instead of 5 commits, you would have 6.

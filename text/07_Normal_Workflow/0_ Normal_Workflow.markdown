@@ -38,7 +38,7 @@ Alternatively, instead of running `git add` beforehand, you can use
 which will automatically notice any modified (but not new) files, add
 them to the index, and commit, all in one step.
 
-A note on commit messages: Though not required, it's a good idea to
+A note on commit messages: though not required, it's a good idea to
 begin the commit message with a single short (less than 50 character)
 line summarizing the change, followed by a blank line and then a more
 thorough description.  Tools that turn commits into email, for

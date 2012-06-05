@@ -14,7 +14,7 @@ can also make more specific requests:
     $ git log fs/		    # commits that modify any file under fs/
     $ git log -S'foo()'	    # commits that add or remove any file data
     			            # matching the string 'foo()'
-    $ git log --no-merges	# dont show merge commits
+    $ git log --no-merges	# don't show merge commits
 
 And of course you can combine all of these; the following finds
 commits since v2.5 which touch the Makefile or any file under fs:
