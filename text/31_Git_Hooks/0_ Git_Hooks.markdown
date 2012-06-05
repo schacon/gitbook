@@ -350,9 +350,3 @@ for the user.
 This hook is invoked by 'git-gc --auto'. It takes no parameter, and
 exiting with non-zero status from this script causes the 'git-gc --auto'
 to abort.
-
-
-### References ###
-
-[Git Hooks](http://www.kernel.org/pub/software/scm/git/docs/githooks.html)
-* http://probablycorey.wordpress.com/2008/03/07/git-hooks-make-me-giddy/
