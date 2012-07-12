@@ -3,7 +3,7 @@
 ### The SHA ###
 
 All the information needed to represent the history of a
-project is stored in files referenced by a 40-digit "object name" that 
+project is stored in files referenced by a 40-alphanumeric characters "object name" that 
 looks something like this:
     
     6ff87c4664981e4397625791c8ea3bbb5f2279a3
