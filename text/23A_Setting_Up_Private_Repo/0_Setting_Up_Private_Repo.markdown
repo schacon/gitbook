@@ -24,7 +24,7 @@ however they have ssh authentication setup.
 
 ### Multiple User Access using Gitosis ###
 
-If you don't want to setup seperate accounts for every user, you can use
+If you don't want to setup separate accounts for every user, you can use
 a tool called Gitosis.  In gitosis, there is an authorized_keys file that
 contains the public keys of everyone authorized to access the repository,
 and then everyone uses the 'git' user to do pushes and pulls.

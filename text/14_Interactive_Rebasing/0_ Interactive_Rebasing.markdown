@@ -1,7 +1,7 @@
 ## Interactive Rebasing ##
 
 You can also rebase interactively.  This is often used to re-write your
-own commit objects before pusing them somewhere.  It is an easy way to 
+own commit objects before pushing them somewhere.  It is an easy way to
 split, merge or re-order commits before sharing them with others.  You
 can also use it to clean up commits you've pulled from someone when
 applying them locally.
@@ -17,7 +17,7 @@ since the last time you have pushed (or merged from the origin repository).
 
 To see what commits those are beforehand, you can run log this way:
 	
-	$ git log github/master..
+	$ git log origin/master..
 	
 Once you run the 'rebase -i' command, you will be thrown into your editor
 of choice with something that looks like this:
@@ -106,7 +106,7 @@ that commit:
 
 And then when you get to the command line, you revert that commit and create
 two (or more) new ones.  Lets say 21d80a5 modified two files, file1 and file2,
-and you wanted to split them into seperate commits.  You could do this after
+and you wanted to split them into separate commits.  You could do this after
 the rebase dropped you to the command line :
 
 	$ git reset HEAD^
